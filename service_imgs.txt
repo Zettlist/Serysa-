@@ -1,0 +1,89 @@
+POS 60394:
+class="service-img">
+          <img src="w.jpeg" alt="Control de cucarachas en cocina industrial Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-img-tag">Residencial · Comercial</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"></div>
+          <h3>Control de Insectos Rastreros y Voladores</h3>
+   
+---
+POS 61089:
+class="service-img">
+          <img src="WhatsApp%20Image%202026-03-21%20sat%2011.38.27%20AM.jpeg" alt="Control de roedores industrial Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-img-tag">Industrial · Almacén</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"></div>
+          <h3>Control de Roed
+---
+POS 61813:
+class="service-img">
+          <img src="WhatsApp%20Image%202026-03-21%20at%20dedede11.38.25%20AM.jpeg" alt="Retiro de enjambres colmenas Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-img-tag">Urgencias</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">🐝</div>
+          <h3>Retiro de Enjambres y 
+---
+POS 62536:
+class="service-img">
+          <img src="WhatsApp%20Image%202026wwwqw-03-21%20at%2011.38.26%20AM.jpeg" alt="Fumigación restaurante bar Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-img-tag">Sector Restaurantero</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><span class="cotiz-opt-ico"><svg xml
+---
+POS 63690:
+class="service-img">
+          <img src="WhatsApp%20Image%20202qqw6-03-21%20at%2011.38.26%20AM.jpeg" alt="Control plagas grandes venues arenas Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+          <div class="service-img-tag">Grandes Venues</div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon">🏟️</div>
+          <h3>Grandes Ven
+---
+POS 64425:
+class="service-img">
+          <div class="service-img"><img src="svc_termitas.png" alt="Control de Termitas" loading="lazy"></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M2 22 Q8 16 12 12 Q16 8 20 
+---
+POS 64461:
+class="service-img"><img src="svc_termitas.png" alt="Control de Termitas" loading="lazy"></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q21 2 21 2 Q21 8 18 14 Q15 20 8 22
+---
+POS 65290:
+class="service-img">
+          <div class="service-img"><img src="svc_aves.png" alt="Control de Aves" loading="lazy"></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M8 20 Q17 8 20 5 Q20 5 20 10 Q18 14
+---
+POS 65326:
+class="service-img"><img src="svc_aves.png" alt="Control de Aves" loading="lazy"></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M8 20 Q17 8 20 5 Q20 5 20 10 Q18 14 14 16 Q12 18 11 22"/><circle cx="18
+---
+POS 66205:
+class="service-img">
+          <div class="service-img" style="background:linear-gradient(135deg,var(--navy-800),var(--blue-500));display:flex;align-items:center;justify-content:center;height:200px;"><span style="font-size:3rem;opacity:.2;">✦</span></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><span class="cotiz-opt-ico"><svg xmlns="http://www.w3.org/
+---
+POS 66241:
+class="service-img" style="background:linear-gradient(135deg,var(--navy-800),var(--blue-500));display:flex;align-items:center;justify-content:center;height:200px;"><span style="font-size:3rem;opacity:.2;">✦</span></div>
+        </div>
+        <div class="service-body">
+          <div class="service-icon"><span class="cotiz-opt-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="
+---

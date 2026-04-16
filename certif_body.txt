@@ -1,0 +1,73 @@
+certif-grid{grid-template-columns:repeat(2,1fr);}
+  .zonas-grid{grid-template-columns:1fr;}
+  .urgency-inner{gap:14px;}
+  .cotiz-body{padding:24px 18px;}
+}
+</style>
+
+
+
+
+
+
+<style id="serysa-icon-css">
+/* ── SVG Icon System ── */
+.icon-svg { display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; color:var(--cyan-400); }
+.icon-svg svg { width:100%; height:100%; }
+.icon-svg-card { display:flex; align-items:center; justify-content:center; width:60px; height:60px; color:var(--cyan-400); margin-bottom:15px; }
+.icon-svg-card svg { width:100%; height:100%; }
+.icon-svg-check { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; color:var(--green); vertical-align:middle; margin-right:6px; flex-shrink:0; }
+.icon-svg-check svg { width:100%; height:100%; }
+.icon-svg-xl { display:inline-flex; width:40px; height:40px; color:var(--green); vertical-align:middle; }
+.icon-svg-xl svg { width:100%; height:100%; }
+/* cotiz-opt icons */
+.cotiz-opt-ico { display:flex; align-items:center; justify-content:center; height:54px; margin-bottom:9px; transition:transform .3s; }
+.cotiz-opt-ico svg { width:46px; height:46px; color:var(--blue-500); stroke:var(--blue-500); }
+.cotiz-opt:hover .cotiz-opt-ico svg, .cotiz-opt.sel .cotiz-opt-ico svg { color:var(--cyan-500); stroke:var(--cyan-500); transform:scale(1.1); }
+/* service icon in cards */
+.service-icon-svg { display:flex; align-items:center; justify-content:center; width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,var(--blue-100),var(--gray-100)); margin-bottom:14px; }
+.service-icon-svg svg { width:34px; height:34px; stroke:var(--blue-500); color:var(--blue-500); }
+/* Remove old icon images */
+.icon-img, .icon-img-sm { display:none; }
+</style>
+
+
+<style id="cotiz-svg-css">
+  .cotiz-opt-ico { display:flex; align-items:center; justify-content:center; height:58px; margin-bottom:10px; }
+  .cotiz-svg-wrap { display:flex; width:48px; height:48px; color:var(--blue-400); transition:color .25s, transform .25s; }
+  .cotiz-svg-wrap svg { width:100%; height:100%; }
+  .cotiz-opt:hover .cotiz-svg-wrap, .cotiz-opt.sel .cotiz-svg-wrap { color:var(--cyan-500); transform:scale(1.12); }
+</style>
+
+<style id="ventaja-svg-fix">
+  .ventaja-icon svg { stroke: #fff; color: #fff; }
+  .ventaja-icon { color: #fff; }
+  .ventaja-card:hover .ventaja-icon svg { stroke: var(--cyan-300); color: var(--cyan-300); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#inicio" class="logo">
+      <div class="logo-mark">
+        <div class="logo-diamond"></div>
+        <span class="logo-s">S</span>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name">SERYSA</div>
+        <div class="logo-tagline">Manejo Integrado de Plagas</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#cotizador">Cotizador</a>
+      <a href="#polizas">Pólizas</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#zonas">Zonas</a>
+    </nav>
+    <div class="header-actions">
+      <a href="tel:+528100000000" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2

@@ -1,0 +1,195 @@
+PRD — Sitio Web
+Empresa de Fumigaciones
+Monterrey y Área Metropolitana de NL · Versión 1.0 · Abril 2026
+1 · CONTEXTO DE MERCADO
+97%
+70%
+54%
+clientes buscan el servicio online
+(búsqueda local)
+de las búsquedas ocurren desde celular
+elige proveedor en menos de 4 horas de
+buscar
+El mercado local de control de plagas en MTY está fragmentado. La mayoría de competidores tienen sitios
+básicos con formulario de contacto, sin agendamiento en línea, sin precios referenciales visibles, y con SEO
+local débil.
+2 · COMPETENCIA SIGNIFICATIVA EN MONTERREY
+Empresa
+Análisis
+AECO Fumigaciones # Top
+local
+Certificación ISO 9001:2015 · Blog activo con SEO · Sección 'Contrata tu póliza' ·
+Tienda online · Fuerte en branding ecológico. Sin agendamiento real.
+Marro-King
+38 años de experiencia · Pólizas 3/6/12 meses con descuento · Certificación
+COFEPRIS y Sec. de Salud NL. Diseño web básico, sin chat ni booking.
+Fumiklin
+Enfoque industria alimentaria, maquiladora, hospitales. Licencia de desinfección.
+Sitio muy simple, casi sin contenido diferenciador visible.
+Garpec
+Soporte web y telefónico · Productos eco-amigables para jardines · Segmento
+industrial grande. Sitio desactualizado visualmente.
+Prodec / Tecno Fumigaciones
+Prodec combina fumigación + limpieza + jardinería. Tecno usa insecticidas de baja
+toxicidad, 25+ años. Ambos con presencia digital muy limitada.
+3 · BRECHAS DETECTADAS (OPORTUNIDADES)
+
+Alta
+Sin agendamiento en línea real
+Ningún competidor local permite booking directo. Una herramienta de cita en línea sería diferenciador inmediato.
+Alta
+Sin precios referenciales visibles
+Todos piden llamar para cotizar. Mostrar rangos o un cotizador interactivo reduce la barrera de contacto
+significativamente.
+Media
+Poca prueba social visible
+Reseñas de Google integradas en sitio, casos de éxito por giro (restaurantes, maquilas, hogares) son escasas en
+la competencia.
+Media
+SEO local débil por municipio
+Páginas dedicadas a San Pedro, Apodaca, Guadalupe, Escobedo, Santa Catarina son casi inexistentes en
+competidores.
+Baja
+Sin chat en vivo ni WhatsApp flotante
+Los usuarios en urgencia necesitan contacto inmediato. Solo 2 competidores muestran teléfono visible. Nadie
+tiene chat.
+4 · PERFILES DE USUARIO OBJETIVO
+Urgente Residencial
+Encontró una plaga en casa. Busca
+desde celular. Quiere respuesta el
+mismo día. Alta intención de compra.
+Necesita ver precio referencial y
+contacto inmediato.
+Alta urgencia · Mobile
+Gerente / Admin
+Comercial
+Restaurante, oficina, bodega.
+Necesita cumplir normativa SSA.
+Busca póliza anual y certificado.
+Compara varias empresas, valora
+experiencia industrial.
+Póliza · B2B
+Preventivo Planificado
+Quiere fumigación periódica antes de
+ver plagas. Busca empresa de
+confianza para contrato largo plazo.
+Valora garantías y seguimiento
+post-servicio.
+Contrato · Recurrente
+5 · OBJETIVOS DEL PRODUCTO
+Generación de leads urgentes
+Teléfono clickeable y WhatsApp flotante visibles en todo momento. CTA 'Cotización gratis' above the fold.
+Formulario corto de 4 campos máx.
+P1 — Alta prioridad
+Conversión sin fricción
+Cotizador interactivo por tipo de plaga y m² aproximados. Agendamiento 
+de servicio).
+P1 — Alta prioridad
+
+Credibilidad y confianza
+Licencias y certificaciones visibles. Fotos reales del equipo y unidades. Reseñas de Google embebidas.
+Número de servicios realizados.
+P2 — Media prioridad
+SEO local dominante
+Páginas por municipio (San Pedro, Guadalupe, Apodaca, Escobedo, San
+de plagas locales y temporadas.
+P2 — Media prioridad
+6 · ARQUITECTURA DE INFORMACIÓN (PÁGINAS)
+URL / Página
+Contenido clave
+/ Inicio
+Hero con CTA principal · Servicios en cards visuales · Reseñas Google · Botón
+WhatsApp flotante · Contador de clientes/años
+/servicios
+Lista de servicios con acceso a subpáginas por tipo de plaga
+/servicios/[plaga]
+Página individual: síntomas, riesgos, proceso de tratamiento, CTA agendamiento —
+una por plaga principal
+/sectores
+Residencial · Comercial · Industrial · Restaurantes · Maquiladoras — con casos de uso
+específicos
+/polizas
+Planes 3/6/12 meses con precios o rangos visibles. Comparativa de planes. CTA
+contratar.
+/zonas/[municipio]
+Páginas SEO por municipio: San Pedro, Guadalupe, Apodaca, Escobedo, Santa
+Catarina, San Nicolás
+/cotizador
+Herramienta interactiva: tipo de plaga + inmueble + m² → rango de precio estimado +
+formulario
+/blog
+Artículos SEO: temporadas de plagas en MTY, prevención, tips, normativa SSA
+/nosotros
+Historia · Equipo · Licencias COFEPRIS · Certificaciones · Fotos reales
+/contacto
+Formulario corto · Mapa Google · Horarios · WhatsApp directo · Click-to-call
+7 · FUNCIONALIDADES CLAVE (BACKLOG PRIORIZADO)
+P1
+WhatsApp flotante + click-to-call
+Botón siempre visible en toda la navegación. En mobile, número grande en header. Un botón flotante puede
+aumentar llamadas 30-40%.
+P1
+Formulario corto de cotización (4 campos)
+Nombre, teléfono, tipo de plaga, municipio. Presente en todas las páginas. Sin fricción. Cada campo extra reduce
+conversión 10-15%.
+P1
+Páginas SEO por municipio
+Fumigación en Guadalupe / Apodaca / San Pedro / Escobedo / Santa Catarina. Keyword targeting directo para
+búsquedas locales.
+
+P1
+Trust signals visibles en home
+Badge COFEPRIS · Certificaciones · Años de experiencia · # servicios realizados · Reseñas Google embebidas
+con estrellitas.
+P2
+Cotizador interactivo
+Tipo de plaga + tamaño del espacio → rango referencial de precio. Diferenciador único vs. toda la competencia
+local en MTY.
+P2
+Sección de pólizas con precios visibles
+Planes comparativos con precio o rango visible. Descuento por póliza anual. CTA 'Contratar ahora'. Ataca al
+segmento B2B directamente.
+P3
+Agendamiento en línea
+Calendario con disponibilidad. Selección de servicio, fecha y hora. Confirmación por WhatsApp o email. Integrable
+con Calendly.
+P3
+Blog con contenido local SEO
+'Temporada de alacranes en MTY', 'Cuando fumigar antes del verano', 'Normativa para restaurantes NL'.
+Contenido de largo plazo.
+8 · REQUISITOS TÉCNICOS MÍNIMOS
+Mobile-first
+Diseño pensado primero para celular. Botones grandes,
+formularios de 1 columna, menú hamburguesa.
+Velocidad < 3 seg
+Imágenes en WebP con lazy load, hosting rápido
+(Hostinger MX o similar). Core Web Vitals en verde.
+Google Business integrado
+Schema markup local, reseñas de Google embebidas,
+mapa integrado en contacto y páginas de municipio.
+HTTPS + SSL + LFPDPPP
+Certificado SSL activo. Formularios con reCAPTCHA.
+Política de privacidad visible conforme a ley mexicana.
+9 · VENTAJAS COMPETITIVAS A COMUNICAR EN EL SITIO
+Respuesta el mismo dia
+Productos seguros para mascotas y ninos
+Certificacion COFEPRIS visible
+Garantia de servicio escrita
+Sin necesidad de salir del inmueble
+Polizas con descuento por volumen
+Experiencia en industria alimentaria y maquilas
+Manejo integrado de plagas (MIP)
+Cotizador online — unico en MTY
+Precios referenciales visibles
+
+10 · KPIS DE EXITO DEL SITIO
+>3%
+<3s
+Top 3
+tasa de conversion visitante → lead
+(benchmark industria: 2.2–4.3%)
+tiempo de carga en mobile (Google Core
+Web Vitals)
+posicion en Google Maps para 'fumigacion
+[municipio]'
+PRD v1.0 · Análisis de mercado y competencia — Monterrey NL · Abril 2026

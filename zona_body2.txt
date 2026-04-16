@@ -1,0 +1,25 @@
+class="zonas-grid">
+      <div class="zona-card reveal"><div class="zona-ico">🏙️</div><div><h4>Monterrey</h4><p>Centro, Sur, Norte, Obispado</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.07s"><div class="zona-ico">⛰️</div><div><h4>San Pedro Garza García</h4><p>Valle, Lomas, Del Valle</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.14s"><div class="zona-ico">🌆</div><div><h4>Guadalupe</h4><p>Mitras, Las Puentes, Contry</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.21s"><div class="zona-ico">✈️</div><div><h4>Apodaca</h4><p>Zona Industrial, El Carmen</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.28s"><div class="zona-ico">🏗️</div><div><h4>General Escobedo</h4><p>Parques industriales, Norte</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.35s"><div class="zona-ico">🏔️</div><div><h4>Santa Catarina</h4><p>Industrial, Residencial</p></div></div>
+      <div class="zona-card reveal" style="transition-delay:.42s"><div class="zona-ico">🏘️</div><div><h4>San Nicolás de los Garza</h4><p>Anáhuac, Jardines, Roma</p></div></div>
+      <div class="zona-card zona-cta reveal" style="transition-delay:.49s"><div class="zona-ico">📍</div><div><h4>¿Tu municipio?</h4><p>Cubrimos toda el Área Metro de NL</p></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ CONTACTO -->
+<section class="contacto section-pad" id="contacto">
+  <div class="contacto-wrap">
+    <div class="contacto-grid">
+      <div class="contacto-left reveal-left">
+        <div class="badge badge-glass" style="margin-bottom:20px;">Contáctanos</div>
+        <h2>¿Tienes una plaga?<br>Hablemos <span class="grad-text">ahora mismo.</span></h2>
+        <p>Cuéntanos tu situación. Respondemos en menos de 1 hora en días hábiles y atendemos urgencias el mismo día.</p>
+        <div class="contacto-items">
+          <div class="ci">
+            <div class="ci-

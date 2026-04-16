@@ -1,0 +1,44 @@
+class="certif-grid">
+      <div class="certif-card reveal"><span class="certif-emoji">🏛️</span><h4>Licencia Sanitaria COFEPRIS</h4><p>Autorización federal vigente para servicios de control de plagas en NL.</p><div class="certif-num">23 AP 19 026 0329</div></div>
+      <div class="certif-card reveal" style="transition-delay:.08s"><span class="certif-emoji">🌾</span><h4>AIB International</h4><p>Saneamiento e higiene en procesamiento de alimentos. 12 unidades de educación continua.</p></div>
+      <div class="certif-card reveal" style="transition-delay:.16s"><span class="certif-emoji">📊</span><h4>HACCP Avanzado</h4><p>Inocuidad alimentaria certificada. Soporte para auditorías corporativas y de clientes internacionales.</p></div>
+      <div class="certif-card reveal" style="transition-delay:.24s"><span class="certif-emoji">🎓</span><h4>CONOCER</h4><p>Competencia Laboral: Control Básico de Plagas, MIP e Inocuidad Alimentaria. Normas técnicas vigentes.</p></div>
+      <div class="certif-card reveal" style="transition-delay:.32s"><span class="certif-emoji">⭐</span><h4>Distintivo H</h4><p>Experiencia en auditorías para establecimientos de alimentos. Soporte para obtención del distintivo.</p></div>
+      <div class="certif-card reveal" style="transition-delay:.4s"><span class="certif-emoji">🔬</span><h4>BPM Industria Alimentaria</h4><p>Buenas Prácticas de Manufactura. Capacitación por BAYER de México y centros especializados.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ CLIENTES / TICKER -->
+<section class="clients-section" id="clientes">
+  <div class="container">
+    <div class="section-header">
+      <div class="badge">Nuestros Clientes</div>
+      <h2 class="section-title">Las marcas más importantes <span class="grad-text">confían en SERYSA</span></h2>
+      <p class="section-sub">Más de 500 empresas en Monterrey y el Área Metropolitana, desde restaurantes y hoteles hasta grandes corporativos y maquiladoras.</p>
+    </div>
+  </div>
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker">
+      <div class="client-chip">Arena Monterrey</div>
+      <div class="client-chip">Banorte</div>
+      <div class="client-chip">CFE</div>
+      <div class="client-chip">Cinépolis</div>
+      <div class="client-chip">Hyundai</div>
+      <div class="client-chip">Kia</div>
+      <div class="client-chip">Mitsubishi</div>
+      <div class="client-chip">Gruma</div>
+      <div class="client-chip">Ternium</div>
+      <div class="client-chip">Mattel</div>
+      <div class="client-chip">iZZi</div>
+      <div class="client-chip">Aramark</div>
+      <div class="client-chip">Essity</div>
+      <div class="client-chip">Fluidmaster</div>
+      <div class="client-chip">Rockwell Automation</div>
+      <div class="client-chip">Jabil</div>
+      <div class="client-chip">Cryo-Infra</div>
+      <div class="client-chip">Comfort Inn</div>
+      <div class="client-chip">Sherwin-Williams</div>
+      <div class="client-chip">Valspar</div>
+     

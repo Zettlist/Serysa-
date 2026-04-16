@@ -1,0 +1,10 @@
+"hero-years">30 años de experiencia</div>
+      </div>
+
+      <h1>
+        <span class="hero-line1">Eliminamos tu plaga</span>
+        <span class="hero-line2" id="typewriterEl">el mismo día.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Servicios y Suministros Agroindustriales en <strong>M

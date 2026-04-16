@@ -1,0 +1,212 @@
+POS 51046: '📞' (0x1f4de)
+  ...ob()">Zonas de cobertura</a>
+  <a href="tel:+528100000000" class="btn btn-cyan">📞 Llamar ahora</a>
+  <a href="https://wa.me/528100000000" target="_blank" class=...
+
+POS 51142: '💬' (0x1f4ac)
+  ...a>
+  <a href="https://wa.me/528100000000" target="_blank" class="btn btn-green">💬 WhatsApp</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════ HERO -->
+<secti...
+
+POS 56914: '🔒' (0x1f512)
+  ...       Solicitar cotización →
+        </button>
+        <p class="form-privacy">🔒 Datos protegidos · LFPDPPP · Sin spam</p>
+      </form>
+      <div id="heroOk"...
+
+POS 57558: '⚡' (0x26a1)
+  ...lass="urgency-bar">
+  <div class="urgency-inner">
+    <div class="urgency-item">⚡ Respuesta el mismo día — Área Metro MTY</div>
+    <div class="urgency-sep">|</...
+
+POS 58273: '💬' (0x1f4ac)
+  ... <div class="urgency-item"><a href="https://wa.me/528100000000" target="_blank">💬 WhatsApp urgente</a></div>
+    <div class="urgency-sep">|</div>
+    <div class...
+
+POS 61952: '🐝' (0x1f41d)
+  ...  </div>
+        <div class="service-body">
+          <div class="service-icon">🐝</div>
+          <h3>Retiro de Enjambres y Colmenas</h3>
+          <p>Servicio ...
+
+POS 63839: '🏟' (0x1f3df)
+  ...  </div>
+        <div class="service-body">
+          <div class="service-icon">🏟️</div>
+          <h3>Grandes Venues e Instalaciones</h3>
+          <p>Arenas, ...
+
+POS 63840: '️' (0xfe0f)
+  ... </div>
+        <div class="service-body">
+          <div class="service-icon">🏟️</div>
+          <h3>Grandes Venues e Instalaciones</h3>
+          <p>Arenas, f...
+
+POS 64352: '🐜' (0x1f41c)
+  ...er" style="background:linear-gradient(135deg,var(--blue-100),var(--gray-100));">🐜</div>
+        </div>
+        <div class="service-body">
+          <div class="...
+
+POS 64446: '🌿' (0x1f33f)
+  ...  </div>
+        <div class="service-body">
+          <div class="service-icon">🌿</div>
+          <h3>Termitas y Control de Vectores</h3>
+          <p>Tratamien...
+
+POS 64955: '🦅' (0x1f985)
+  ...ce-img-placeholder" style="background:linear-gradient(135deg,#fff3e0,#fef3c7);">🦅</div>
+        </div>
+        <div class="service-body">
+          <div class="...
+
+POS 65049: '🦜' (0x1f99c)
+  ...  </div>
+        <div class="service-body">
+          <div class="service-icon">🦜</div>
+          <h3>Control de Aves y Murciélagos</h3>
+          <p>Mallas, pi...
+
+POS 67036: '⚡' (0x26a1)
+  ...entajas-grid">
+      <div class="ventaja-card reveal"><div class="ventaja-icon">⚡</div><div class="ventaja-text"><h4>Respuesta el mismo día</h4><p>Atendemos eme...
+
+POS 67666: '🐾' (0x1f43e)
+  ...s="ventaja-card reveal" style="transition-delay:.14s"><div class="ventaja-icon">🐾</div><div class="ventaja-text"><h4>Seguros para mascotas y niños</h4><p>Produc...
+
+POS 67964: '📋' (0x1f4cb)
+  ...s="ventaja-card reveal" style="transition-delay:.21s"><div class="ventaja-icon">📋</div><div class="ventaja-text"><h4>Garantía de servicio escrita</h4><p>Entrega...
+
+POS 68986: '💰' (0x1f4b0)
+  ...s="ventaja-card reveal" style="transition-delay:.35s"><div class="ventaja-icon">💰</div><div class="ventaja-text"><h4>Pólizas con descuento progresivo</h4><p>Pla...
+
+POS 69278: '🌿' (0x1f33f)
+  ...s="ventaja-card reveal" style="transition-delay:.42s"><div class="ventaja-icon">🌿</div><div class="ventaja-text"><h4>Manejo Integrado de Plagas (MIP)</h4><p>Dia...
+
+POS 69573: '💻' (0x1f4bb)
+  ...s="ventaja-card reveal" style="transition-delay:.49s"><div class="ventaja-icon">💻</div><div class="ventaja-text"><h4>Cotizador online — único en MTY</h4><p>El ú...
+
+POS 71720: '🧮' (0x1f9ee)
+  ...ap reveal">
+      <div class="cotiz-head">
+        <div class="cotiz-head-icon">🧮</div>
+        <div class="cotiz-head-text">
+          <h2>Cotizador de Control...
+
+POS 72532: '✓' (0x2713)
+  ...l3"></div>
+          <div class="cp-step" id="cs4"><div class="cp-dot" id="cd4">✓</div>Tu cotización</div>
+        </div>
+
+        <!-- Panel 1 -->
+        <div...
+
+POS 83770: '⚠' (0x26a0)
+  ...visita</div>
+          </div>
+          <div class="cotiz-warning">
+            ⚠️ <strong>Precio referencial.</strong> El monto exacto depende del nivel de inf...
+
+POS 83771: '️' (0xfe0f)
+  ...isita</div>
+          </div>
+          <div class="cotiz-warning">
+            ⚠️ <strong>Precio referencial.</strong> El monto exacto depende del nivel de infe...
+
+POS 86724: '✓' (0x2713)
+  ..."poliza-feats">
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio cada 3 meses</div>
+            <div class="poliza-feat"><span ...
+
+POS 86825: '✓' (0x2713)
+  ...a 3 meses</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
+            <div class="poliza-feat">...
+
+POS 86932: '✓' (0x2713)
+  ...cumentado</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Garantía entre visitas</div>
+            <div class="poliza-feat"><span...
+
+POS 87034: '✓' (0x2713)
+  ...e visitas</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Atención de urgencia prioritaria</div>
+            <div class="poliza-f...
+
+POS 87958: '✓' (0x2713)
+  ..."poliza-feats">
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio cada 2 meses</div>
+            <div class="poliza-feat"><span ...
+
+POS 88059: '✓' (0x2713)
+  ...a 2 meses</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
+            <div class="poliza-feat">...
+
+POS 88166: '✓' (0x2713)
+  ...cumentado</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Garantía entre visitas</div>
+            <div class="poliza-feat"><span...
+
+POS 88268: '✓' (0x2713)
+  ...e visitas</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Atención de urgencia prioritaria</div>
+            <div class="poliza-f...
+
+POS 88380: '✓' (0x2713)
+  ...ioritaria</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Certificado COFEPRIS incluido</div>
+          </div>
+          <a href=...
+
+POS 89185: '✓' (0x2713)
+  ..."poliza-feats">
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio mensual</div>
+            <div class="poliza-feat"><span class...
+
+POS 89281: '✓' (0x2713)
+  ...o mensual</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
+            <div class="poliza-feat">...
+
+POS 89388: '✓' (0x2713)
+  ...cumentado</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Garantía permanente</div>
+            <div class="poliza-feat"><span cl...
+
+POS 89487: '✓' (0x2713)
+  ...ermanente</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Urgencias 24/7</div>
+            <div class="poliza-feat"><span class="...
+
+POS 89581: '✓' (0x2713)
+  ...cias 24/7</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Certificado COFEPRIS</div>
+            <div class="poliza-feat"><span c...
+
+POS 89681: '✓' (0x2713)
+  ... COFEPRIS</div>
+            <div class="poliza-feat"><span class="pf-check yes">✓</span> Soporte auditorías AIB / FSSC</div>
+          </div>
+          <a href=...
+
+POS 90782: '🏛' (0x1f3db)
+  ..."certif-grid">
+      <div class="certif-card reveal"><span class="certif-emoji">🏛️</span><h4>Licencia Sanitaria COFEPRIS</h4><p>Autorización federal vigente par...
+
+POS 90783: '️' (0xfe0f)
+  ...certif-grid">
+      <div class="certif-card reveal"><span class="certif-emoji">🏛️</span><h4>Licencia Sanitaria COFEPRIS</h4><p>Autorización federal vigente para...
+
+POS 91054: '🌾' (0x1f33e)
+  ...s="certif-card reveal" style="transition-delay:.08s"><span class="certif-emoji">🌾</span><h4>AIB International</h4><p>Saneamiento e higiene en procesamiento de a...

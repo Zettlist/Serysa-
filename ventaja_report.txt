@@ -1,0 +1,53 @@
+POS 21018:
+ventaja-icon{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  background:linear-gradient(135deg,var(--blue-500),
+
+---
+
+POS 21347:
+ventaja-icon{transform:scale(1.1) rotate(-5deg);box-shadow:0 8px 24px rgba(11,21,237,.4);}
+.ventaja-text h4{font-size:.95rem;color:var(--navy-900);margin-bottom:5px;}
+.ventaja-text p{font-size:.82rem;
+
+---
+
+POS 67022:
+ventaja-icon">⚡</div><div class="ventaja-text"><h4>Respuesta el mismo día</h4><p>Atendemos emergencias de plagas el mismo día en toda el Área Metro de MTY. Sin esperas ni excusas.</p></div></div>
+    
+
+---
+
+POS 67299:
+ventaja-icon"><img src="icons/escudo.png" class="icon-img" alt="Garantía"></div><div class="ventaja-text"><h4>Licencia COFEPRIS visible</h4><p>Licencia Sanitaria 23 AP 19 026 0329. Marco legal y norma
+
+---
+
+POS 67652:
+ventaja-icon">🐾</div><div class="ventaja-text"><h4>Seguros para mascotas y niños</h4><p>Productos de baja toxicidad certificados. Sin necesidad de abandonar el inmueble en la mayoría de los servicios.
+
+---
+
+POS 67950:
+ventaja-icon">📋</div><div class="ventaja-text"><h4>Garantía de servicio escrita</h4><p>Entregamos garantía formal por escrito. Si el problema regresa, volvemos sin costo adicional. Punto.</p></div></d
+
+---
+
+POS 68235:
+ventaja-icon"><span class="cotiz-opt-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+---
+
+POS 68972:
+ventaja-icon">💰</div><div class="ventaja-text"><h4>Pólizas con descuento progresivo</h4><p>Planes 3, 6 y 12 meses con descuentos de hasta 20%. Mayor cobertura preventiva, menor costo por visita.</p></
+
+---
+
+POS 69264:
+ventaja-icon">🌿</div><div class="ventaja-text"><h4>Manejo Integrado de Plagas (MIP)</h4><p>Diagnóstico, prevención y seguimiento documentado. Mínimo impacto ambiental. Metodología de clase mundial.</p
+
+---
+
+POS 69559:
+ventaja-icon">💻</div><div class="ventaja-text"><h4>Cotizador online — único en MTY</h4><p>El único proveedor local con precio referencial en línea. Obtén tu rango de precio en 60 segundos, sin llamada

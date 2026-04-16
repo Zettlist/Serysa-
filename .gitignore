@@ -1,0 +1,13 @@
+# Python scripts de trabajo
+*.py
+# Archivos de texto temporales
+*.txt
+# Cache Firebase
+.firebase/
+# Videos grandes (ya están en Firebase Hosting)
+*.mp4
+# Archivos duplicados/temporales
+Gemini_Generated_Image_*.png
+serysa_gemini_nobg.png
+serysa_logo_new.png
+images_preview.html

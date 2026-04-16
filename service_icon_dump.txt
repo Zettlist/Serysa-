@@ -1,0 +1,78 @@
+POS 60867:
+class="service-icon" style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,rgba(11,21,237,.08),rgba(0,212,255,.05));display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--blue-500);"><svg viewBox="0 0 64 64" fill="currentColor" width="28" height="28">
+      <ellipse cx="32" cy="38" rx="11" ry="16"/><ellipse cx="32" cy="22" rx="7" ry="7"/>
+      <path d="M29 17 Q22 10 16 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M35 17 Q42 10 48 6" stroke="currentColor" stroke-width="2.5" fill="none
+===
+POS 62667:
+class="service-icon" style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,rgba(11,21,237,.08),rgba(0,212,255,.05));display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--blue-500);"><svg viewBox="0 0 64 64" fill="currentColor" width="28" height="28">
+      <ellipse cx="28" cy="38" rx="17" ry="13"/><circle cx="46" cy="28" r="10"/>
+      <ellipse cx="48" cy="20" rx="5" ry="6"/><ellipse cx="48" cy="20" rx="2.5" ry="3.5" fill="white" opacity=".4"/>
+      <circle cx="50" cy="26" r="2" fill="white"/><circle cx="50.6" cy="26" r="1" fill="#1
+===
+POS 64099:
+class="service-icon">🐝</div>
+          <h3>Retiro de Enjambres y Colmenas</h3>
+          <p>Servicio de retiro seguro con equipo especializado y trajes de protección. Reubicación responsable.</p>
+          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.24s">
+        <div class="service-img">
+          <img src="WhatsApp%20Image%202026wwwqw-03-21%20at%2011.38.26%20AM.jpeg" alt="Fumigación restaurante bar Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+
+===
+POS 64830:
+class="service-icon"><span class="cotiz-opt-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 4 L12 20 Q12 26 18 26 L18 44" />
+  <line x1="12" y1="14" x2="24" y2="14" />
+  <path d="M24 4 L24 14 Q24 20 18 22" />
+  <line x1="30" y1="4" x2="30" y2="44" />
+  <path d="M30 4 Q38 4 38 12 Q38 20 30 20" />
+</svg></span></div>
+          <h3>Sector Restaurantero y Bares</h3>
+          <p>Programa para cumplir normativa SSA y Distintivo H. Certificado COFEPRIS. Sin cierre del es
+===
+POS 65986:
+class="service-icon">🏟️</div>
+          <h3>Grandes Venues e Instalaciones</h3>
+          <p>Arenas, foros, maquiladoras y corporativos. Experiencia en Arena Monterrey, Cinépolis, Banorte y más.</p>
+          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.4s">
+        <div class="service-img">
+          <div class="service-img"><img src="svc_termitas.png" alt="Control de Termitas" loading="lazy"></div>
+        </div>
+        <div class="service-body">
+          <div class="servic
+===
+POS 66573:
+class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q21 2 21 2 Q21 8 18 14 Q15 20 8 22 Z"/><line x1="12" y1="12" x2="2" y2="22"/></svg></div>
+          <h3>Termitas y Control de Vectores</h3>
+          <p>Tratamiento preventivo y curativo. Control de vectores de enfermedades con productos de baja toxicidad ambiental.</p>
+          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+        </div>
+      </div>
+
+      <div clas
+===
+POS 67430:
+class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M8 20 Q17 8 20 5 Q20 5 20 10 Q18 14 14 16 Q12 18 11 22"/><circle cx="18" cy="5" r="2"/><circle cx="17.5" cy="4.5" r="0.8" fill="currentColor"/><line x1="14" y1="16" x2="16" y2="21"/></svg></div>
+          <h3>Control de Aves y Murciélagos</h3>
+          <p>Mallas, picos ahuyentadores y sistemas de exclusión. Reubicación de fauna silvestre responsable.</p>
+          <a href="#cotizador" class="service-link">Cotizar este s
+===
+POS 68359:
+class="service-icon"><span class="cotiz-opt-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="6" y="8" width="36" height="36" />
+  <line x1="6" y1="16" x2="42" y2="16" /><line x1="6" y1="24" x2="42" y2="24" /><line x1="6" y1="32" x2="42" y2="32" />
+  <line x1="18" y1="8" x2="18" y2="44" /><line x1="30" y1="8" x2="30" y2="44" />
+  <path d="M18 4 L24 8 L30 4" />
+</svg></span></div>
+          <h3>Control de Chinche de Cama</h3>
+          <p>Tratamiento térmico y químico esp
+===
