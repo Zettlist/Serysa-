@@ -1838,6 +1838,52 @@ input[type=range]::-webkit-slider-thumb{
   .vbg-bar { flex-direction: column; height: auto; padding: 14px 20px; gap: 10px; }
   .vbg-bar-text { font-size: .82rem; }
 }
+
+/* ═══ COTIZADOR TOGGLE ═══ */
+.cotiz-toggle{display:flex;gap:0;background:var(--gray-100);border-radius:12px;padding:5px;margin-bottom:40px;max-width:440px;margin-left:auto;margin-right:auto;}
+.cotiz-tab{flex:1;padding:13px 20px;border-radius:9px;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;transition:all .25s;background:transparent;color:var(--gray-700);}
+.cotiz-tab.active{background:#fff;color:var(--blue-500);box-shadow:0 2px 12px rgba(11,21,237,.12);}
+.cotiz-tab:hover:not(.active){color:var(--navy-900);}
+
+/* ═══ INDUSTRIAL CHAT ═══ */
+.ind-chat-wrap{background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(7,12,71,.10);overflow:hidden;max-width:760px;margin:0 auto;}
+.ind-chat-head{background:var(--grad-hero);padding:20px 24px;display:flex;align-items:center;gap:14px;}
+.ind-chat-head-avatar{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.ind-chat-head-info h3{color:#fff;font-size:1rem;margin-bottom:3px;font-family:'Montserrat',sans-serif;}
+.ind-chat-head-info p{color:rgba(255,255,255,.65);font-size:.8rem;}
+.ind-online-dot{width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;margin-right:5px;animation:glowPulse 2s infinite;}
+.chat-body{padding:24px;max-height:460px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;}
+.chat-msg{display:flex;gap:10px;align-items:flex-end;max-width:88%;}
+.chat-msg.bot{align-self:flex-start;}
+.chat-msg.user{align-self:flex-end;flex-direction:row-reverse;}
+.chat-avatar{width:32px;height:32px;border-radius:50%;background:var(--grad-primary);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.chat-bubble{padding:11px 15px;border-radius:18px;font-size:.875rem;line-height:1.6;}
+.chat-msg.bot .chat-bubble{background:var(--gray-100);color:var(--gray-900);border-bottom-left-radius:4px;}
+.chat-msg.user .chat-bubble{background:var(--grad-primary);color:#fff;border-bottom-right-radius:4px;}
+.chat-typing-wrap{display:flex;gap:10px;align-items:flex-end;}
+.chat-typing{display:flex;gap:5px;align-items:center;padding:12px 16px;background:var(--gray-100);border-radius:18px;border-bottom-left-radius:4px;width:62px;}
+.chat-typing span{width:7px;height:7px;border-radius:50%;background:var(--gray-400);animation:typingBounce .9s infinite;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
+.chat-options{display:flex;flex-wrap:wrap;gap:8px;padding:4px 24px 20px;}
+.chat-opt-btn{padding:9px 16px;border:1.5px solid var(--blue-300);border-radius:30px;background:#fff;color:var(--blue-500);font-size:.82rem;font-weight:600;font-family:'Montserrat',sans-serif;cursor:pointer;transition:all .2s;}
+.chat-opt-btn:hover,.chat-opt-btn.selected{background:var(--blue-500);color:#fff;border-color:var(--blue-500);}
+.chat-confirm-btn{background:var(--blue-500);color:#fff;border-color:var(--blue-500);width:100%;margin-top:4px;border-radius:30px;padding:10px 16px;font-size:.84rem;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;border:none;transition:all .2s;}
+.chat-confirm-btn:hover{background:var(--blue-600);}
+.chat-contact-form{padding:0 24px 20px;display:flex;flex-direction:column;gap:10px;}
+.chat-contact-form input{padding:12px 16px;border:1.5px solid #e0e4f0;border-radius:10px;font-family:'Open Sans',sans-serif;font-size:.9rem;outline:none;transition:border .2s;}
+.chat-contact-form input:focus{border-color:var(--blue-400);}
+.chat-send-btn{background:var(--grad-primary);color:#fff;border:none;padding:14px;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .25s;}
+.chat-send-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-blue);}
+.ind-report-card{margin:0 24px 20px;background:var(--gray-50);border:1px solid #e0e4f0;border-radius:14px;padding:20px;}
+.ind-report-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy-900);margin-bottom:14px;}
+.ind-report-row{display:flex;gap:10px;font-size:.84rem;padding:7px 0;border-bottom:1px solid #eef0f8;}
+.ind-report-row:last-child{border:none;}
+.ind-report-key{color:var(--gray-400);font-weight:600;min-width:130px;flex-shrink:0;}
+.ind-report-val{color:var(--gray-900);font-weight:600;}
+.ind-wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:15px;border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;width:100%;transition:all .25s;text-decoration:none;margin:0 24px 24px;box-sizing:border-box;width:calc(100% - 48px);}
+.ind-wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,185,129,.4);}
 </style>
 
 <script>
@@ -1863,6 +1909,14 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="section-sub">El único cotizador de control de plagas en línea en Monterrey. Sin llamadas, sin espera.</p>
     </div>
 
+    <!-- Toggle Residencial / Industrial -->
+    <div class="cotiz-toggle">
+      <button class="cotiz-tab active" id="tab-res-btn" onclick="switchCotizTab('residencial')">🏠 Residencial</button>
+      <button class="cotiz-tab" id="tab-ind-btn" onclick="switchCotizTab('industrial')">🏭 Industrial / Empresa</button>
+    </div>
+
+    <!-- Residencial tab -->
+    <div id="tab-residencial">
     <div class="cotiz-wrap reveal">
       <div class="cotiz-head">
         <div class="cotiz-head-icon">🧮</div>
@@ -2146,6 +2200,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
       </div>
     </div>
+    </div><!-- /tab-residencial -->
+
+    <!-- Industrial chatbot -->
+    <div id="tab-industrial" style="display:none;">
+      <div class="ind-chat-wrap reveal">
+        <div class="ind-chat-head">
+          <div class="ind-chat-head-avatar">🤖</div>
+          <div class="ind-chat-head-info">
+            <h3>Asistente Industrial SERYSA</h3>
+            <p><span class="ind-online-dot"></span>En línea · Propuesta personalizada gratis</p>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-options" id="chatOptions"></div>
+        <div class="chat-contact-form" id="chatContactForm" style="display:none;">
+          <input type="text" id="indNombre" placeholder="Tu nombre completo" />
+          <input type="tel" id="indTelefono" placeholder="Tu WhatsApp (81 XXXX XXXX)" />
+          <button class="chat-send-btn" onclick="sendIndustrialReport()">Enviar reporte al equipo SERYSA →</button>
+        </div>
+        <div class="ind-report-card" id="indReport" style="display:none;"></div>
+        <a id="indWaBtn" class="ind-wa-btn" target="_blank" style="display:none;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Iniciar conversación con el equipo SERYSA
+        </a>
+      </div>
+    </div><!-- /tab-industrial -->
+
   </div>
 </section>
 
@@ -3222,6 +3303,212 @@ function submitContact(e){
 document.querySelectorAll('.btn').forEach(btn=>{
   btn.addEventListener('click',ripple);
 });
+
+/* ══════════════════════════════════════════════
+   COTIZADOR TAB TOGGLE
+══════════════════════════════════════════════ */
+function switchCotizTab(tab) {
+  const res = document.getElementById('tab-residencial');
+  const ind = document.getElementById('tab-industrial');
+  const resBtn = document.getElementById('tab-res-btn');
+  const indBtn = document.getElementById('tab-ind-btn');
+  if (tab === 'residencial') {
+    res.style.display = '';
+    ind.style.display = 'none';
+    resBtn.classList.add('active');
+    indBtn.classList.remove('active');
+  } else {
+    res.style.display = 'none';
+    ind.style.display = '';
+    indBtn.classList.add('active');
+    resBtn.classList.remove('active');
+    if (!chatStarted) startChat();
+  }
+}
+
+/* ══════════════════════════════════════════════
+   INDUSTRIAL CHATBOT
+══════════════════════════════════════════════ */
+const chatState = {};
+let chatStarted = false;
+let chatStep = 0;
+
+const CHAT_FLOW = [
+  {
+    key: 'giro',
+    q: '¡Hola! 👋 Soy el asistente de SERYSA.\n\nPara prepararte una <strong>propuesta personalizada</strong> para tu negocio, te haré unas preguntas rápidas.\n\n¿Cuál es el giro de tu empresa?',
+    opts: ['🍽️ Alimentos y Bebidas', '🏭 Manufactura / Industria', '🏨 Hotel / Hospitalidad', '🏥 Hospital / Clínica', '📦 Logística / Bodega', '🏢 Oficinas / Comercio', '🔧 Otro'],
+  },
+  {
+    key: 'empleados',
+    q: '¿Cuántas personas trabajan en tus instalaciones?',
+    opts: ['1 – 20 personas', '21 – 100 personas', '101 – 500 personas', 'Más de 500'],
+  },
+  {
+    key: 'plagas',
+    q: '¿Qué plagas has detectado o te preocupan?\n<small style="color:var(--gray-400)">(Puedes elegir varias)</small>',
+    opts: ['🪳 Cucarachas', '🐀 Roedores', '🐜 Termitas', '🦟 Mosquitos / Vectores', '🐦 Aves', '🔍 No sé — quiero inspección general'],
+    multi: true,
+  },
+  {
+    key: 'cert',
+    q: '¿Tu empresa tiene o está buscando alguna certificación que requiera control de plagas documentado?',
+    opts: ['✅ Sí — ISO / HACCP / BRC / FSSC', '⏳ En proceso de certificación', '❌ No aplica por ahora'],
+  },
+  {
+    key: 'incidente',
+    q: '¿Han tenido algún incidente reciente con plagas?\n(hallazgos en auditoría, quejas de clientes, avistamientos)',
+    opts: ['⚠️ Sí, recientemente', '✅ No — es mantenimiento preventivo'],
+  },
+  {
+    key: 'frecuencia',
+    q: '¿Con qué frecuencia necesitas el servicio?',
+    opts: ['Mensual', 'Bimestral', 'Trimestral', 'Por evento / urgencia', '🤔 No sé, asesórame'],
+  },
+];
+
+function startChat() {
+  chatStarted = true;
+  chatStep = 0;
+  runStep(0);
+}
+
+function runStep(step) {
+  if (step >= CHAT_FLOW.length) {
+    showContactForm();
+    return;
+  }
+  const s = CHAT_FLOW[step];
+  addBotMsg(s.q, 500, () => showOpts(s.opts, s.multi || false, (val) => {
+    const display = Array.isArray(val) ? val.join(', ') : val;
+    addUserMsg(display.replace(/<[^>]+>/g,''));
+    chatState[s.key] = val;
+    chatStep++;
+    setTimeout(() => runStep(chatStep), 600);
+  }));
+}
+
+function addBotMsg(html, delay, cb) {
+  const body = document.getElementById('chatBody');
+  // Typing indicator
+  const typingWrap = document.createElement('div');
+  typingWrap.className = 'chat-msg bot chat-typing-wrap';
+  typingWrap.innerHTML = '<div class="chat-avatar">🤖</div><div class="chat-typing"><span></span><span></span><span></span></div>';
+  body.appendChild(typingWrap);
+  body.scrollTop = body.scrollHeight;
+  setTimeout(() => {
+    typingWrap.remove();
+    const msg = document.createElement('div');
+    msg.className = 'chat-msg bot';
+    msg.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble">${html}</div>`;
+    body.appendChild(msg);
+    body.scrollTop = body.scrollHeight;
+    if (cb) cb();
+  }, delay + 900);
+}
+
+function addUserMsg(text) {
+  const body = document.getElementById('chatBody');
+  const msg = document.createElement('div');
+  msg.className = 'chat-msg user';
+  msg.innerHTML = `<div class="chat-bubble">${text}</div>`;
+  body.appendChild(msg);
+  body.scrollTop = body.scrollHeight;
+  document.getElementById('chatOptions').innerHTML = '';
+}
+
+function showOpts(opts, multi, cb) {
+  const container = document.getElementById('chatOptions');
+  container.innerHTML = '';
+  const selected = [];
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'chat-opt-btn';
+    btn.textContent = opt;
+    if (multi) {
+      btn.onclick = () => {
+        btn.classList.toggle('selected');
+        const idx = selected.indexOf(opt);
+        if (idx > -1) selected.splice(idx, 1);
+        else selected.push(opt);
+        let confirmBtn = document.getElementById('chatMultiConfirm');
+        if (selected.length > 0 && !confirmBtn) {
+          confirmBtn = document.createElement('button');
+          confirmBtn.id = 'chatMultiConfirm';
+          confirmBtn.className = 'chat-confirm-btn';
+          confirmBtn.textContent = 'Continuar →';
+          confirmBtn.onclick = () => cb([...selected]);
+          container.appendChild(confirmBtn);
+        } else if (selected.length === 0 && confirmBtn) {
+          confirmBtn.remove();
+        }
+      };
+    } else {
+      btn.onclick = () => cb(opt);
+    }
+    container.appendChild(btn);
+  });
+}
+
+function showContactForm() {
+  addBotMsg('Perfecto, ya tengo todo lo necesario 📋\n\n¿A qué nombre y WhatsApp te enviamos la propuesta?', 400, () => {
+    document.getElementById('chatContactForm').style.display = 'flex';
+    document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+  });
+}
+
+function sendIndustrialReport() {
+  const nombre = document.getElementById('indNombre').value.trim();
+  const telefono = document.getElementById('indTelefono').value.trim();
+  if (!nombre || !telefono) {
+    alert('Por favor ingresa tu nombre y número de WhatsApp.');
+    return;
+  }
+  chatState.nombre = nombre;
+  chatState.telefono = telefono;
+  document.getElementById('chatContactForm').style.display = 'none';
+  addUserMsg(nombre + ' — ' + telefono);
+  addBotMsg('¡Listo! 🎉 Tu reporte está completo. Te conectamos con nuestro equipo ahora mismo — ya van a saber todo sobre tu caso.', 400, () => {
+    buildReport();
+  });
+}
+
+function buildReport() {
+  const s = chatState;
+  const plagasStr = Array.isArray(s.plagas) ? s.plagas.join(', ') : s.plagas;
+  // Show visual report
+  const reportEl = document.getElementById('indReport');
+  reportEl.style.display = 'block';
+  reportEl.innerHTML = `
+    <div class="ind-report-title">📋 Reporte Industrial — SERYSA</div>
+    <div class="ind-report-row"><span class="ind-report-key">Giro del negocio</span><span class="ind-report-val">${s.giro}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Personal</span><span class="ind-report-val">${s.empleados}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Plagas / servicios</span><span class="ind-report-val">${plagasStr}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Certificaciones</span><span class="ind-report-val">${s.cert}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Incidente reciente</span><span class="ind-report-val">${s.incidente}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Frecuencia deseada</span><span class="ind-report-val">${s.frecuencia}</span></div>
+    <div class="ind-report-row"><span class="ind-report-key">Contacto</span><span class="ind-report-val">${s.nombre} · ${s.telefono}</span></div>
+  `;
+  // Build WhatsApp message
+  const waMsg = encodeURIComponent(
+    '🏭 *SOLICITUD INDUSTRIAL — SERYSA*\n\n' +
+    '📋 *Datos del negocio:*\n' +
+    '• Giro: ' + s.giro + '\n' +
+    '• Personal: ' + s.empleados + '\n' +
+    '• Plagas / servicios: ' + plagasStr + '\n' +
+    '• Certificaciones: ' + s.cert + '\n' +
+    '• Incidente reciente: ' + s.incidente + '\n' +
+    '• Frecuencia deseada: ' + s.frecuencia + '\n\n' +
+    '👤 *Contacto:*\n' +
+    '• Nombre: ' + s.nombre + '\n' +
+    '• WhatsApp: ' + s.telefono + '\n\n' +
+    '_Reporte generado desde serysa.com_'
+  );
+  const waBtn = document.getElementById('indWaBtn');
+  waBtn.href = 'https://wa.me/528181410750?text=' + waMsg;
+  waBtn.style.display = 'flex';
+  document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+}
 </script>
 </body>
 </html>
