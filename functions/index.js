@@ -1,7 +1,7 @@
 const { onRequest } = require("firebase-functions/v2/https");
 const { setGlobalOptions } = require("firebase-functions/v2");
 const admin = require("firebase-admin");
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -123,7 +123,7 @@ Cuando isComplete=true, incluye en leadData:
 }`;
 
 // ═══════════════════════════════════════════════════════════
-// ENDPOINT: /chat — conversación con Claude
+// ENDPOINT: /chat — conversación con Gemini
 // ═══════════════════════════════════════════════════════════
 exports.chat = onRequest(async (req, res) => {
   if (req.method === "OPTIONS") { res.status(204).send(""); return; }
@@ -136,19 +136,26 @@ exports.chat = onRequest(async (req, res) => {
   }
 
   try {
-    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_KEY });
-
-    const response = await client.messages.create({
-      model: "claude-haiku-4-5",
-      max_tokens: 1024,
-      system: SYSTEM_PROMPT,
-      messages: messages,
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash-lite",
+      systemInstruction: SYSTEM_PROMPT,
+      generationConfig: { responseMimeType: "application/json" },
     });
 
-    const raw = response.content[0].text;
+    // Convert messages to Gemini format
+    const history = messages.slice(0, -1).map(m => ({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.content }],
+    }));
+    const lastMessage = messages[messages.length - 1].content;
+
+    const chat = model.startChat({ history });
+    const result = await chat.sendMessage(lastMessage);
+    const raw = result.response.text();
+
     let parsed;
     try {
-      // Extract JSON from response (Claude may wrap in markdown)
       const jsonMatch = raw.match(/\{[\s\S]*\}/);
       parsed = JSON.parse(jsonMatch ? jsonMatch[0] : raw);
     } catch {
@@ -171,7 +178,7 @@ exports.chat = onRequest(async (req, res) => {
     res.json(parsed);
 
   } catch (err) {
-    console.error("Claude error:", err.message, err.status, JSON.stringify(err));
+    console.error("Gemini error:", err.message, JSON.stringify(err));
     res.status(500).json({ error: "Error al procesar tu mensaje. Intenta de nuevo.", debug: err.message });
   }
 });
@@ -230,7 +237,6 @@ exports.monthlyReport = onRequest(async (req, res) => {
       if (l.razon_perdida) razones[l.razon_perdida] = (razones[l.razon_perdida] || 0) + 1;
     });
 
-    // Urgentes sin cerrar
     const urgentesAbiertos = incompletos.filter(l => l.urgencia === "alta");
 
     res.json({

@@ -1884,6 +1884,12 @@ input[type=range]::-webkit-slider-thumb{
 .ind-report-val{color:var(--gray-900);font-weight:600;}
 .ind-wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:15px;border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;width:100%;transition:all .25s;text-decoration:none;margin:0 24px 24px;box-sizing:border-box;width:calc(100% - 48px);}
 .ind-wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,185,129,.4);}
+.chat-input-area{display:flex;gap:8px;padding:8px 24px 20px;align-items:center;}
+.chat-input-area input{flex:1;padding:11px 16px;border:1.5px solid #e0e4f0;border-radius:24px;font-family:'Open Sans',sans-serif;font-size:.88rem;outline:none;transition:border .2s;}
+.chat-input-area input:focus{border-color:var(--blue-400);}
+.chat-input-send{width:40px;height:40px;border-radius:50%;background:var(--grad-primary);color:#fff;border:none;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+.chat-input-send:hover{transform:scale(1.1);}
+.chat-error{color:#ef4444;font-size:.82rem;padding:8px 24px;}
 </style>
 
 <script>
@@ -2214,10 +2220,10 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="chat-body" id="chatBody"></div>
         <div class="chat-options" id="chatOptions"></div>
-        <div class="chat-contact-form" id="chatContactForm" style="display:none;">
-          <input type="text" id="indNombre" placeholder="Tu nombre completo" />
-          <input type="tel" id="indTelefono" placeholder="Tu WhatsApp (81 XXXX XXXX)" />
-          <button class="chat-send-btn" onclick="sendIndustrialReport()">Enviar reporte al equipo SERYSA →</button>
+        <div class="chat-input-area" id="chatInputArea" style="display:none;">
+          <input type="text" id="chatTextInput" placeholder="Escribe tu respuesta..."
+            onkeypress="if(event.key==='Enter')submitChatText()" />
+          <button class="chat-input-send" onclick="submitChatText()">➤</button>
         </div>
         <div class="ind-report-card" id="indReport" style="display:none;"></div>
         <a id="indWaBtn" class="ind-wa-btn" target="_blank" style="display:none;">
@@ -3327,188 +3333,206 @@ function switchCotizTab(tab) {
 }
 
 /* ══════════════════════════════════════════════
-   INDUSTRIAL CHATBOT
+   CLAUDE AI CHATBOT
 ══════════════════════════════════════════════ */
-const chatState = {};
-let chatStarted = false;
-let chatStep = 0;
+const CHAT_URL  = 'https://chat-rk7fz524tq-uc.a.run.app';
+const SAVE_URL  = 'https://savelead-rk7fz524tq-uc.a.run.app';
 
-const CHAT_FLOW = [
-  {
-    key: 'giro',
-    q: '¡Hola! 👋 Soy el asistente de SERYSA.\n\nPara prepararte una <strong>propuesta personalizada</strong> para tu negocio, te haré unas preguntas rápidas.\n\n¿Cuál es el giro de tu empresa?',
-    opts: ['🍽️ Alimentos y Bebidas', '🏭 Manufactura / Industria', '🏨 Hotel / Hospitalidad', '🏥 Hospital / Clínica', '📦 Logística / Bodega', '🏢 Oficinas / Comercio', '🔧 Otro'],
-  },
-  {
-    key: 'empleados',
-    q: '¿Cuántas personas trabajan en tus instalaciones?',
-    opts: ['1 – 20 personas', '21 – 100 personas', '101 – 500 personas', 'Más de 500'],
-  },
-  {
-    key: 'plagas',
-    q: '¿Qué plagas has detectado o te preocupan?\n<small style="color:var(--gray-400)">(Puedes elegir varias)</small>',
-    opts: ['🪳 Cucarachas', '🐀 Roedores', '🐜 Termitas', '🦟 Mosquitos / Vectores', '🐦 Aves', '🔍 No sé — quiero inspección general'],
-    multi: true,
-  },
-  {
-    key: 'cert',
-    q: '¿Tu empresa tiene o está buscando alguna certificación que requiera control de plagas documentado?',
-    opts: ['✅ Sí — ISO / HACCP / BRC / FSSC', '⏳ En proceso de certificación', '❌ No aplica por ahora'],
-  },
-  {
-    key: 'incidente',
-    q: '¿Han tenido algún incidente reciente con plagas?\n(hallazgos en auditoría, quejas de clientes, avistamientos)',
-    opts: ['⚠️ Sí, recientemente', '✅ No — es mantenimiento preventivo'],
-  },
-  {
-    key: 'frecuencia',
-    q: '¿Con qué frecuencia necesitas el servicio?',
-    opts: ['Mensual', 'Bimestral', 'Trimestral', 'Por evento / urgencia', '🤔 No sé, asesórame'],
-  },
-];
+let chatStarted   = false;
+let chatHistory   = [];
+let chatCollected = {};
+let chatSessionId = null;
+let typingEl      = null;
+
+function genSessionId() {
+  return 'ses_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+}
 
 function startChat() {
-  chatStarted = true;
-  chatStep = 0;
-  runStep(0);
+  chatStarted   = true;
+  chatSessionId = genSessionId();
+  chatHistory   = [];
+  chatCollected = {};
+  document.getElementById('chatBody').innerHTML     = '';
+  document.getElementById('chatOptions').innerHTML  = '';
+  document.getElementById('indReport').style.display = 'none';
+  document.getElementById('indWaBtn').style.display  = 'none';
+  sendToAI(null); // null = bot inicia la conversación
 }
 
-function runStep(step) {
-  if (step >= CHAT_FLOW.length) {
-    showContactForm();
-    return;
+async function sendToAI(userText) {
+  // Agregar mensaje del usuario al historial
+  if (userText !== null) {
+    chatHistory.push({ role: 'user', content: userText });
+  } else {
+    chatHistory.push({ role: 'user', content: '¡Hola! Quiero información sobre sus servicios de control de plagas.' });
   }
-  const s = CHAT_FLOW[step];
-  addBotMsg(s.q, 500, () => showOpts(s.opts, s.multi || false, (val) => {
-    const display = Array.isArray(val) ? val.join(', ') : val;
-    addUserMsg(display.replace(/<[^>]+>/g,''));
-    chatState[s.key] = val;
-    chatStep++;
-    setTimeout(() => runStep(chatStep), 600);
-  }));
+
+  showTyping();
+  clearInteraction();
+
+  try {
+    const res = await fetch(CHAT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory, sessionId: chatSessionId })
+    });
+
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    // Guardar respuesta del asistente en historial
+    chatHistory.push({ role: 'assistant', content: JSON.stringify(data) });
+    chatCollected = Object.assign({}, chatCollected, data.collected || {});
+
+    hideTyping();
+    addBotBubble(data.message || '¿Puedes repetir eso?');
+
+    if (data.isComplete && data.leadData) {
+      setTimeout(() => showReport(data.leadData), 700);
+    } else if (data.options && data.options.length > 0) {
+      showOptionBtns(data.options);
+    } else {
+      showTextInput();
+    }
+
+  } catch (err) {
+    hideTyping();
+    addBotBubble('Tuve un problema de conexión 😕 Intenta de nuevo o escríbenos directo al WhatsApp.');
+    showTextInput();
+  }
 }
 
-function addBotMsg(html, delay, cb) {
+/* ── UI helpers ── */
+function showTyping() {
   const body = document.getElementById('chatBody');
-  // Typing indicator
-  const typingWrap = document.createElement('div');
-  typingWrap.className = 'chat-msg bot chat-typing-wrap';
-  typingWrap.innerHTML = '<div class="chat-avatar">🤖</div><div class="chat-typing"><span></span><span></span><span></span></div>';
-  body.appendChild(typingWrap);
+  typingEl = document.createElement('div');
+  typingEl.className = 'chat-msg bot chat-typing-wrap';
+  typingEl.innerHTML = '<div class="chat-avatar">🤖</div><div class="chat-typing"><span></span><span></span><span></span></div>';
+  body.appendChild(typingEl);
   body.scrollTop = body.scrollHeight;
-  setTimeout(() => {
-    typingWrap.remove();
-    const msg = document.createElement('div');
-    msg.className = 'chat-msg bot';
-    msg.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble">${html}</div>`;
-    body.appendChild(msg);
-    body.scrollTop = body.scrollHeight;
-    if (cb) cb();
-  }, delay + 900);
 }
 
-function addUserMsg(text) {
-  const body = document.getElementById('chatBody');
-  const msg = document.createElement('div');
-  msg.className = 'chat-msg user';
-  msg.innerHTML = `<div class="chat-bubble">${text}</div>`;
-  body.appendChild(msg);
-  body.scrollTop = body.scrollHeight;
+function hideTyping() {
+  if (typingEl) { typingEl.remove(); typingEl = null; }
+}
+
+function clearInteraction() {
   document.getElementById('chatOptions').innerHTML = '';
+  document.getElementById('chatInputArea').style.display = 'none';
 }
 
-function showOpts(opts, multi, cb) {
-  const container = document.getElementById('chatOptions');
-  container.innerHTML = '';
-  const selected = [];
+function addBotBubble(text) {
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'chat-msg bot';
+  div.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addUserBubble(text) {
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'chat-msg user';
+  div.innerHTML = `<div class="chat-bubble">${text}</div>`;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  clearInteraction();
+}
+
+function showOptionBtns(opts) {
+  const c = document.getElementById('chatOptions');
+  c.innerHTML = '';
   opts.forEach(opt => {
     const btn = document.createElement('button');
     btn.className = 'chat-opt-btn';
     btn.textContent = opt;
-    if (multi) {
-      btn.onclick = () => {
-        btn.classList.toggle('selected');
-        const idx = selected.indexOf(opt);
-        if (idx > -1) selected.splice(idx, 1);
-        else selected.push(opt);
-        let confirmBtn = document.getElementById('chatMultiConfirm');
-        if (selected.length > 0 && !confirmBtn) {
-          confirmBtn = document.createElement('button');
-          confirmBtn.id = 'chatMultiConfirm';
-          confirmBtn.className = 'chat-confirm-btn';
-          confirmBtn.textContent = 'Continuar →';
-          confirmBtn.onclick = () => cb([...selected]);
-          container.appendChild(confirmBtn);
-        } else if (selected.length === 0 && confirmBtn) {
-          confirmBtn.remove();
-        }
-      };
-    } else {
-      btn.onclick = () => cb(opt);
-    }
-    container.appendChild(btn);
+    btn.onclick = () => { addUserBubble(opt); sendToAI(opt); };
+    c.appendChild(btn);
   });
 }
 
-function showContactForm() {
-  addBotMsg('Perfecto, ya tengo todo lo necesario 📋\n\n¿A qué nombre y WhatsApp te enviamos la propuesta?', 400, () => {
-    document.getElementById('chatContactForm').style.display = 'flex';
-    document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
-  });
+function showTextInput() {
+  const area = document.getElementById('chatInputArea');
+  area.style.display = 'flex';
+  document.getElementById('chatTextInput').focus();
 }
 
-function sendIndustrialReport() {
-  const nombre = document.getElementById('indNombre').value.trim();
-  const telefono = document.getElementById('indTelefono').value.trim();
-  if (!nombre || !telefono) {
-    alert('Por favor ingresa tu nombre y número de WhatsApp.');
-    return;
-  }
-  chatState.nombre = nombre;
-  chatState.telefono = telefono;
-  document.getElementById('chatContactForm').style.display = 'none';
-  addUserMsg(nombre + ' — ' + telefono);
-  addBotMsg('¡Listo! 🎉 Tu reporte está completo. Te conectamos con nuestro equipo ahora mismo — ya van a saber todo sobre tu caso.', 400, () => {
-    buildReport();
-  });
+function submitChatText() {
+  const input = document.getElementById('chatTextInput');
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserBubble(text);
+  sendToAI(text);
 }
 
-function buildReport() {
-  const s = chatState;
-  const plagasStr = Array.isArray(s.plagas) ? s.plagas.join(', ') : s.plagas;
-  // Show visual report
+/* ── Reporte final ── */
+function showReport(leadData) {
+  const s = chatCollected;
+
+  const rows = [
+    ['Tipo de cliente',  s.tipo_cliente],
+    ['Giro',             s.giro],
+    ['Sector',           s.sector_alimentario],
+    ['Certificación',    s.certificacion],
+    ['Norma',            s.norma],
+    ['Producto/Proceso', s.producto_proceso],
+    ['Ubicación',        s.ubicacion],
+    ['Plagas',           Array.isArray(s.plagas_historial) ? s.plagas_historial.join(', ') : s.plagas_historial],
+    ['Problema activo',  Array.isArray(s.problema_activo)  ? s.problema_activo.join(', ')  : s.problema_activo],
+    ['Servicio especial',s.servicio_especial],
+    ['Disponibilidad',   s.disponibilidad],
+    ['Nombre',           s.nombre],
+    ['WhatsApp',         s.whatsapp || s.telefono],
+    ['Tipo solicitud',   s.tipo_solicitud],
+    ['Visita inspección',s.visita_inspeccion],
+  ].filter(([,v]) => v && v !== 'null' && v !== 'undefined' && v !== 'None');
+
   const reportEl = document.getElementById('indReport');
   reportEl.style.display = 'block';
-  reportEl.innerHTML = `
-    <div class="ind-report-title">📋 Reporte Industrial — SERYSA</div>
-    <div class="ind-report-row"><span class="ind-report-key">Giro del negocio</span><span class="ind-report-val">${s.giro}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Personal</span><span class="ind-report-val">${s.empleados}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Plagas / servicios</span><span class="ind-report-val">${plagasStr}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Certificaciones</span><span class="ind-report-val">${s.cert}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Incidente reciente</span><span class="ind-report-val">${s.incidente}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Frecuencia deseada</span><span class="ind-report-val">${s.frecuencia}</span></div>
-    <div class="ind-report-row"><span class="ind-report-key">Contacto</span><span class="ind-report-val">${s.nombre} · ${s.telefono}</span></div>
-  `;
-  // Build WhatsApp message
-  const waMsg = encodeURIComponent(
-    '🏭 *SOLICITUD INDUSTRIAL — SERYSA*\n\n' +
-    '📋 *Datos del negocio:*\n' +
-    '• Giro: ' + s.giro + '\n' +
-    '• Personal: ' + s.empleados + '\n' +
-    '• Plagas / servicios: ' + plagasStr + '\n' +
-    '• Certificaciones: ' + s.cert + '\n' +
-    '• Incidente reciente: ' + s.incidente + '\n' +
-    '• Frecuencia deseada: ' + s.frecuencia + '\n\n' +
-    '👤 *Contacto:*\n' +
-    '• Nombre: ' + s.nombre + '\n' +
-    '• WhatsApp: ' + s.telefono + '\n\n' +
-    '_Reporte generado desde serysa.com_'
-  );
+  reportEl.innerHTML = `<div class="ind-report-title">📋 Reporte SERYSA</div>` +
+    rows.map(([k,v]) =>
+      `<div class="ind-report-row"><span class="ind-report-key">${k}</span><span class="ind-report-val">${v}</span></div>`
+    ).join('');
+
+  // Construir mensaje WhatsApp
+  const waLines = ['🏭 *SOLICITUD SERYSA*', ''];
+  rows.forEach(([k,v]) => waLines.push(`• *${k}:* ${v}`));
+  waLines.push('', '_Generado desde serysa.com_');
+
   const waBtn = document.getElementById('indWaBtn');
-  waBtn.href = 'https://wa.me/528181410750?text=' + waMsg;
+  waBtn.href = 'https://wa.me/528181410750?text=' + encodeURIComponent(waLines.join('\n'));
   waBtn.style.display = 'flex';
-  document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+  waBtn.onclick = () => saveLead('CERRADO', leadData);
+
+  document.getElementById('chatBody').scrollTop = 99999;
+
+  // Guardar como incompleto; se actualiza a CERRADO si abren WhatsApp
+  saveLead('INCOMPLETO', leadData);
 }
+
+/* ── Guardar lead en Firestore ── */
+async function saveLead(estado, leadData) {
+  try {
+    await fetch(SAVE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId: chatSessionId,
+        collected: { ...chatCollected, estado_lead: estado },
+        leadData:  { ...(leadData || {}), estado_lead: estado },
+        abrioWhatsapp: estado === 'CERRADO'
+      })
+    });
+  } catch(e) { /* fallo silencioso */ }
+}
+
+// Guardar incompleto si el usuario abandona
+window.addEventListener('beforeunload', () => {
+  if (chatStarted && chatHistory.length > 1) saveLead('INCOMPLETO', null);
+});
 </script>
 </body>
 </html>
