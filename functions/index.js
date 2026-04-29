@@ -119,8 +119,9 @@ Cuando isComplete=true, incluye en leadData:
   "urgencia": "alta|media|baja",
   "prob_cierre": 0-100,
   "razon_perdida": null,
-  "resumen": "descripción breve del caso"
+  "resumen": "Reporte COMPLETO y DETALLADO con TODO lo recolectado en la conversación. Debe incluir TODOS estos campos si se tienen: CLIENTE (nombre, empresa si mencionó), TIPO DE INSTALACIÓN, GIRO/SECTOR, CERTIFICACIONES Y NORMAS, PRODUCTOS O PROCESOS que manejan, UBICACIÓN exacta, PLAGAS ACTIVAS con descripción de dónde las vieron y frecuencia, HISTORIAL DE PLAGAS previas, SERVICIOS ESPECIALES solicitados (con medidas m³ si aplica), URGENCIA y motivo (auditoría, infestación severa, etc.), DISPONIBILIDAD para visita, TIPO DE SOLICITUD (cotización/servicio), CONTACTO (teléfono/WhatsApp), OBSERVACIONES ADICIONALES que el cliente mencionó. Si el lead es INCOMPLETO indica qué información faltó. Si es RECHAZADO indica el motivo."
 }`;
+
 
 // ═══════════════════════════════════════════════════════════
 // ENDPOINT: /chat — conversación con Gemini
