@@ -1,4 +1,5 @@
 const { onRequest } = require("firebase-functions/v2/https");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
 const { setGlobalOptions } = require("firebase-functions/v2");
 const admin = require("firebase-admin");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -290,4 +291,20 @@ exports.monthlyReport = onRequest(async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Error generando reporte" });
   }
+});
+
+// ═══════════════════════════════════════════════════════════
+// CRON: ping cada 5 min para evitar cold start
+// ═══════════════════════════════════════════════════════════
+exports.keepWarm = onSchedule({ schedule: "every 5 minutes", region: "us-central1" }, async () => {
+  const https = require("https");
+  const url = "https://chat-rk7fz524tq-uc.a.run.app";
+  const body = JSON.stringify({ messages: [{ role: "user", content: "ping" }] });
+  await new Promise((resolve) => {
+    const req = https.request(url, { method: "POST", headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(body) } }, resolve);
+    req.on("error", resolve);
+    req.write(body);
+    req.end();
+  });
+  console.log("keepWarm ping sent");
 });
