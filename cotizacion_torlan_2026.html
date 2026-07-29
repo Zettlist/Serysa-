@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotización — TORLAN a SERYSA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Open Sans',sans-serif;background:#f4f6fb;color:#1e2a4a;font-size:13px;}
+
+  .page{max-width:820px;margin:32px auto;background:#fff;border-radius:12px;box-shadow:0 4px 32px rgba(0,0,0,.12);overflow:hidden;}
+
+  .header{background:linear-gradient(135deg,#111827 0%,#1e3a5f 100%);padding:36px 40px 28px;display:flex;justify-content:space-between;align-items:flex-start;}
+  .header-left .company{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:800;color:#fff;letter-spacing:2px;}
+  .header-left .tagline{color:rgba(255,255,255,.65);font-size:11px;margin-top:4px;}
+  .header-right{text-align:right;}
+  .doc-type{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:2px;}
+  .doc-num{color:rgba(255,255,255,.6);font-size:11px;margin-top:4px;}
+  .doc-date{color:#7dd3fc;font-size:12px;margin-top:2px;font-weight:600;}
+
+  .meta-band{background:#f0f4ff;border-bottom:1px solid #e0e8ff;padding:16px 40px;display:flex;}
+  .meta-block{flex:1;border-right:1px solid #d0daff;padding-right:24px;margin-right:24px;}
+  .meta-block:last-child{border:none;padding:0;margin:0;}
+  .meta-label{font-size:10px;font-weight:700;color:#6b7db3;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+  .meta-value{font-size:13px;font-weight:600;color:#1e2a4a;}
+  .meta-sub{font-size:11px;color:#7b8fc0;margin-top:2px;}
+
+  .parties{display:flex;padding:24px 40px;border-bottom:1px solid #eef0f8;}
+  .party{flex:1;}
+  .party:first-child{border-right:1px dashed #d8dff5;padding-right:32px;margin-right:32px;}
+  .party-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#6b7db3;margin-bottom:8px;}
+  .party-name{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:#111827;}
+  .party-detail{font-size:11.5px;color:#4a5578;margin-top:3px;line-height:1.65;}
+
+  .table-wrap{padding:28px 40px;}
+  .table-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#1e2a4a;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .table-title::after{content:'';flex:1;height:1px;background:#e0e8ff;}
+
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:linear-gradient(90deg,#111827,#1e3a5f);}
+  thead th{color:#fff;font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:10px 12px;text-align:left;}
+  thead th:last-child{text-align:right;}
+  tbody tr{border-bottom:1px solid #f0f3fa;}
+  tbody tr:nth-child(even){background:#f8faff;}
+  td{padding:11px 12px;vertical-align:top;}
+  td.num{text-align:center;color:#6b7db3;font-size:12px;width:36px;}
+  td.total{text-align:right;font-weight:700;color:#111827;width:110px;}
+
+  .svc-name{font-weight:600;color:#1e2a4a;margin-bottom:3px;}
+  .svc-cat{display:inline-block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:1px 7px;border-radius:20px;margin-bottom:4px;}
+  .cat-ai{background:#fef3c7;color:#b45309;}
+  .cat-int{background:#dcfce7;color:#15803d;}
+  .cat-devops{background:#fee2e2;color:#b91c1c;}
+  .svc-desc{font-size:11px;color:#6b7db3;line-height:1.55;}
+
+  .totals-wrap{padding:0 40px 28px;display:flex;justify-content:flex-end;}
+  .totals-box{width:280px;border:1px solid #e0e8ff;border-radius:10px;overflow:hidden;}
+  .totals-row{display:flex;justify-content:space-between;padding:9px 16px;border-bottom:1px solid #f0f3fa;font-size:12.5px;}
+  .totals-row:last-child{border:none;}
+  .totals-row.grand{background:linear-gradient(90deg,#111827,#1e3a5f);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;}
+  .totals-row .t-label{opacity:.8;}
+  .totals-row .t-val{font-weight:700;}
+
+  .notes{padding:0 40px 28px;display:flex;gap:16px;}
+  .note-box{flex:1;background:#f8faff;border:1px solid #e0e8ff;border-radius:10px;padding:14px 16px;}
+  .note-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#111827;margin-bottom:8px;}
+  .note-text{font-size:11.5px;color:#4a5578;line-height:1.65;}
+
+  .sign-area{padding:0 40px 32px;display:flex;gap:48px;}
+  .sign-block{flex:1;text-align:center;}
+  .sign-line{border-top:1.5px solid #c0cce8;margin-top:52px;padding-top:8px;}
+  .sign-name{font-weight:700;font-size:12px;color:#1e2a4a;}
+  .sign-role{font-size:10.5px;color:#6b7db3;}
+
+  .footer{background:#111827;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-left{font-size:10.5px;color:rgba(255,255,255,.6);}
+  .footer-brand{font-family:'Montserrat',sans-serif;font-weight:800;color:#fff;font-size:11px;}
+  .footer-right{font-size:10px;color:rgba(255,255,255,.4);}
+
+  @media print{body{background:#fff;}.page{box-shadow:none;margin:0;border-radius:0;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="company">TORLAN</div>
+      <div class="tagline">Desarrollo Web &amp; Soluciones Digitales</div>
+    </div>
+    <div class="header-right">
+      <div class="doc-type">COTIZACIÓN</div>
+      <div class="doc-num">No. TOR-2026-0502-001</div>
+      <div class="doc-date">2 de mayo de 2026</div>
+    </div>
+  </div>
+
+  <div class="meta-band">
+    <div class="meta-block">
+      <div class="meta-label">Periodo</div>
+      <div class="meta-value">Enero — Abril 2026</div>
+      <div class="meta-sub">Desarrollo e implementación</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Proyecto</div>
+      <div class="meta-value">Chatbot IA + Integraciones</div>
+      <div class="meta-sub">serysa-web-2026.web.app</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Validez</div>
+      <div class="meta-value">30 días naturales</div>
+      <div class="meta-sub">A partir del 2 de mayo de 2026</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Moneda</div>
+      <div class="meta-value">MXN</div>
+      <div class="meta-sub">Transferencia / Cheque</div>
+    </div>
+  </div>
+
+  <div class="parties">
+    <div class="party">
+      <div class="party-role">Proveedor de servicios</div>
+      <div class="party-name">TORLAN</div>
+      <div class="party-detail">
+        Desarrollo Web &amp; Soluciones Digitales<br>
+        Monterrey, Nuevo León<br>
+        Integraciones de IA y automatizaciones digitales
+      </div>
+    </div>
+    <div class="party">
+      <div class="party-role">Cliente</div>
+      <div class="party-name">SERYSA</div>
+      <div class="party-detail">
+        Servicios y Suministros Agroindustriales, S.A. de C.V.<br>
+        Monterrey, Nuevo León<br>
+        Lic. COFEPRIS: 23 AP 19 026 0329
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-title">Desglose de Servicios por Periodo</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Descripción del servicio</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- ── ENERO ── -->
+        <tr style="background:#e8f0fe;"><td colspan="3" style="padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1e3a5f;">Enero 2026</td></tr>
+
+        <tr>
+          <td class="num">1</td>
+          <td>
+            <span class="svc-cat cat-ai">IA</span>
+            <div class="svc-name">Chatbot de cotización Claude AI — Mes 1/3</div>
+            <div class="svc-desc">Desarrollo inicial: integración Anthropic SDK, system prompt SERYSA, flujo de cotización, formato JSON, validaciones server-side y contexto acumulado.</div>
+          </td>
+          <td class="total">$733.33</td>
+        </tr>
+
+        <tr>
+          <td class="num">2</td>
+          <td>
+            <span class="svc-cat cat-int">Backend</span>
+            <div class="svc-name">Firebase Cloud Functions + Firestore — Mes 1/3</div>
+            <div class="svc-desc">Configuración inicial del proyecto, endpoints /chat y /saveLead, base de datos Firestore, variables de entorno y primer despliegue a producción.</div>
+          </td>
+          <td class="total">$566.67</td>
+        </tr>
+
+        <tr>
+          <td class="num">3</td>
+          <td>
+            <span class="svc-cat cat-devops">DevOps</span>
+            <div class="svc-name">Hosting Firebase + Despliegue — Mes 1/3</div>
+            <div class="svc-desc">Configuración Firebase Hosting (serysa-web-2026), dominio .web.app, CDN y primer despliegue.</div>
+          </td>
+          <td class="total">$100.00</td>
+        </tr>
+
+        <tr style="background:#f0f4ff;"><td colspan="2" style="padding:7px 12px;text-align:right;font-size:11.5px;font-weight:600;color:#1e3a5f;">Subtotal Enero</td><td class="total" style="background:#f0f4ff;">$1,400.00</td></tr>
+
+        <!-- ── FEBRERO ── -->
+        <tr style="background:#e8f0fe;"><td colspan="3" style="padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1e3a5f;">Febrero 2026</td></tr>
+
+        <tr>
+          <td class="num">4</td>
+          <td>
+            <span class="svc-cat cat-ai">IA</span>
+            <div class="svc-name">Chatbot de cotización Claude AI — Mes 2/3</div>
+            <div class="svc-desc">Refinamiento: criterios de urgencia y prob. cierre, prompt caching, defensa contra prompt injection, historial sanitizado y flujo por tipo de cliente.</div>
+          </td>
+          <td class="total">$733.33</td>
+        </tr>
+
+        <tr>
+          <td class="num">5</td>
+          <td>
+            <span class="svc-cat cat-int">Backend</span>
+            <div class="svc-name">Firebase Cloud Functions + Firestore — Mes 2/3</div>
+            <div class="svc-desc">Endpoint /monthlyReport, optimizaciones de merge en Firestore, manejo de errores y seguridad CORS.</div>
+          </td>
+          <td class="total">$566.67</td>
+        </tr>
+
+        <tr>
+          <td class="num">6</td>
+          <td>
+            <span class="svc-cat cat-devops">DevOps</span>
+            <div class="svc-name">Hosting Firebase + Despliegue — Mes 2/3</div>
+            <div class="svc-desc">Iteraciones de despliegue, ajustes de configuración y pruebas de integración en producción.</div>
+          </td>
+          <td class="total">$100.00</td>
+        </tr>
+
+        <tr style="background:#f0f4ff;"><td colspan="2" style="padding:7px 12px;text-align:right;font-size:11.5px;font-weight:600;color:#1e3a5f;">Subtotal Febrero</td><td class="total" style="background:#f0f4ff;">$1,400.00</td></tr>
+
+        <!-- ── MARZO ── -->
+        <tr style="background:#e8f0fe;"><td colspan="3" style="padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1e3a5f;">Marzo 2026</td></tr>
+
+        <tr>
+          <td class="num">7</td>
+          <td>
+            <span class="svc-cat cat-ai">IA</span>
+            <div class="svc-name">Chatbot de cotización Claude AI — Mes 3/3</div>
+            <div class="svc-desc">Migración a Claude Haiku 4-5, inyección de datos ya recolectados, preguntas de calificación de lead, ajustes finales de system prompt y pruebas en producción.</div>
+          </td>
+          <td class="total">$733.34</td>
+        </tr>
+
+        <tr>
+          <td class="num">8</td>
+          <td>
+            <span class="svc-cat cat-int">Backend</span>
+            <div class="svc-name">Firebase Cloud Functions + Firestore — Mes 3/3</div>
+            <div class="svc-desc">Ajustes finales de endpoints, validaciones de teléfono server-side, pruebas de carga y estabilización del sistema.</div>
+          </td>
+          <td class="total">$566.66</td>
+        </tr>
+
+        <tr>
+          <td class="num">9</td>
+          <td>
+            <span class="svc-cat cat-devops">DevOps</span>
+            <div class="svc-name">Hosting Firebase + Despliegue — Mes 3/3</div>
+            <div class="svc-desc">Despliegue final, keep-warm scheduler, revisión de variables de entorno y entrega del proyecto.</div>
+          </td>
+          <td class="total">$100.00</td>
+        </tr>
+
+        <tr style="background:#f0f4ff;"><td colspan="2" style="padding:7px 12px;text-align:right;font-size:11.5px;font-weight:600;color:#1e3a5f;">Subtotal Marzo</td><td class="total" style="background:#f0f4ff;">$1,400.00</td></tr>
+
+        <!-- ── ABRIL ── -->
+        <tr style="background:#e8f0fe;"><td colspan="3" style="padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1e3a5f;">Abril 2026</td></tr>
+
+        <tr>
+          <td class="num">10</td>
+          <td>
+            <span class="svc-cat cat-ai">IA</span>
+            <div class="svc-name">Widget flotante WhatsApp con mini-chat IA</div>
+            <div class="svc-desc">Botón flotante que abre mini-chat estilo WhatsApp para captura rápida de leads. Flujo independiente orientado a obtener número de contacto. UI personalizada con burbujas de conversación. Integrado al mismo backend de IA y Firestore.</div>
+          </td>
+          <td class="total">$1,300.00</td>
+        </tr>
+
+        <tr>
+          <td class="num">11</td>
+          <td>
+            <span class="svc-cat cat-int">Integración</span>
+            <div class="svc-name">Notificaciones automáticas WhatsApp vía Twilio</div>
+            <div class="svc-desc">Envío automático de reporte al cerrar cotización. Mensaje formateado con nombre, WhatsApp, tipo de instalación, plagas, urgencia y probabilidad de cierre. Integración con Twilio Messaging API.</div>
+          </td>
+          <td class="total">$1,000.00</td>
+        </tr>
+
+        <tr style="background:#f0f4ff;"><td colspan="2" style="padding:7px 12px;text-align:right;font-size:11.5px;font-weight:600;color:#1e3a5f;">Subtotal Abril</td><td class="total" style="background:#f0f4ff;">$2,300.00</td></tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="totals-wrap">
+    <div class="totals-box">
+      <div class="totals-row grand">
+        <span class="t-label">TOTAL</span>
+        <span class="t-val">$6,500.00 MXN</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note-box">
+      <div class="note-title">Tecnologías</div>
+      <div class="note-text">
+        • Anthropic Claude Haiku 4-5<br>
+        • Firebase Functions + Firestore + Hosting<br>
+        • Twilio WhatsApp Messaging API<br>
+        • Node.js 22 · Google Cloud Run<br>
+        • @anthropic-ai/sdk · firebase-admin
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-brand">TORLAN</span> · Desarrollo Web &amp; Soluciones Digitales · Monterrey, N.L.
+    </div>
+    <div class="footer-right">TOR-2026-0502-001 · Pág. 1 de 1</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -13,3 +13,7 @@ serysa_logo_new.png
 images_preview.html
 
 functions/.env
+
+# Node deps
+functions/node_modules/
+node_modules/
