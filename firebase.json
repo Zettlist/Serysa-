@@ -7,7 +7,12 @@
       "**/node_modules/**",
       "**/*.py",
       "**/*.txt",
-      "**/*.md"
+      "**/*.md",
+      "functions/**"
     ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs22"
   }
 }
