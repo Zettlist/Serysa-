@@ -195,6 +195,69 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
   box-shadow:0 0 0 4px rgba(11,21,237,.08);
 }
 
+/* ── grupo de casillas (tipo de servicio) ── */
+/* el campo de contacto no aparece hasta que se elige un medio.
+   se anima con max-height y no con la fila del grid: aqui dentro el 1fr
+   se resolvia a cero y el campo nunca llegaba a abrirse.  el tope va
+   ajustado al alto real del campo para que el cierre no se quede colgado */
+.campo-plegable{
+  max-height:0;overflow:hidden;
+  transition:max-height .34s cubic-bezier(.4,0,.2,1);
+}
+.campo-plegable>div>input{
+  margin-top:10px;opacity:0;transform:translateY(-6px);
+  transition:opacity .26s ease .06s,transform .26s ease .06s;
+}
+.campo-plegable.abierto{max-height:90px;}
+.campo-plegable.abierto>div>input{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .campo-plegable,.campo-plegable>div>input{transition:none;}
+}
+
+.check-group{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;}
+.form-group .check-item{
+  display:flex;align-items:center;gap:8px;margin-bottom:0;cursor:pointer;
+  font-size:.85rem;font-weight:500;text-transform:none;letter-spacing:0;
+  color:var(--gray-900);font-family:'Open Sans',sans-serif;
+}
+/* la casilla se dibuja a mano: heredar el estilo de los inputs de texto
+   la deformaba (border-radius:8px la hacía ver redonda, como opción única) */
+.form-group .check-item input[type="checkbox"]{
+  appearance:none;-webkit-appearance:none;
+  width:16px;height:16px;flex:0 0 16px;padding:0;margin:0;
+  border:1.5px solid #b9c2d6;border-radius:4px;background-color:#fff;background-image:none;
+  box-shadow:none;cursor:pointer;position:relative;
+}
+.form-group .check-item input[type="checkbox"]:checked{
+  background-color:var(--blue-500);border-color:var(--blue-500);
+}
+.form-group .check-item input[type="checkbox"]:checked::after{
+  content:'';position:absolute;left:4px;top:1px;
+  width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+}
+.form-group .check-item input[type="checkbox"]:focus-visible{
+  outline:2px solid var(--blue-500);outline-offset:2px;
+}
+.form-group .check-item span{line-height:1.3;}
+/* el header fijo mide 76px: evita que el formulario quede tapado al llegar por ancla */
+#cotizacion-gratuita{scroll-margin-top:96px;}
+/* ── SOPORTE ── */
+.soporte{background:var(--gray-50);}
+.soporte-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+.soporte-img{border-radius:18px;overflow:hidden;border:1px solid rgba(11,21,237,.06);background:#fff;}
+.soporte-img img{width:100%;height:220px;object-fit:cover;display:block;}
+.soporte-slot{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  min-height:220px;border-radius:18px;
+  border:1.5px dashed rgba(11,21,237,.22);background:rgba(11,21,237,.03);
+  color:var(--blue-500);font-size:.82rem;font-weight:600;
+  font-family:'Montserrat',sans-serif;letter-spacing:.3px;text-align:center;padding:20px;
+}
+.check-aviso{display:none;font-size:.75rem;color:#e5484d;margin-top:8px;}
+.hero-card .check-aviso{color:#ff9a9a;}
+@media(max-width:400px){.check-group{grid-template-columns:1fr;}}
+
 /* ═══════════════════════════════════════════════ PARTICLES */
 #particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
 .p-dot{
@@ -400,6 +463,15 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
   background:rgba(255,255,255,.1);
 }
 .hero-card select option{background:var(--navy-800);color:#fff;}
+.hero-card .form-group .check-item{color:rgba(255,255,255,.82);}
+.hero-card .form-group .check-item input[type="checkbox"]{
+  background-color:rgba(255,255,255,.10);border-color:rgba(255,255,255,.35);
+}
+.hero-card .form-group .check-item input[type="checkbox"]:checked{
+  background-color:var(--cyan-500);border-color:var(--cyan-500);
+}
+.hero-card .form-group .check-item input[type="checkbox"]:checked::after{border-color:var(--navy-800);}
+.hero-card .form-group .check-item input[type="checkbox"]:focus-visible{outline-color:var(--cyan-500);}
 .form-privacy{font-size:.7rem;color:rgba(255,255,255,.4);text-align:center;margin-top:10px;}
 
 /* ═══════════════════════════════════════════════ URGENCY BAR */
@@ -451,6 +523,56 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 /* ═══════════════════════════════════════════════ SERVICES */
 .services{background:var(--gray-50);}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;}
+/* filas de tarjetas centradas (MIP y Reubicación) */
+.svc-row{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:center;gap:24px;}
+.svc-row>.service-card{flex:0 1 300px;max-width:340px;}
+@media(max-width:660px){.svc-row>.service-card{flex:1 1 100%;max-width:none;}}
+/* Servicios Especiales — carrusel con flechas laterales y degradado */
+.especiales-car{grid-column:1/-1;position:relative;}
+.especiales-row{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(268px,1fr);gap:24px;
+  /* proximity y no mandatory: con el ajuste obligatorio el navegador corta
+     la animación a medio camino para reencajar la tarjeta, y da tirones */
+  overflow-x:auto;overflow-y:hidden;padding:18px 2px 22px;scroll-snap-type:x proximity;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.especiales-row>.service-card{scroll-snap-align:start;}
+/* mientras corre la animación el ajuste se apaga: si no, el navegador
+   reencaja la tarjeta en cada fotograma y el recorrido sale a saltos */
+.especiales-row.sin-ajuste{scroll-snap-type:none;}
+.especiales-row::-webkit-scrollbar{display:none;}
+/* degradados que difuminan las tarjetas cortadas */
+.especiales-car::before,.especiales-car::after{
+  content:'';position:absolute;top:0;bottom:22px;width:64px;
+  pointer-events:none;z-index:3;transition:opacity .25s;
+}
+.especiales-car::before{left:0;background:linear-gradient(90deg,var(--gray-50),rgba(247,248,255,0));}
+.especiales-car::after{right:0;background:linear-gradient(270deg,var(--gray-50),rgba(247,248,255,0));}
+.especiales-car.at-start::before{opacity:0;}
+.especiales-car.at-end::after{opacity:0;}
+/* flechas flotantes sobre los bordes */
+.esp-side{
+  position:absolute;top:calc(50% - 2px);transform:translateY(-50%);z-index:4;
+  width:44px;height:44px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(11,21,237,.12);background:#fff;color:var(--blue-500);
+  font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(4,8,46,.16);
+  transition:background .22s,color .22s,opacity .3s,transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s;
+}
+/* el translateY se repite en cada estado: si se omite, la flecha salta al centro */
+.esp-side:hover{
+  background:var(--blue-500);color:#fff;
+  transform:translateY(-50%) scale(1.09);
+  box-shadow:0 12px 28px rgba(11,21,237,.32);
+}
+.esp-side:active{transform:translateY(-50%) scale(.95);transition-duration:.09s;}
+.esp-side.l{left:-14px;}
+.esp-side.r{right:-14px;}
+.esp-side:disabled{opacity:0;pointer-events:none;}
+@media(max-width:860px){
+  .esp-side{display:none;}
+  .especiales-car::before,.especiales-car::after{width:36px;}
+}
 
 .service-card{
   background:#fff;border-radius:18px;overflow:hidden;
@@ -468,7 +590,7 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 .service-card:hover::before{opacity:1;}
 
 .service-img{
-  height:200px;overflow:hidden;position:relative;
+  height:318px;overflow:hidden;position:relative;
 }
 .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1);}
 .service-card:hover .service-img img{transform:scale(1.08);}
@@ -689,69 +811,6 @@ input[type=range]::-webkit-slider-thumb{
   font-size:.83rem;color:var(--gray-700);line-height:1.6;
 }
 .cotiz-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:30px;}
-
-/* ═══════════════════════════════════════════════ POLIZAS */
-.polizas{background:#fff;position:relative;overflow:hidden;}
-.polizas::before{
-  content:'';position:absolute;
-  bottom:-200px;left:50%;transform:translateX(-50%);
-  width:800px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(11,21,237,.04) 0%,transparent 70%);
-}
-.polizas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.poliza{
-  border-radius:20px;overflow:hidden;
-  border:1px solid rgba(11,21,237,.1);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-  position:relative;
-}
-.poliza:hover{transform:translateY(-8px);box-shadow:0 20px 56px rgba(11,21,237,.12);}
-.poliza.hot{
-  border:none;
-  background:linear-gradient(165deg,var(--navy-900),var(--navy-700),var(--blue-600));
-  box-shadow:0 12px 48px rgba(11,21,237,.25);transform:translateY(-10px);
-}
-.poliza.hot:hover{transform:translateY(-16px);box-shadow:0 24px 64px rgba(11,21,237,.4);}
-.poliza-top{padding:30px 28px;background:var(--gray-50);}
-.poliza.hot .poliza-top{background:transparent;}
-.poliza-chip{
-  display:inline-block;padding:4px 12px;border-radius:20px;
-  font-size:.7rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.5px;font-family:'Montserrat',sans-serif;
-  margin-bottom:14px;
-  background:rgba(245,158,11,.12);color:var(--orange);border:1px solid rgba(245,158,11,.25);
-}
-.poliza.hot .poliza-chip{background:rgba(0,212,255,.15);color:var(--cyan-400);border-color:rgba(0,212,255,.3);}
-.poliza-name{font-size:1.25rem;font-weight:800;color:var(--navy-900);margin-bottom:4px;}
-.poliza.hot .poliza-name{color:#fff;}
-.poliza-period{font-size:.82rem;color:var(--gray-700);}
-.poliza.hot .poliza-period{color:rgba(255,255,255,.6);}
-.poliza-price{
-  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;
-  font-family:'Montserrat',sans-serif;margin-top:12px;
-  background:var(--grad-text);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
-.poliza.hot .poliza-price{
-  background:linear-gradient(90deg,#fff,var(--cyan-300));
-  -webkit-background-clip:text;background-clip:text;
-}
-.poliza-save{
-  display:inline-flex;align-items:center;gap:5px;margin-top:5px;
-  font-size:.78rem;font-weight:700;color:var(--green);
-  font-family:'Montserrat',sans-serif;
-}
-.poliza.hot .poliza-save{color:var(--cyan-400);}
-
-.poliza-body{padding:24px 28px;}
-.poliza-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:24px;}
-.poliza-feat{display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--gray-700);}
-.poliza.hot .poliza-feat{color:rgba(255,255,255,.75);}
-.pf-check{flex-shrink:0;margin-top:1px;}
-.pf-check.yes{color:var(--green);}
-.pf-check.no{color:var(--gray-400);}
-.poliza.hot .pf-check.yes{color:var(--cyan-400);}
-.poliza-btn{width:100%;justify-content:center;}
 
 /* ═══════════════════════════════════════════════ CERTIF */
 .certif{
@@ -1136,8 +1195,6 @@ input[type=range]::-webkit-slider-thumb{
 @media(max-width:900px){
   .how-grid{grid-template-columns:1fr;gap:32px;}
   .how-connector{display:none;}
-  .polizas-grid{grid-template-columns:1fr;}
-  .poliza.hot{transform:none;}
   .testim-grid{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
@@ -1217,7 +1274,6 @@ input[type=range]::-webkit-slider-thumb{
     <nav class="nav">
       <a href="#servicios">Servicios</a>
       <a href="#cotizador">Cotizador</a>
-      <a href="#polizas">Pólizas</a>
       <a href="#clientes">Clientes</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#zonas">Zonas</a>
@@ -1236,7 +1292,6 @@ input[type=range]::-webkit-slider-thumb{
 <nav class="mobile-menu" id="mobileMenu">
   <a href="#servicios" onclick="closeMob()">Servicios</a>
   <a href="#cotizador" onclick="closeMob()">Cotizador online</a>
-  <a href="#polizas" onclick="closeMob()">Pólizas</a>
   <a href="#clientes" onclick="closeMob()">Clientes</a>
   <a href="#nosotros" onclick="closeMob()">Nosotros</a>
   <a href="#zonas" onclick="closeMob()">Zonas de cobertura</a>
@@ -1285,7 +1340,7 @@ input[type=range]::-webkit-slider-thumb{
       <div class="hero-stats">
         <div>
           <div class="h-stat-num">30+</div>
-          <div class="h-stat-label">Años en MTY</div>
+          <div class="h-stat-label">Años de experiencia</div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,.12)"></div>
         <div>
@@ -1306,7 +1361,7 @@ input[type=range]::-webkit-slider-thumb{
     </div>
 
     <!-- Hero Form Card -->
-    <div class="hero-card">
+    <div class="hero-card" id="cotizacion-gratuita">
       <div style="text-align: center; margin-bottom: 28px;">
         <img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA" style="width: 75%; max-width: 260px; height: auto; margin: 0 auto; filter: drop-shadow(0 8px 24px rgba(0,212,255,0.45));">
       </div>
@@ -1318,8 +1373,16 @@ input[type=range]::-webkit-slider-thumb{
           <input type="text" placeholder="Tu nombre" required>
         </div>
         <div class="form-group">
-          <label>WhatsApp / Teléfono</label>
-          <input type="tel" placeholder="81 8141 0750" required>
+          <label>Medio de contacto preferido</label>
+          <select id="heroMedio" required onchange="ajustaMedioContacto()">
+            <option value="">Seleccionar...</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="telefono">Teléfono</option>
+            <option value="correo">Correo</option>
+          </select>
+          <div class="campo-plegable" id="heroContactoCaja">
+            <div><input type="tel" id="heroContacto" placeholder="Elige un medio para continuar"></div>
+          </div>
         </div>
         <div class="form-group">
           <label>Tipo de plaga</label>
@@ -1332,12 +1395,22 @@ input[type=range]::-webkit-slider-thumb{
             <option>Aves / Murciélagos</option>
             <option>Chinches de cama</option>
             <option>Enjambres / Colmenas</option>
+            <option>Fumigación (gas)</option>
+            <option>Fauna silvestre</option>
+            <option>Sanitización</option>
             <option>Control integral MIP</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Estado / Municipio con referencia (cerca de...)</label>
-          <input type="text" required placeholder="Ej. Monterrey, NL — cerca de...">
+          <label>Tipo de servicio</label>
+          <div class="check-group" id="heroTipoServicio">
+            <label class="check-item"><input type="checkbox" name="tipoServicio" value="Residencial"><span>Residencial</span></label>
+            <label class="check-item"><input type="checkbox" name="tipoServicio" value="Comercial"><span>Comercial</span></label>
+            <label class="check-item"><input type="checkbox" name="tipoServicio" value="Industrial"><span>Industrial</span></label>
+            <label class="check-item"><input type="checkbox" name="tipoServicio" value="Otro" id="heroTipoOtro" onchange="toggleTipoOtro()"><span>Otro (especificar)</span></label>
+          </div>
+          <input type="text" id="heroTipoOtroTxt" placeholder="¿Cuál?" style="margin-top:10px;display:none;">
+          <p class="check-aviso" id="heroTipoAviso" role="alert">Elige al menos un tipo de servicio.</p>
         </div>
         <button type="submit" class="btn btn-cyan" style="width:100%;justify-content:center;padding:15px;" onclick="ripple(event)">
           Solicitar cotización →
@@ -1403,7 +1476,7 @@ input[type=range]::-webkit-slider-thumb{
     <div class="section-header">
       <div class="badge">Nuestros Servicios</div>
       <h2 class="section-title">Soluciones para <span class="grad-text">cada tipo de plaga</span></h2>
-      <p class="section-sub">Aplicamos Manejo Integrado de Plagas (MIP): diagnóstico, tratamiento, seguimiento documentado y garantía escrita.</p>
+      <p class="section-sub">Aplicamos Manejo Integrado de Plagas (MIP): diagnóstico, tratamiento, seguimiento documentado y garantía.</p>
     </div>
     <div class="services-grid">
 
@@ -1416,50 +1489,45 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
 
+      <div class="svc-row">
       <!-- Cambio 7a: Insectos Rastreros -->
       <div class="service-card reveal">
         <div class="service-img">
-          <img src="w.jpeg" alt="Control de insectos rastreros Monterrey" loading="lazy">
+          <img src="img/servicios/rastreros.jpg" alt="Técnico SERYSA aplicando control de insectos rastreros en cocina industrial" loading="lazy">
           <div class="service-img-overlay"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);color:white;"><svg viewBox="0 0 64 64" fill="white" width="36" height="36"><ellipse cx="32" cy="40" rx="12" ry="16"/><ellipse cx="32" cy="22" rx="7" ry="7"/><path d="M20 32 Q10 30 6 26" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 32 Q54 30 58 26" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M20 42 Q10 44 6 40" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 42 Q54 44 58 40" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M28 17 Q22 10 16 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M36 17 Q42 10 48 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control de Insectos Rastreros</h3>
-          <p>Cucarachas, hormigas, alacranes y arañas. Método: aspersión dirigida con productos de baja toxicidad en grietas, zócalos y áreas de mayor actividad. Tratamiento seguro en cocinas, almacenes y hogares.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Cucarachas, hormigas, alacranes y arañas, etc. Utilizando siempre productos de uso urbano en grietas, zócalos y áreas de mayor actividad. Tratamiento seguro en cocinas, almacenes y hogares.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <!-- Cambio 7b: Insectos Voladores -->
       <div class="service-card reveal" style="transition-delay:.06s">
         <div class="service-img">
-          <img src="WhatsApp%20Image%202026-03-21%20sat%2011.38.27%20AM.jpeg" alt="Control de insectos voladores Monterrey" loading="lazy">
+          <img src="img/servicios/voladores.jpg" alt="Nebulización para control de insectos voladores en nave industrial" loading="lazy">
           <div class="service-img-overlay"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);color:white;"><svg viewBox="0 0 64 64" fill="white" width="36" height="36"><ellipse cx="32" cy="40" rx="8" ry="12"/><circle cx="32" cy="24" r="7"/><ellipse cx="14" cy="28" rx="13" ry="6" fill="rgba(255,255,255,0.5)" transform="rotate(-20 14 28)"/><ellipse cx="50" cy="28" rx="13" ry="6" fill="rgba(255,255,255,0.5)" transform="rotate(20 50 28)"/><path d="M29 17 Q26 10 22 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M35 17 Q38 10 42 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control de Insectos Voladores</h3>
-          <p>Moscas, mosquitos, polillas y jejenes. Método: atomización ULV para espacios amplios e interiores. Elimina poblaciones de forma eficaz con mínimo impacto en el ambiente.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Moscas, mosquitos, polillas y jejenes, etc., mediante atomización ULV para espacios amplios e interiores. Elimina poblaciones de forma eficaz con mínimo impacto en el ambiente.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <div class="service-card reveal" style="transition-delay:.08s">
         <div class="service-img">
-          <img src="WhatsApp%20Image%202026-03-21%20sat%2011.38.27%20AM.jpeg" alt="Control de roedores industrial Monterrey" loading="lazy">
+          <img src="img/servicios/roedores.jpg" alt="Instalación de estación de cebo para control de roedores" loading="lazy">
           <div class="service-img-overlay"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);color:white;"><svg viewBox="0 0 64 64" fill="white" width="36" height="36">
-      <ellipse cx="28" cy="38" rx="17" ry="13"/><circle cx="46" cy="28" r="10"/>
-      <ellipse cx="48" cy="20" rx="5" ry="6"/><ellipse cx="48" cy="20" rx="2.5" ry="3.5" fill="white" opacity=".4"/>
-      <circle cx="50" cy="26" r="2" fill="white"/><circle cx="50.6" cy="26" r="1" fill="#111"/>
-      <path d="M11 44 Q4 42 4 52 Q4 58 8 58" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
-    </svg></div>
           <h3>Control de Roedores</h3>
-          <p>Programa documentado para industria, maquiladoras y almacenes. Documentación disponible para el cumplimiento de normativas aplicables.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Programas de control de roedores para todo tipo de industria, siempre bajo normativas aplicables.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
+      </div>
+
       </div>
 
       <!-- ── SECCIÓN 2: ESPECIALES ── -->
@@ -1471,74 +1539,69 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
 
+      <div class="especiales-car" id="especialesCar">
+      <button type="button" class="esp-side l" id="espPrev" aria-label="Ver servicios anteriores" onclick="scrollEspeciales(-1)">‹</button>
+      <div class="especiales-row" id="especialesTrack">
       <!-- Cambio 8a: Termitas -->
       <div class="service-card reveal" style="transition-delay:.16s">
         <div class="service-img">
-          <div class="service-img"><img src="svc_termitas.png" alt="Control de Termitas Monterrey" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/termita.jpg" alt="Control de Termitas Monterrey" loading="lazy"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><ellipse cx="32" cy="46" rx="12" ry="14"/><ellipse cx="32" cy="30" rx="7" ry="7"/><ellipse cx="32" cy="16" rx="9" ry="8"/><path d="M25 18 Q18 22 16 20" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M39 18 Q46 22 48 20" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M28 9 Q22 4 18 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M36 9 Q42 4 46 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M25 29 Q14 28 10 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M39 29 Q50 28 54 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control de Termita</h3>
           <p>Tratamiento preventivo y curativo contra termitas subterráneas y de madera seca. Inspección de estructuras, aplicación de barrera química y seguimiento documentado.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <!-- Cambio 8b: Insectos Vectores — mosquito con probóscide -->
       <div class="service-card reveal" style="transition-delay:.22s">
         <div class="service-img">
-          <div class="service-img"><img src="svc_termitas.png" alt="Control de insectos vectores Monterrey" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/termita.jpg" alt="Control de insectos vectores Monterrey" loading="lazy"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34">
-  <!-- Abdomen largo y curvo -->
-  <path d="M30 44 Q26 52 24 58 Q28 60 32 58 Q34 52 32 44 Z"/>
-  <!-- Tórax -->
-  <ellipse cx="32" cy="36" rx="6" ry="8"/>
-  <!-- Cabeza pequeña -->
-  <circle cx="32" cy="26" r="5"/>
-  <!-- Probóscide larga — rasgo distintivo del mosquito -->
-  <path d="M32 21 Q32 14 30 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Alas finas y alargadas (distintas a la mosca) -->
-  <path d="M26 34 Q14 28 10 32 Q12 38 22 36 Z" fill="rgba(255,255,255,0.55)"/>
-  <path d="M38 34 Q50 28 54 32 Q52 38 42 36 Z" fill="rgba(255,255,255,0.55)"/>
-  <!-- 3 pares de patas largas y delgadas -->
-  <path d="M28 38 Q20 42 14 46" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M28 40 Q18 46 12 52" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M36 38 Q44 42 50 46" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M36 40 Q46 46 52 52" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M30 42 Q24 48 20 54" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M34 42 Q40 48 44 54" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-</svg></div>
           <h3>Control de Insectos Vectores</h3>
-          <p>Control de mosquitos (Aedes, Culex), moscas domésticas y otros vectores de enfermedades. Fumigación y atomización con productos registrados ante COFEPRIS de baja toxicidad ambiental.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Control de mosquitos (Aedes, Culex, etc.), moscas domésticas y otros transmisores de enfermedades. Control mediante atomización con productos registrados ante COFEPRIS de baja toxicidad ambiental.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <div class="service-card reveal" style="transition-delay:.24s">
         <div class="service-img">
-          <div class="service-img"><img src="svc_chinche.png" alt="Control de Chinche de Cama" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/chinche.jpg" alt="Inspección de chinche de cama en habitación de hotel" loading="lazy"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><rect x="8" y="36" width="48" height="8" rx="3"/><rect x="8" y="44" width="48" height="14" rx="2"/><rect x="6" y="32" width="52" height="6" rx="2"/><path d="M14 32 L14 22" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 32 L50 22" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="26" rx="14" ry="9" fill="rgba(255,255,255,0.7)"/><circle cx="26" cy="23" r="2" fill="rgba(0,0,0,0.5)"/><circle cx="38" cy="23" r="2" fill="rgba(0,0,0,0.5)"/><path d="M22 20 Q18 16 14 14" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M42 20 Q46 16 50 14" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control de Chinche de Cama</h3>
-          <p>Tratamiento térmico y químico especializado. Protocolo documentado para hoteles, posadas y residencias.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Aplicación de diversos tratamientos (térmico, químico, entre otros). Protocolo documentado para hoteles, posadas y residencias.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <div class="service-card reveal" style="transition-delay:.32s">
         <div class="service-img">
-          <img src="WhatsApp%20Image%202026-03-21%20sat%2011.38.27%20AM.jpeg" alt="Control de plagas de almacén con fumigantes Monterrey" loading="lazy">
+          <img src="img/servicios/almacen.jpg" alt="Fumigación con gas bajo carpa sellada para plaga de almacén" loading="lazy">
           <div class="service-img-overlay"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><path d="M4 28 L32 4 L60 28 L60 62 L4 62 Z"/><rect x="18" y="38" width="28" height="24" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="28" y="30" width="8" height="14" rx="1" fill="rgba(255,255,255,0.3)"/><circle cx="48" cy="18" r="6" fill="rgba(0,212,255,0.5)"/><path d="M45 15 Q48 12 51 15" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control de Plaga de Almacén con Fumigantes</h3>
           <p>Protocolo de uso seguro y responsable de fumigantes (gases) para plagas de almacén: gorgojos, polillas, escarabajos y otros insectos que afectan productos almacenados.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.4s">
+        <div class="service-img">
+          <img src="img/servicios/sanitizacion.jpg" alt="Sanitización con termonebulizadora en planta de alimentos" loading="lazy">
+          <div class="service-img-overlay"></div>
+        </div>
+        <div class="service-body">
+          <h3>Sanitizaciones</h3>
+          <p>Eliminación profesional de virus, bacterias, hongos y esporas mediante la aplicación de desinfectantes de grado hospitalario. Se adapta a cualquier espacio y superficie.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
+        </div>
+      </div>
+      </div>
+      <button type="button" class="esp-side r" id="espNext" aria-label="Ver más servicios" onclick="scrollEspeciales(1)">›</button>
       </div>
 
       <!-- ── SECCIÓN 3: REUBICACIÓN ── -->
@@ -1550,58 +1613,74 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
 
+      <div class="svc-row">
       <!-- Cambio 1: Tarjeta fusionada Enjambres -->
       <div class="service-card reveal" style="transition-delay:.40s">
         <div class="service-img">
-          <img src="WhatsApp%20Image%202026-03-21%20at%20dedede11.38.25%20AM.jpeg" alt="Retiro y reubicación enjambres colmenas Monterrey" loading="lazy">
+          <img src="img/servicios/enjambres.jpg" alt="Retiro y reubicación enjambres colmenas Monterrey" loading="lazy">
           <div class="service-img-overlay"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><ellipse cx="32" cy="42" rx="9" ry="12"/><path d="M23 38 Q32 36 41 38" stroke="rgba(0,0,0,0.25)" stroke-width="2.5" fill="none"/><path d="M23 44 Q32 42 41 44" stroke="rgba(0,0,0,0.25)" stroke-width="2.5" fill="none"/><ellipse cx="32" cy="28" rx="7" ry="6"/><circle cx="32" cy="17" r="7"/><path d="M28 11 Q22 6 18 4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="18" cy="4" r="2.5"/><path d="M36 11 Q42 6 46 4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="46" cy="4" r="2.5"/><ellipse cx="18" cy="26" rx="12" ry="6" fill="rgba(255,255,255,0.3)" transform="rotate(-10 18 26)"/><ellipse cx="46" cy="26" rx="12" ry="6" fill="rgba(255,255,255,0.3)" transform="rotate(10 46 26)"/></svg></div>
-          <h3>Retiro y Reubicación Pacífica de Enjambres y Colmenas</h3>
-          <p>Retiro seguro con equipo especializado y trajes de protección. Reubicación pacífica y responsable de enjambres y colmenas activas fuera de las instalaciones, sin daño a la colonia.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <h3>Reubicación de enjambres y colmenas</h3>
+          <p>Manejo de abejas con equipo especializado y protocolos de seguridad. Reubicación pacífica y responsable de enjambres y colmenas activas fuera de las instalaciones, sin daño a la colonia.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <!-- Cambio 2a: Aves -->
       <div class="service-card reveal" style="transition-delay:.48s">
         <div class="service-img">
-          <div class="service-img"><img src="svc_aves.png" alt="Control y reubicación de aves Monterrey" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/aves.jpg" alt="Captura y reubicación pacífica de palomas" loading="lazy"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><path d="M8 26 Q20 10 34 20 Q42 14 52 20 Q48 28 34 26 Q26 36 18 38 Q12 36 10 30 Z"/><circle cx="42" cy="16" r="2.5" fill="rgba(0,0,0,0.5)"/><path d="M18 38 Q16 46 22 50" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M26 40 Q26 48 30 52" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M8 26 Q4 22 4 28 Q4 32 8 32" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
           <h3>Control y Reubicación Pacífica de Aves</h3>
-          <p>Mallas, picos ahuyentadores y sistemas de exclusión para palomas, gaviotas y otras aves urbanas. Captura y reubicación humanitaria respetando la normativa ambiental vigente.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <p>Diversos métodos de control como trampeo, mallas, púas, ahuyentadores, entre otros sistemas de exclusión para palomas y otras aves urbanas. Captura y reubicación humanitaria respetando la normativa ambiental vigente.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
 
       <!-- Cambio 2b: Murciélagos y Mamíferos -->
       <div class="service-card reveal" style="transition-delay:.56s">
         <div class="service-img">
-          <div class="service-img"><img src="svc_aves.png" alt="Control y reubicación de murciélagos y mamíferos Monterrey" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/fauna.jpg" alt="Tlacuache capturado en trampa para reubicación de fauna silvestre" loading="lazy"></div>
         </div>
         <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><ellipse cx="32" cy="38" rx="10" ry="12"/><circle cx="32" cy="22" r="8"/><path d="M22 24 Q10 16 4 22 Q6 30 14 28 Q18 32 22 30" fill="rgba(255,255,255,0.5)"/><path d="M42 24 Q54 16 60 22 Q58 30 50 28 Q46 32 42 30" fill="rgba(255,255,255,0.5)"/><circle cx="27" cy="20" r="2" fill="rgba(0,0,0,0.5)"/><circle cx="37" cy="20" r="2" fill="rgba(0,0,0,0.5)"/><path d="M28 14 Q30 10 32 9 Q34 10 36 14" stroke="white" stroke-width="1.5" fill="none"/></svg></div>
-          <h3>Control y Reubicación de Murciélagos y Mamíferos</h3>
-          <p>Exclusión y reubicación responsable de murciélagos, tlacuaches y otros mamíferos silvestres. Sellado de accesos y manejo seguro sin daño a las especies protegidas por la normativa ambiental.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
+          <h3>Control y Reubicación de Fauna silvestre</h3>
+          <p>Reubicación responsable de fauna silvestre: tlacuaches, reptiles, mamíferos y otros animales. Sellado de accesos y manejo seguro que prioriza el bienestar animal, sin daño a las especies protegidas por la normativa ambiental.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
-
-      <div class="service-card reveal" style="transition-delay:.64s">
-        <div class="service-img">
-          <div class="service-img"><img src="svc_aves.png" alt="Manejo pacífico de reptiles Monterrey" loading="lazy"></div>
-        </div>
-        <div class="service-body">
-          <div class="service-icon" style="width:104px;height:104px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--cyan-600));display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;box-shadow:0 6px 20px rgba(11,21,237,.35);"><svg viewBox="0 0 64 64" fill="white" width="34" height="34"><path d="M8 38 Q16 32 24 36 Q32 40 40 34 Q50 28 58 32" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="58" cy="32" rx="5" ry="4"/><circle cx="56" cy="30" r="1.5" fill="rgba(0,0,0,0.6)"/><path d="M56 34 L54 38 M58 34 L60 38" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M8 38 Q6 42 4 44 M8 38 Q6 34 4 32" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M16 42 L14 48 M24 44 L24 50 M32 42 L32 48 M40 38 L40 44 M48 34 L48 40" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
-          <h3>Manejo Pacífico de Reptiles</h3>
-          <p>Captura y reubicación segura de reptiles silvestres como serpientes, iguanas y lagartijas. Manejo responsable que prioriza el bienestar animal y la seguridad de las personas.</p>
-          <a href="#cotizador" class="service-link">Cotizar este servicio →</a>
-        </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ SOPORTE -->
+<section class="soporte section-pad" id="soporte">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Soporte</h2>
+      <p class="section-sub">Todas las actividades de nuestros servicios son registradas en un sistema, mismo al que nuestros clientes tienen acceso para obtener documentación de soporte, de manera inmediata.</p>
+    </div>
+
+    <!-- Espacio reservado para imágenes. Para poner una foto, sustituye el div
+         .soporte-slot por otro con clase soporte-img que contenga la etiqueta img
+         apuntando a img/soporte/ con su texto alternativo. -->
+    <div class="soporte-grid">
+      <div class="soporte-slot reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Espacio para imagen</span>
+      </div>
+      <div class="soporte-slot reveal" style="transition-delay:.08s" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Espacio para imagen</span>
+      </div>
+      <div class="soporte-slot reveal" style="transition-delay:.16s" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Espacio para imagen</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1664,9 +1743,9 @@ input[type=range]::-webkit-slider-thumb{
 </svg>
       </div>
       <div class="cob-states">
-        <div class="cob-state reveal"><span class="cob-dot" style="background:#3b47f5"></span><div><h4>Coahuila</h4><p>Saltillo, Torreón, Monclova, Ramos Arizpe y región.</p></div></div>
-        <div class="cob-state reveal" style="transition-delay:.08s"><span class="cob-dot" style="background:#22d3ee"></span><div><h4>Nuevo León</h4><p>Monterrey y toda el Área Metropolitana, además del interior del estado.</p></div></div>
-        <div class="cob-state reveal" style="transition-delay:.16s"><span class="cob-dot" style="background:#67e8f9"></span><div><h4>Tamaulipas</h4><p>Reynosa, Nuevo Laredo, Matamoros, Tampico y zona fronteriza.</p></div></div>
+        <div class="cob-state reveal"><span class="cob-dot" style="background:#3b47f5"></span><div><h4>Coahuila</h4><p>Saltillo, Torreón, Ramos Arizpe y Piedras Negras.</p></div></div>
+        <div class="cob-state reveal" style="transition-delay:.08s"><span class="cob-dot" style="background:#22d3ee"></span><div><h4>Nuevo León</h4><p>Cobertura en todo el estado.</p></div></div>
+        <div class="cob-state reveal" style="transition-delay:.16s"><span class="cob-dot" style="background:#67e8f9"></span><div><h4>Tamaulipas</h4><p>Reynosa, Nuevo Laredo, Matamoros y Tampico.</p></div></div>
         <a href="#cotizador" class="btn btn-cyan" onclick="ripple(event)" style="margin-top:10px;">¿Estás en la zona? Cotiza gratis →</a>
       </div>
     </div>
@@ -1691,20 +1770,16 @@ input[type=range]::-webkit-slider-thumb{
 <section class="ventajas section-pad" id="ventajas">
   <div class="container">
     <div class="section-header">
-      <div class="badge">¿Por qué SERYSA?</div>
-      <h2 class="section-title">Ventajas que nos hacen <span class="grad-text">únicos en Monterrey</span></h2>
-      <p class="section-sub">El único proveedor con chatbot de cotización online, más de 30 años de experiencia y personal certificado en toda el Área Metropolitana.</p>
+      <div class="badge" style="font-size:1.05rem;padding:9px 22px;letter-spacing:.5px;">¿Por qué SERYSA?</div>
+      <h2 class="section-title">Ventajas que nos hacen <span class="grad-text">Competentes en Monterrey</span></h2>
     </div>
     <div class="ventajas-grid">
       <div class="ventaja-card reveal"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div><div class="ventaja-text"><h4>Atención oportuna</h4><p>Atendemos según el tipo de plaga, condiciones, espacios y nivel de riesgo. Incluye áreas de oportunidad, medidas preventivas y correctivas al finalizar el servicio.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.07s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 2 L20 6 L20 12 Q20 18 12 22 Q4 18 4 12 L4 6 Z"/><polyline points="9,12 11,14 15,10"/></svg></div><div class="ventaja-text"><h4>Licencia COFEPRIS visible</h4><p>Licencia Sanitaria 23 AP 19 026 0329. Marco legal y normativo 100% vigente. Documentación lista para auditorías.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.14s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q20 3 21 2 Q21 8 18 14 Q15 20 8 22 Z"/><line x1="12" y1="12" x2="2" y2="22"/></svg></div><div class="ventaja-text"><h4>Manejo Integrado de Plagas (MIP)</h4><p>Diagnóstico, prevención y seguimiento documentado. Mínimo impacto ambiental. Metodología de clase mundial.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.21s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4 L19 4 Q20 4 20 5 L20 21 Q20 22 19 22 L5 22 Q4 22 4 21 L4 5 Q4 4 5 4 L8 4"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div><div class="ventaja-text"><h4>Garantía de servicio escrita</h4><p>Entregamos certificado formal digital que ampara el servicio realizado. Si requieres más de una aplicación se te informará al momento dependiendo de la plaga a controlar.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.28s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M9 2 L9 6 Q9 8 11 8 L13 8 Q15 8 15 6 L15 2"/><rect x="7" y="8" width="10" height="3" rx="1"/><path d="M8 11 L6 22 L18 22 L16 11"/><path d="M10 14 Q12 13 14 14"/><path d="M9 17 Q12 16 15 17"/><circle cx="19" cy="6" r="2.5"/><path d="M19 3.5 L19 4.5 M19 7.5 L19 8.5 M16.5 6 L17.5 6 M20.5 6 L21.5 6" stroke-width="1.5"/></svg></div><div class="ventaja-text"><h4>Expertos en uso y manejo de gases para control de plagas</h4><p>Protocolo certificado para la aplicación segura y responsable de fumigantes. Personal capacitado en el manejo de gases para plagas de almacén y espacios cerrados.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.35s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><circle cx="12" cy="12" r="9"/><path d="M12 6 L12 8 M12 16 L12 18 M9 9 Q9 7 12 7 Q15 7 15 9.5 Q15 12 12 12 Q15 12 15 14.5 Q15 17 12 17 Q9 17 9 15"/></svg></div><div class="ventaja-text"><h4>Pago al final del servicio</h4><p>Pago en una sola exhibición al finalizar el servicio residencial. Para empresas, pólizas con esquema de pago a 15 a 20 días.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.42s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="4" cy="13" r="2"/><circle cx="20" cy="13" r="2"/><path d="M12 22 Q7 20 6 16 Q5 13 8 12 Q10 11 12 12 Q14 11 16 12 Q19 13 18 16 Q17 20 12 22"/></svg></div><div class="ventaja-text"><h4>Seguros para personas de la 3a edad, niños y mascotas</h4><p>Productos de baja toxicidad certificados. Sin necesidad de abandonar el inmueble en la mayoría de los servicios.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.49s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="7" y1="20" x2="7" y2="17"/><line x1="17" y1="20" x2="17" y2="17"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="12" x2="13" y2="12"/></svg></div><div class="ventaja-text"><h4>Chatbot de cotización — único en MTY</h4><p>El único proveedor local con asistente de IA en línea. Obtén tu cotización personalizada en minutos, sin llamadas y sin esperas.</p></div></div>
-      <div class="ventaja-card reveal" style="transition-delay:.56s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/><path d="M9 7 Q12 5 15 7"/><circle cx="19" cy="6" r="3"/><path d="M19 4 v4 M17 6 h4" stroke-width="1.5"/></svg></div><div class="ventaja-text"><h4>Expertos en cualquier giro empresarial y más</h4><p>Atendemos oficinas, bodegas, restaurantes, hospitales, hoteles, plazas comerciales, naves industriales y vivienda. Sin importar el giro, tenemos experiencia comprobada.</p></div></div>
+      <div class="ventaja-card reveal" style="transition-delay:.07s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 2 L20 6 L20 12 Q20 18 12 22 Q4 18 4 12 L4 6 Z"/><polyline points="9,12 11,14 15,10"/></svg></div><div class="ventaja-text"><h4>Soporte de documentación vigente</h4><p>Licencia sanitaria, seguro RC, RPSE, licencia COFEPRIS para sanitización, certificaciones control de plagas y certificación de competencias laborales (MIP Grado de inocuidad).</p></div></div>
+      <div class="ventaja-card reveal" style="transition-delay:.14s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q20 3 21 2 Q21 8 18 14 Q15 20 8 22 Z"/><line x1="12" y1="12" x2="2" y2="22"/></svg></div><div class="ventaja-text"><h4>Servicio personalizado</h4><p>Diagnóstico, prevención y seguimiento documentado. Mínimo impacto ambiental. Metodología de clase mundial.</p></div></div>
+      <div class="ventaja-card reveal" style="transition-delay:.21s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4 L19 4 Q20 4 20 5 L20 21 Q20 22 19 22 L5 22 Q4 22 4 21 L4 5 Q4 4 5 4 L8 4"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div><div class="ventaja-text"><h4>Garantía</h4><p>Uso exclusivo de productos adecuados de acuerdo a la necesidad, con su soporte y documentación vigente.</p></div></div>
+      <div class="ventaja-card reveal" style="transition-delay:.28s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M9 2 L9 6 Q9 8 11 8 L13 8 Q15 8 15 6 L15 2"/><rect x="7" y="8" width="10" height="3" rx="1"/><path d="M8 11 L6 22 L18 22 L16 11"/><path d="M10 14 Q12 13 14 14"/><path d="M9 17 Q12 16 15 17"/><circle cx="19" cy="6" r="2.5"/><path d="M19 3.5 L19 4.5 M19 7.5 L19 8.5 M16.5 6 L17.5 6 M20.5 6 L21.5 6" stroke-width="1.5"/></svg></div><div class="ventaja-text"><h4>Gases fumigantes</h4><p>Protocolo certificado para la aplicación segura y responsable de fumigantes. Personal capacitado en el manejo de gases para plagas de almacén y estructuras.</p></div></div>
+      <div class="ventaja-card reveal" style="transition-delay:.35s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/><path d="M9 7 Q12 5 15 7"/><circle cx="19" cy="6" r="3"/><path d="M19 4 v4 M17 6 h4" stroke-width="1.5"/></svg></div><div class="ventaja-text"><h4>Expertos en cualquier giro empresarial y más</h4><p>Atendemos oficinas, bodegas, restaurantes, hospitales, hoteles, plazas comerciales, naves industriales y vivienda. Sin importar el giro, tenemos experiencia comprobada.</p></div></div>
     </div>
   </div>
 </section>
@@ -2111,80 +2186,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 
-<!-- ═══════════════════════════════════ PÓLIZAS -->
-<section class="polizas section-pad" id="polizas">
-  <div class="container">
-    <div class="section-header">
-      <div class="badge">Planes y Pólizas</div>
-      <h2 class="section-title">Protección continua con <span class="grad-text">planes de servicio</span></h2>
-      <p class="section-sub">La prevención siempre es más económica que la emergencia. Elige el plan ideal para tu hogar o negocio.</p>
-    </div>
-    <div class="polizas-grid">
-
-      <div class="poliza reveal">
-        <div class="poliza-top">
-          <div class="poliza-chip">Básico</div>
-          <div class="poliza-name">Póliza Trimestral</div>
-          <div class="poliza-period">4 servicios al año · Cada 3 meses</div>
-          <div class="poliza-price">Desde $X,XXX</div>
-          <div class="poliza-save">↓ Ahorro 5% vs. precio individual</div>
-        </div>
-        <div class="poliza-body">
-          <div class="poliza-feats">
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio cada 3 meses</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Seguimiento entre visitas</div>
-            <div class="poliza-feat"><span class="pf-check no">—</span> <span style="color:var(--gray-400)">Certificado para auditorías</span></div>
-          </div>
-          <a href="#contacto" class="btn btn-outline poliza-btn" onclick="ripple(event)">Contratar plan →</a>
-        </div>
-      </div>
-
-      <div class="poliza hot reveal" style="transition-delay:.1s">
-        <div class="poliza-top">
-          <div class="poliza-chip">⭐ Más popular</div>
-          <div class="poliza-name">Póliza Semestral</div>
-          <div class="poliza-period">1 servicio al mes por 6 meses</div>
-          <div class="poliza-price">Desde $X,XXX</div>
-          <div class="poliza-save">↓ Ahorro 10% vs. precio individual</div>
-        </div>
-        <div class="poliza-body">
-          <div class="poliza-feats">
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio cada 2 meses</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Garantía entre visitas</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Certificado de servicio incluido</div>
-          </div>
-          <a href="#contacto" class="btn btn-glass poliza-btn" style="border:1px solid rgba(255,255,255,.3);" onclick="ripple(event)">Contratar plan →</a>
-        </div>
-      </div>
-
-      <div class="poliza reveal" style="transition-delay:.2s">
-        <div class="poliza-top">
-          <div class="poliza-chip">Máximo ahorro</div>
-          <div class="poliza-name">Póliza Anual</div>
-          <div class="poliza-period">12 servicios al año · Mensual</div>
-          <div class="poliza-price">Desde $X,XXX</div>
-          <div class="poliza-save">↓ Ahorro 20% vs. precio individual</div>
-        </div>
-        <div class="poliza-body">
-          <div class="poliza-feats">
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Servicio mensual</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Informe técnico documentado</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Urgencias 24/7</div>
-            <div class="poliza-feat"><span class="pf-check yes">✓</span> Certificado de servicio</div>
-          </div>
-          <a href="#contacto" class="btn btn-primary poliza-btn" onclick="ripple(event)">Contratar plan →</a>
-        </div>
-      </div>
-
-    </div>
-    <p style="text-align:center;margin-top:28px;font-size:.84rem;color:var(--gray-700);">
-      * Precios varían según plaga, tamaño y municipio.
-      <a href="#cotizador" style="color:var(--blue-500);font-weight:700;">Usa el cotizador</a> para un rango referencial.
-    </p>
-  </div>
-</section>
 
 
 <!-- ═══════════════════════════════════ CERTIFICACIONES -->
@@ -2964,7 +2965,6 @@ document.addEventListener('DOMContentLoaded', function() {
           <a href="#servicios">Control de Termitas</a>
           <a href="#servicios">Plagas de Almacén</a>
           <a href="#servicios">Servicios Especiales</a>
-          <a href="#polizas">Pólizas de servicio</a>
         </div>
       </div>
       <div>
@@ -2983,7 +2983,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-links">
           <a href="#nosotros">Quiénes somos</a>
           <a href="#clientes">Nuestros clientes</a>
-          <a href="#polizas">Pólizas</a>
           <a href="#cotizador">Cotizador online</a>
           <a href="#contacto">Contacto</a>
           <a href="#">Aviso de privacidad</a>
@@ -3129,6 +3128,118 @@ function ripple(e){
   setTimeout(()=>r.remove(),700);
 }
 
+/* ── CARRUSEL SERVICIOS ESPECIALES ── */
+/* el desplazamiento nativo (behavior:'smooth') arranca y frena de golpe y
+   cada navegador le pone su propio ritmo; se anima a mano con una curva
+   que entra y sale suave, igual en todos */
+const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+let deslizId = null, deslizPista = null;
+
+function frenaDesliz(){
+  if(deslizId){ cancelAnimationFrame(deslizId); deslizId = null; }
+  if(deslizPista){ deslizPista.classList.remove('sin-ajuste'); deslizPista = null; }
+}
+
+function desliza(pista, destino, ms){
+  frenaDesliz();
+  const tope   = pista.scrollWidth - pista.clientWidth;
+  destino      = Math.max(0, Math.min(tope, destino));
+  const inicio = pista.scrollLeft, tramo = destino - inicio;
+  if(menosMovimiento.matches || Math.abs(tramo) < 2){ pista.scrollLeft = destino; return; }
+
+  deslizPista = pista;
+  pista.classList.add('sin-ajuste');
+
+  const t0 = performance.now();
+  const curva = p => p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2;
+  const paso = ahora => {
+    const p = Math.min(1, (ahora - t0) / ms);
+    pista.scrollLeft = inicio + tramo * curva(p);
+    if(p < 1){ deslizId = requestAnimationFrame(paso); return; }
+    // el ajuste vuelve al terminar, para que el dedo del usuario lo tenga
+    deslizId = null; deslizPista = null;
+    pista.classList.remove('sin-ajuste');
+  };
+  deslizId = requestAnimationFrame(paso);
+}
+
+function scrollEspeciales(dir){
+  const t = document.getElementById('especialesTrack');
+  if(!t) return;
+  const card = t.querySelector('.service-card');
+  const step = card ? card.getBoundingClientRect().width + 24 : 292;
+  desliza(t, t.scrollLeft + dir*step, 520);
+}
+(function(){
+  const t = document.getElementById('especialesTrack');
+  if(!t) return;
+  const car = document.getElementById('especialesCar');
+  const prev = document.getElementById('espPrev'), next = document.getElementById('espNext');
+
+  const sync = () => {
+    const max = t.scrollWidth - t.clientWidth - 2;
+    const atStart = t.scrollLeft <= 2, atEnd = t.scrollLeft >= max;
+    if(prev) prev.disabled = atStart;
+    if(next) next.disabled = atEnd;
+    if(car){ car.classList.toggle('at-start', atStart); car.classList.toggle('at-end', atEnd); }
+  };
+  t.addEventListener('scroll', sync, {passive:true});
+  window.addEventListener('resize', sync);
+  sync();
+
+  /* ── avance automático ── */
+  const AVANZA  = 4000;   // avanza una tarjeta cada 4 s
+  const REANUDA = 9000;   // tras tocarlo el usuario, espera 9 s antes de retomar
+  const reduce  = menosMovimiento;
+  let timer = null, esperaHasta = 0, enPantalla = true, encima = false;
+
+  const paso = () => {
+    const c = t.querySelector('.service-card');
+    return c ? c.getBoundingClientRect().width + 24 : 292;
+  };
+  const tick = () => {
+    if(encima || !enPantalla || document.hidden || Date.now() < esperaHasta) return;
+    const max = t.scrollWidth - t.clientWidth - 2;
+    /* si el recorrido no llega ni a una tarjeta, avanzar solo hace ir hasta
+       el tope y volver, una y otra vez, entre dos posiciones casi iguales:
+       parece un tic nervioso.  En ese caso el carrusel se queda quieto y
+       las flechas siguen estando para quien quiera asomarse. */
+    if(max < paso()) return;
+    // el regreso al inicio recorre todo el carrusel: se hace más lento a
+    // propósito, para que se lea como una vuelta y no como un tirón
+    if(t.scrollLeft >= max) desliza(t, 0, 1100);
+    else desliza(t, t.scrollLeft + paso(), 640);
+  };
+  const arranca = () => { if(!timer && !reduce.matches) timer = setInterval(tick, AVANZA); };
+  const detiene = () => { if(timer){ clearInterval(timer); timer = null; } };
+  const aplaza  = () => { esperaHasta = Date.now() + REANUDA; };
+  /* cortar la animación en curso solo vale cuando el usuario desplaza con
+     el dedo o la rueda: pelearse con su gesto es lo que más se siente.
+     En las flechas NO, porque el atributo onclick lanza el movimiento antes
+     de que corra este manejador y lo estaría matando recién nacido. */
+  const tomaControl = () => { aplaza(); frenaDesliz(); };
+
+  // cualquier interacción del usuario aplaza el avance
+  ['pointerdown','wheel','touchstart','keydown'].forEach(ev => t.addEventListener(ev, tomaControl, {passive:true}));
+  [prev, next].forEach(b => b && b.addEventListener('click', aplaza));
+
+  // se detiene mientras el mouse está encima o hay foco de teclado dentro
+  if(car){
+    car.addEventListener('mouseenter', () => { encima = true; });
+    car.addEventListener('mouseleave', () => { encima = false; });
+    car.addEventListener('focusin',    () => { encima = true; });
+    car.addEventListener('focusout',   () => { encima = false; });
+  }
+  // no corre si la pestaña está oculta o el carrusel fuera de pantalla
+  document.addEventListener('visibilitychange', () => { document.hidden ? detiene() : arranca(); });
+  if(car && 'IntersectionObserver' in window){
+    new IntersectionObserver(e => { enPantalla = e[0].isIntersecting; }, {threshold:.25}).observe(car);
+  }
+  if(reduce.addEventListener) reduce.addEventListener('change', () => reduce.matches ? detiene() : arranca());
+
+  arranca();
+})();
+
 /* ── COTIZADOR ── */
 let plagaF=0, espacioF=0, szVal=150, curStep=1;
 let plagaName='', espacioName='';
@@ -3170,8 +3281,54 @@ function calcPrecio(){
 }
 
 /* ── FORMS ── */
+/* ── el campo de contacto se despliega al elegir medio, y se adapta a él ── */
+function ajustaMedioContacto(){
+  const medio = document.getElementById('heroMedio').value;
+  const caja  = document.getElementById('heroContactoCaja');
+  const campo = document.getElementById('heroContacto');
+  const abre  = medio !== '';
+
+  if(medio === 'correo'){
+    campo.type = 'email';
+    campo.placeholder = 'tucorreo@ejemplo.com';
+  } else if(medio === 'whatsapp'){
+    campo.type = 'tel';
+    campo.placeholder = 'Tu número de WhatsApp';
+  } else if(medio){
+    campo.type = 'tel';
+    campo.placeholder = '81 8141 0750';
+  }
+
+  caja.classList.toggle('abierto', abre);
+  /* plegado no puede ser obligatorio: el navegador no sabe pedir un dato
+     que no se ve y el envío se quedaría trabado sin decir por qué */
+  campo.required = abre;
+  if(!abre){ campo.value = ''; return; }
+
+  /* el foco espera a que termine de abrirse, si no la pantalla da un salto */
+  const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setTimeout(() => campo.focus({preventScroll:true}), quieto ? 0 : 200);
+}
+
+/* ── "Otro (especificar)" muestra su campo de texto ── */
+function toggleTipoOtro(){
+  const otro = document.getElementById('heroTipoOtro');
+  const txt  = document.getElementById('heroTipoOtroTxt');
+  txt.style.display = otro.checked ? 'block' : 'none';
+  txt.required = otro.checked;
+  if(otro.checked) txt.focus(); else txt.value = '';
+}
+
 function submitHero(e){
   e.preventDefault();
+  const marcadas = document.querySelectorAll('#heroTipoServicio input[name="tipoServicio"]:checked');
+  const aviso = document.getElementById('heroTipoAviso');
+  if(marcadas.length === 0){
+    aviso.style.display = 'block';
+    document.getElementById('heroTipoServicio').scrollIntoView({block:'center', behavior:'smooth'});
+    return;
+  }
+  aviso.style.display = 'none';
   document.getElementById('heroForm').style.display='none';
   document.getElementById('heroOk').style.display='block';
 }

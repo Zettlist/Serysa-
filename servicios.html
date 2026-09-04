@@ -690,69 +690,6 @@ input[type=range]::-webkit-slider-thumb{
 }
 .cotiz-nav{display:flex;gap:12px;justify-content:flex-end;margin-top:30px;}
 
-/* ═══════════════════════════════════════════════ POLIZAS */
-.polizas{background:#fff;position:relative;overflow:hidden;}
-.polizas::before{
-  content:'';position:absolute;
-  bottom:-200px;left:50%;transform:translateX(-50%);
-  width:800px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(11,21,237,.04) 0%,transparent 70%);
-}
-.polizas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.poliza{
-  border-radius:20px;overflow:hidden;
-  border:1px solid rgba(11,21,237,.1);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
-  position:relative;
-}
-.poliza:hover{transform:translateY(-8px);box-shadow:0 20px 56px rgba(11,21,237,.12);}
-.poliza.hot{
-  border:none;
-  background:linear-gradient(165deg,var(--navy-900),var(--navy-700),var(--blue-600));
-  box-shadow:0 12px 48px rgba(11,21,237,.25);transform:translateY(-10px);
-}
-.poliza.hot:hover{transform:translateY(-16px);box-shadow:0 24px 64px rgba(11,21,237,.4);}
-.poliza-top{padding:30px 28px;background:var(--gray-50);}
-.poliza.hot .poliza-top{background:transparent;}
-.poliza-chip{
-  display:inline-block;padding:4px 12px;border-radius:20px;
-  font-size:.7rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.5px;font-family:'Montserrat',sans-serif;
-  margin-bottom:14px;
-  background:rgba(245,158,11,.12);color:var(--orange);border:1px solid rgba(245,158,11,.25);
-}
-.poliza.hot .poliza-chip{background:rgba(0,212,255,.15);color:var(--cyan-400);border-color:rgba(0,212,255,.3);}
-.poliza-name{font-size:1.25rem;font-weight:800;color:var(--navy-900);margin-bottom:4px;}
-.poliza.hot .poliza-name{color:#fff;}
-.poliza-period{font-size:.82rem;color:var(--gray-700);}
-.poliza.hot .poliza-period{color:rgba(255,255,255,.6);}
-.poliza-price{
-  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;
-  font-family:'Montserrat',sans-serif;margin-top:12px;
-  background:var(--grad-text);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
-.poliza.hot .poliza-price{
-  background:linear-gradient(90deg,#fff,var(--cyan-300));
-  -webkit-background-clip:text;background-clip:text;
-}
-.poliza-save{
-  display:inline-flex;align-items:center;gap:5px;margin-top:5px;
-  font-size:.78rem;font-weight:700;color:var(--green);
-  font-family:'Montserrat',sans-serif;
-}
-.poliza.hot .poliza-save{color:var(--cyan-400);}
-
-.poliza-body{padding:24px 28px;}
-.poliza-feats{display:flex;flex-direction:column;gap:11px;margin-bottom:24px;}
-.poliza-feat{display:flex;align-items:flex-start;gap:10px;font-size:.84rem;color:var(--gray-700);}
-.poliza.hot .poliza-feat{color:rgba(255,255,255,.75);}
-.pf-check{flex-shrink:0;margin-top:1px;}
-.pf-check.yes{color:var(--green);}
-.pf-check.no{color:var(--gray-400);}
-.poliza.hot .pf-check.yes{color:var(--cyan-400);}
-.poliza-btn{width:100%;justify-content:center;}
-
 /* ═══════════════════════════════════════════════ CERTIF */
 .certif{
   background:var(--navy-950);position:relative;overflow:hidden;
@@ -1076,8 +1013,6 @@ input[type=range]::-webkit-slider-thumb{
 @media(max-width:900px){
   .how-grid{grid-template-columns:1fr;gap:32px;}
   .how-connector{display:none;}
-  .polizas-grid{grid-template-columns:1fr;}
-  .poliza.hot{transform:none;}
   .testim-grid{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
@@ -1163,7 +1098,6 @@ input[type=range]::-webkit-slider-thumb{
     <nav class="nav">
       <a href="servicios.html">Servicios</a>
       <a href="index.html#cotizador">Cotizador</a>
-      <a href="polizas.html">Pólizas</a>
       <a href="index.html#clientes">Clientes</a>
       <a href="nosotros.html">Nosotros</a>
       <a href="index.html#zonas">Zonas</a>
@@ -1275,7 +1209,6 @@ input[type=range]::-webkit-slider-thumb{
         <div class="footer-links">
           <a href="#nosotros">Quiénes somos</a>
           <a href="#clientes">Nuestros clientes</a>
-          <a href="#polizas">Pólizas</a>
           <a href="#cotizador">Cotizador online</a>
           <a href="#contacto">Contacto</a>
           <a href="#">Aviso de privacidad</a>
