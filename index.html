@@ -22,8 +22,6 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#0b15ed">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"SERYSA","telephone":"+52-81-8141-0750","address":{"@type":"PostalAddress","addressLocality":"Monterrey","addressRegion":"Nuevo León","addressCountry":"MX"},"foundingDate":"1994"}</script>
-  <!-- sprite del fondo del hero: se descubre aqui, sin esperar al JS del final del body -->
-  <link rel="preload" as="image" href="img/fondo/atlas.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -364,83 +362,21 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
   display:flex;align-items:center;
   background:var(--grad-hero);overflow:hidden;
 }
-/* ── DRIFT WALL (fondo hero) ── */
-.hero-drift{
-  position:absolute;inset:0;z-index:0;
-  overflow:hidden;pointer-events:none;
-  perspective:var(--dw-perspective);
-  perspective-origin:50% 50%;
-  --dw-tile-w:128px;
-  --dw-tile-h:90px;
-  --dw-gap:10px;
-  --dw-radius:14px;
-  --dw-perspective:1200px;
-  --dw-dim:.55;
-  --dw-gray:0;
-  --dw-overlay:#060010;
-  --dw-edge:40%;
-  -webkit-mask-image:
-    radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%),
-    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
-  -webkit-mask-composite:source-in;
-  mask-image:
-    radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%),
-    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
-  mask-composite:intersect;
+/* ── Fondo del hero: foto estatica + blur azul ──
+   La foto va en luminosity al 20%: aporta textura sin competir con el texto,
+   y el blur de encima le devuelve el color de la marca. */
+.hero-photo{
+  position:absolute;inset:0;
+  background-image:url('WhatsApp%20Image%202026-03-21%20at%2011.38.27%20AM.jpeg');
+  background-size:cover;background-position:center 25%;
+  opacity:.2;mix-blend-mode:luminosity;
 }
-.dw-plane{
-  position:absolute;top:50%;left:50%;
-  display:flex;flex-direction:row;
-  transform-style:preserve-3d;
-  transform-origin:50% 50%;
-  will-change:transform;
-}
-.dw-col{
-  position:relative;
-  width:calc(var(--dw-tile-w) + var(--dw-gap));
-  transform-style:preserve-3d;
-}
-.dw-track{
-  display:flex;flex-direction:column;
-  will-change:transform;
-  transform-style:preserve-3d;
-}
-.dw-tile{
-  position:relative;display:block;
-  width:100%;
-  height:calc(var(--dw-tile-h) + var(--dw-gap));
-  flex:0 0 auto;
-  transform-style:preserve-3d;
-}
-.dw-inner{
-  position:absolute;inset:calc(var(--dw-gap) / 2);
-  display:block;
-  border-radius:var(--dw-radius);
-  overflow:hidden;
-  background-color:#0b0b12;
-  /* sprite: las 69 fotos en un solo archivo. 9 columnas x 8 filas -> 900% 800%.
-     si cambia el numero de fotos hay que ajustar SHEET_COLS/SHEET_ROWS en el JS */
-  background-image:url('img/fondo/atlas.webp');
-  background-size:900% 800%;
-  background-repeat:no-repeat;
-  opacity:var(--dw-dim);
-  filter:grayscale(var(--dw-gray)) saturate(.92);
-  transform:translateZ(0);
-}
-.dw-inner::after{
-  content:'';position:absolute;inset:0;
-  background:var(--dw-overlay);
-  opacity:.42;
-}
-@media (prefers-reduced-motion: reduce){
-  .dw-plane,.dw-track{will-change:auto;}
-}
-/* scrim: mantiene legible el texto sobre el muro */
-.hero-scrim{
-  position:absolute;inset:0;z-index:2;pointer-events:none;
+.hero-mesh{
+  position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(100deg, rgba(3,10,38,.9) 0%, rgba(3,10,38,.58) 30%, rgba(3,10,38,.1) 56%, rgba(3,10,38,.22) 100%),
-    linear-gradient(to bottom, rgba(3,10,38,.45) 0%, transparent 24%, transparent 66%, rgba(3,10,38,.75) 100%);
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(11,21,237,.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(0,212,255,.15) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(99,102,241,.2) 0%, transparent 50%);
 }
 .hero-content{
   position:relative;z-index:3;
@@ -1373,8 +1309,8 @@ input[type=range]::-webkit-slider-thumb{
 
 <!-- ═══════════════════════════════════ HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-drift" id="heroDrift" aria-hidden="true"></div>
-  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-mesh"></div>
 
   <div class="hero-content container">
     <div class="hero-left">
@@ -3148,209 +3084,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ═══════════════════════════════════ JAVASCRIPT -->
 <script>
-/* ── DRIFT WALL (fondo del hero) ── */
-(function(){
-  const root = document.getElementById('heroDrift');
-  if(!root) return;
-
-  /* una sola peticion para las 69 fotos: cada tile solo mueve background-position.
-     69 peticiones encoladas de a 6 costaban ~3.5 s aunque cada una pesara 6 KB */
-  const SHEET_COLS = 9, SHEET_ROWS = 8, PHOTOS = 69;
-  const POS = Array.from({length:PHOTOS},(_,i)=>
-    `${(i % SHEET_COLS)/(SHEET_COLS-1)*100}% ${Math.floor(i/SHEET_COLS)/(SHEET_ROWS-1)*100}%`);
-
-  const CFG = {
-    tileWidth:128, tileHeight:90, gap:10, radius:14,
-    tilt:-13, turn:-17, roll:12,
-    perspective:1200, depth:160,
-    speed:18, direction:'up', variance:.4, parallax:.7,
-    fade:.6, dim:.55, grayscale:false, overlay:'#060010',
-    minColumns:8, scale:1.18
-  };
-
-  const unitW = CFG.tileWidth + CFG.gap;
-  const unitH = CFG.tileHeight + CFG.gap;
-
-  root.style.setProperty('--dw-tile-w', CFG.tileWidth+'px');
-  root.style.setProperty('--dw-tile-h', CFG.tileHeight+'px');
-  root.style.setProperty('--dw-gap',    CFG.gap+'px');
-  root.style.setProperty('--dw-radius', CFG.radius+'px');
-  root.style.setProperty('--dw-perspective', CFG.perspective+'px');
-  root.style.setProperty('--dw-dim',    CFG.dim);
-  root.style.setProperty('--dw-gray',   CFG.grayscale?1:0);
-  root.style.setProperty('--dw-overlay',CFG.overlay);
-  root.style.setProperty('--dw-edge',   Math.max(0,(1-CFG.fade)*100)+'%');
-
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let reduced = mq.matches;
-  mq.addEventListener('change', e => { reduced = e.matches; });
-
-  const plane = document.createElement('div');
-  plane.className = 'dw-plane';
-  root.appendChild(plane);
-
-  let tracks = [], meta = [], offsets = [], velocities = [], baseVel = [];
-  let colCount = 0, builtH = 0;
-
-  const columnFactor = (i,v) => 1 + v * ((((i*0.6180339887 + 0.35) % 1) * 2) - 1);
-
-  /* Fisher-Yates: baraja una copia, no el original */
-  function shuffled(arr){
-    const a = arr.slice();
-    for(let i=a.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      const t = a[i]; a[i] = a[j]; a[j] = t;
-    }
-    return a;
-  }
-
-  /* n fotos al azar; si la columna necesita mas que el pool, encadena barajadas
-     distintas en vez de repetir la misma vuelta */
-  function randomList(pool, n){
-    const out = [];
-    while(out.length < n) out.push.apply(out, shuffled(pool));
-    return out.slice(0, n);
-  }
-
-  /* el plano se proyecta más angosto por el giro y la profundidad:
-     hay que pedir columnas suficientes para cubrir el ancho real del hero */
-  function neededColumns(w){
-    const persp = CFG.perspective / (CFG.perspective + CFG.depth);
-    const proj  = CFG.scale * persp * Math.cos(CFG.turn * Math.PI/180);
-    /* en movil el hero es mucho mas alto: forzar 8 columnas dispara el numero
-       de tiles sin ganar nada visible, asi que ahi basta con las que cubren */
-    const min = w < 768 ? 5 : CFG.minColumns;
-    return Math.max(min, Math.ceil((w/proj)/unitW) + 2);
-  }
-
-  function build(){
-    const w = root.clientWidth  || window.innerWidth;
-    const h = root.clientHeight || window.innerHeight;
-    const cols = neededColumns(w);
-    if(cols === colCount && Math.abs(h - builtH) < 80) return;
-    colCount = cols; builtH = h;
-
-    const dirSign = CFG.direction === 'up' ? 1 : -1;
-    const perCol  = Math.max(4, Math.ceil((h*1.6)/unitH));
-    const pool    = POS;
-    const frag = document.createDocumentFragment();
-    tracks = []; meta = []; offsets = []; velocities = []; baseVel = [];
-
-    for(let c=0;c<cols;c++){
-      const col   = document.createElement('div'); col.className = 'dw-col';
-      const track = document.createElement('div'); track.className = 'dw-track';
-
-      /* cada columna toma solo las fotos que alcanza a mostrar: usar las 69 por
-         columna daria un track de ~6900px del que apenas se ve una fraccion.
-         El orden se baraja por columna, asi no se repite la misma secuencia */
-      const list = randomList(pool, perCol);
-      const copyHeight = list.length * unitH;
-      const copies = Math.max(2, Math.ceil((h*1.6)/copyHeight) + 1);
-
-      for(let k=0;k<copies;k++){
-        for(let i=0;i<list.length;i++){
-          const tile  = document.createElement('div');  tile.className  = 'dw-tile';
-          const inner = document.createElement('span'); inner.className = 'dw-inner';
-          inner.style.backgroundPosition = list[i];
-          tile.appendChild(inner);
-          track.appendChild(tile);
-        }
-      }
-
-      col.appendChild(track);
-      frag.appendChild(col);
-
-      tracks.push(track);
-      meta.push({ copyHeight });
-      offsets.push(copyHeight * ((c*0.37) % 1));
-      velocities.push(0);
-      baseVel.push(CFG.speed * columnFactor(c, CFG.variance) * dirSign * (c%2===0?1:-1));
-    }
-
-    plane.innerHTML = '';
-    plane.appendChild(frag);
-  }
-
-  /* parallax: el puntero se escucha en el hero porque el muro no recibe eventos */
-  const hero = document.getElementById('inicio');
-  const pointer = {x:0,y:0}, damped = {x:0,y:0};
-  if(hero){
-    hero.addEventListener('pointermove', e => {
-      if(reduced) return;
-      const r = hero.getBoundingClientRect();
-      pointer.x = (e.clientX - r.left)/r.width  - .5;
-      pointer.y = (e.clientY - r.top )/r.height - .5;
-    }, {passive:true});
-    hero.addEventListener('pointerleave', () => { pointer.x = 0; pointer.y = 0; }, {passive:true});
-  }
-
-  function applyPlane(px,py){
-    plane.style.transform =
-      `translate(-50%, -50%) scale(${CFG.scale}) ` +
-      `rotateX(${CFG.tilt + py}deg) rotateY(${CFG.turn + px}deg) rotateZ(${CFG.roll}deg) ` +
-      `translateZ(${-CFG.depth}px)`;
-  }
-
-  let raf = null, lastTs = null;
-
-  function frame(ts){
-    if(lastTs === null) lastTs = ts;
-    const dt = Math.min(.05, Math.max(0, ts - lastTs)/1000);
-    lastTs = ts;
-
-    const maxTilt = CFG.parallax * 8;
-    const tX =  pointer.x * maxTilt;
-    const tY = -pointer.y * maxTilt;
-    const damp = 1 - Math.exp(-dt/0.12);
-    damped.x += (tX - damped.x) * damp;
-    damped.y += (tY - damped.y) * damp;
-    applyPlane(damped.x, damped.y);
-
-    if(!reduced){
-      for(let c=0;c<tracks.length;c++){
-        const m = meta[c]; if(!m) continue;
-        const ease = 1 - Math.exp(-dt/0.28);
-        velocities[c] += (baseVel[c] - velocities[c]) * ease;
-        let next = offsets[c] + velocities[c]*dt;
-        next = ((next % m.copyHeight) + m.copyHeight) % m.copyHeight;
-        offsets[c] = next;
-        tracks[c].style.transform = `translate3d(0, ${-next}px, 0)`;
-      }
-    }
-
-    raf = requestAnimationFrame(frame);
-  }
-
-  function start(){ if(raf === null){ lastTs = null; raf = requestAnimationFrame(frame); } }
-  function stop(){  if(raf !== null){ cancelAnimationFrame(raf); raf = null; } }
-
-  build();
-  applyPlane(0,0);
-
-  /* no gastar frames con el hero fuera de vista o la pestana oculta.
-     El estado se recalcula en cada aviso: cachearlo en una variable dejaba el
-     muro congelado para siempre si la pagina cargaba en una pestana de fondo
-     (el observer avisaba una sola vez con isIntersecting:false y ya no volvia) */
-  function sync(){
-    if(!hero) return start();
-    const r = hero.getBoundingClientRect();
-    const enPantalla = r.bottom > 0 && r.top < (window.innerHeight || 0);
-    (!document.hidden && enPantalla) ? start() : stop();
-  }
-
-  if(hero && 'IntersectionObserver' in window){
-    new IntersectionObserver(sync, {threshold:0}).observe(hero);
-  }
-  document.addEventListener('visibilitychange', sync);
-  sync();
-
-  let rt = null;
-  window.addEventListener('resize', () => {
-    clearTimeout(rt);
-    rt = setTimeout(() => { build(); sync(); }, 200);
-  }, {passive:true});
-})();
-
 /* ── MARQUEE DE TESTIMONIOS ── */
 (function(){
   /* el HTML trae un solo grupo por fila para que los testimonios sigan estando
