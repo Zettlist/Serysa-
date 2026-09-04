@@ -13,6 +13,11 @@
       "cotizacion_torlan_2026.html",
       "Fotos de tarjetas/**",
       "_originales_backup/**",
+      "Fotos Fondo/**",
+      "Cambio fotos*/**",
+      "package.json",
+      "package-lock.json",
+      "src/**",
       "WhatsApp Video*.mp4"
     ]
   },

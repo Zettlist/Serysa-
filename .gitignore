@@ -17,3 +17,7 @@ functions/.env
 # Node deps
 functions/node_modules/
 node_modules/
+
+# Fotos fuente sin procesar (las versiones optimizadas viven en img/)
+Fotos Fondo/
+Cambio fotos */

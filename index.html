@@ -6,11 +6,28 @@
   <title>SERYSA | Control Profesional de Plagas Monterrey | 30 Años</title>
   <meta name="description" content="Control de plagas profesional en Monterrey y Área Metropolitana. 30 años de experiencia. Personal certificado con documentación para auditorías. Cotización gratis en línea.">
   <link rel="canonical" href="https://www.serysa.com/">
+
+  <!-- Favicon. Dos recortes a proposito: los tamanos chicos usan el logo acercado
+       (a 16px el logo completo es una mancha azul; acercado se lee la S) y los
+       grandes usan el logo completo, donde si cabe el detalle del insecto. -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b15ed">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"SERYSA","telephone":"+52-81-8141-0750","address":{"@type":"PostalAddress","addressLocality":"Monterrey","addressRegion":"Nuevo León","addressCountry":"MX"},"foundingDate":"1994"}</script>
+  <!-- sprite del fondo del hero: se descubre aqui, sin esperar al JS del final del body -->
+  <link rel="preload" as="image" href="img/fondo/atlas.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
+<!-- Utilidades de Tailwind. Generado por: npm run css  (fuente: src/tw.css)
+     Va en @layer utilities, y el CSS propio de abajo esta sin capa: por regla de
+     cascada, lo sin-capa siempre gana. O sea que esto no puede pisar el diseno
+     actual; solo agrega clases nuevas para componentes que se peguen. -->
+<link rel="stylesheet" href="tailwind.css">
 <style>
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS — PALETA EXPANDIDA
@@ -91,12 +108,6 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 @keyframes rotateIn  {from{opacity:0;transform:rotate(-8deg) scale(.9)} to{opacity:1;transform:rotate(0) scale(1)}}
 @keyframes glowPulse {0%,100%{box-shadow:0 0 20px rgba(0,212,255,.3)} 50%{box-shadow:0 0 40px rgba(0,212,255,.6)}}
 @keyframes borderRot {0%{background-position:0% 0%} 100%{background-position:400% 0%}}
-@keyframes particleMove {
-  0%   {transform:translateY(0)   translateX(0)  ; opacity:0;}
-  10%  {opacity:.8;}
-  90%  {opacity:.6;}
-  100% {transform:translateY(-120vh) translateX(40px); opacity:0;}
-}
 @keyframes typewriter{from{width:0}to{width:100%}}
 @keyframes blinkCaret{0%,100%{border-color:var(--cyan-500)}50%{border-color:transparent}}
 @keyframes countUp   {from{--n:0}to{--n:var(--target)}}
@@ -258,13 +269,6 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 .hero-card .check-aviso{color:#ff9a9a;}
 @media(max-width:400px){.check-group{grid-template-columns:1fr;}}
 
-/* ═══════════════════════════════════════════════ PARTICLES */
-#particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
-.p-dot{
-  position:absolute;border-radius:50%;
-  animation:particleMove linear infinite;
-  pointer-events:none;
-}
 
 /* ═══════════════════════════════════════════════ HEADER */
 .header{
@@ -355,48 +359,89 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
   display:flex;align-items:center;
   background:var(--grad-hero);overflow:hidden;
 }
-.hero-photo{
-  position:absolute;inset:0;
-  background-image:url('WhatsApp%20Image%202026-03-21%20at%2011.38.27%20AM.jpeg');
-  background-size:cover;background-position:center 25%;
-  opacity:.2;mix-blend-mode:luminosity;
+/* ── DRIFT WALL (fondo hero) ── */
+.hero-drift{
+  position:absolute;inset:0;z-index:0;
+  overflow:hidden;pointer-events:none;
+  perspective:var(--dw-perspective);
+  perspective-origin:50% 50%;
+  --dw-tile-w:128px;
+  --dw-tile-h:90px;
+  --dw-gap:10px;
+  --dw-radius:14px;
+  --dw-perspective:1200px;
+  --dw-dim:.55;
+  --dw-gray:0;
+  --dw-overlay:#060010;
+  --dw-edge:40%;
+  -webkit-mask-image:
+    radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%),
+    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    radial-gradient(ellipse 78% 82% at 50% 46%, #000 var(--dw-edge), transparent 100%),
+    linear-gradient(to top, #000 var(--dw-edge), transparent 100%);
+  mask-composite:intersect;
 }
-.hero-mesh{
-  position:absolute;inset:0;z-index:1;
+.dw-plane{
+  position:absolute;top:50%;left:50%;
+  display:flex;flex-direction:row;
+  transform-style:preserve-3d;
+  transform-origin:50% 50%;
+  will-change:transform;
+}
+.dw-col{
+  position:relative;
+  width:calc(var(--dw-tile-w) + var(--dw-gap));
+  transform-style:preserve-3d;
+}
+.dw-track{
+  display:flex;flex-direction:column;
+  will-change:transform;
+  transform-style:preserve-3d;
+}
+.dw-tile{
+  position:relative;display:block;
+  width:100%;
+  height:calc(var(--dw-tile-h) + var(--dw-gap));
+  flex:0 0 auto;
+  transform-style:preserve-3d;
+}
+.dw-inner{
+  position:absolute;inset:calc(var(--dw-gap) / 2);
+  display:block;
+  border-radius:var(--dw-radius);
+  overflow:hidden;
+  background-color:#0b0b12;
+  /* sprite: las 69 fotos en un solo archivo. 9 columnas x 8 filas -> 900% 800%.
+     si cambia el numero de fotos hay que ajustar SHEET_COLS/SHEET_ROWS en el JS */
+  background-image:url('img/fondo/atlas.webp');
+  background-size:900% 800%;
+  background-repeat:no-repeat;
+  opacity:var(--dw-dim);
+  filter:grayscale(var(--dw-gray)) saturate(.92);
+  transform:translateZ(0);
+}
+.dw-inner::after{
+  content:'';position:absolute;inset:0;
+  background:var(--dw-overlay);
+  opacity:.42;
+}
+@media (prefers-reduced-motion: reduce){
+  .dw-plane,.dw-track{will-change:auto;}
+}
+/* scrim: mantiene legible el texto sobre el muro */
+.hero-scrim{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(11,21,237,.4) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(0,212,255,.15) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(99,102,241,.2) 0%, transparent 50%);
+    linear-gradient(100deg, rgba(3,10,38,.9) 0%, rgba(3,10,38,.58) 30%, rgba(3,10,38,.1) 56%, rgba(3,10,38,.22) 100%),
+    linear-gradient(to bottom, rgba(3,10,38,.45) 0%, transparent 24%, transparent 66%, rgba(3,10,38,.75) 100%);
 }
 .hero-content{
   position:relative;z-index:3;
   width:100%;max-width:1200px;margin:0 auto;
   padding:140px 24px 100px;
   display:grid;grid-template-columns:1fr 430px;gap:64px;align-items:center;
-}
-
-.hero-badge-wrap{display:flex;align-items:center;gap:10px;margin-bottom:26px;}
-.hero-live{
-  display:flex;align-items:center;gap:7px;
-  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);
-  color:var(--green);font-size:.75rem;font-weight:700;
-  padding:6px 14px;border-radius:30px;font-family:'Montserrat',sans-serif;
-  text-transform:uppercase;letter-spacing:.5px;
-}
-.live-dot{
-  width:8px;height:8px;background:var(--green);border-radius:50%;
-  position:relative;flex-shrink:0;
-}
-.live-dot::after{
-  content:'';position:absolute;inset:-3px;
-  background:var(--green);border-radius:50%;opacity:.4;
-  animation:pulseRing .8s ease-out infinite;
-}
-.hero-years{
-  background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
-  color:var(--cyan-400);font-size:.75rem;font-weight:700;
-  padding:6px 14px;border-radius:30px;font-family:'Montserrat',sans-serif;
-  text-transform:uppercase;letter-spacing:.5px;
 }
 
 .hero h1{
@@ -527,52 +572,43 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 .svc-row{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:center;gap:24px;}
 .svc-row>.service-card{flex:0 1 300px;max-width:340px;}
 @media(max-width:660px){.svc-row>.service-card{flex:1 1 100%;max-width:none;}}
-/* Servicios Especiales — carrusel con flechas laterales y degradado */
-.especiales-car{grid-column:1/-1;position:relative;}
+/* ── Carrusel de Servicios Especiales ────────────────────────────────────────
+   El aspecto vive ahora en clases de Tailwind, en el HTML. Aqui solo quedan las
+   tres cosas que Tailwind no cubre bien:
+     1. ocultar la barra de scroll (no hay utilidad para -webkit-scrollbar)
+     2. .sin-ajuste, que el JS enciende y apaga durante la animacion
+     3. los degradados de borde, que dependen de .at-start / .at-end del JS
+   Todo lo demas (flechas, pista, puntos) esta en el marcado.                   */
+
 .especiales-row{
-  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(268px,1fr);gap:24px;
-  /* proximity y no mandatory: con el ajuste obligatorio el navegador corta
-     la animación a medio camino para reencajar la tarjeta, y da tirones */
-  overflow-x:auto;overflow-y:hidden;padding:18px 2px 22px;scroll-snap-type:x proximity;
+  /* proximity y no mandatory: con el ajuste obligatorio el navegador corta la
+     animacion a medio camino para reencajar la tarjeta, y da tirones */
+  scroll-snap-type:x proximity;
   scrollbar-width:none;-ms-overflow-style:none;
 }
-.especiales-row>.service-card{scroll-snap-align:start;}
-/* mientras corre la animación el ajuste se apaga: si no, el navegador
-   reencaja la tarjeta en cada fotograma y el recorrido sale a saltos */
-.especiales-row.sin-ajuste{scroll-snap-type:none;}
 .especiales-row::-webkit-scrollbar{display:none;}
-/* degradados que difuminan las tarjetas cortadas */
-.especiales-car::before,.especiales-car::after{
-  content:'';position:absolute;top:0;bottom:22px;width:64px;
-  pointer-events:none;z-index:3;transition:opacity .25s;
+.especiales-row>.service-card{scroll-snap-align:start;}
+/* mientras corre la animacion el ajuste se apaga: si no, el navegador reencaja
+   la tarjeta en cada fotograma y el recorrido sale a saltos */
+.especiales-row.sin-ajuste{scroll-snap-type:none;}
+
+/* De 1000px para arriba deja de ser carrusel y se comporta como .svc-row, el
+   resto de la seccion. Motivo, medido: a 1200px caben 4.1 de las 5 tarjetas,
+   o sea 0.82 de tarjeta escondida. Eso no es un carrusel, es una fila con un
+   pico cortado; y el auto-avance ya se apagaba solo ahi por la guarda del JS.
+   Abajo de 1000px si hay recorrido de verdad (2.5 tarjetas a 720px, 3.8 en
+   movil) y ahi el carrusel se gana el lugar: ahorra ~2000px de scroll. */
+@media (min-width:1000px){
+  .especiales-row{
+    display:flex;flex-wrap:wrap;justify-content:center;
+    overflow:visible;scroll-snap-type:none;
+  }
+  .especiales-row>.service-card{flex:0 1 300px;max-width:340px;}
 }
-.especiales-car::before{left:0;background:linear-gradient(90deg,var(--gray-50),rgba(247,248,255,0));}
-.especiales-car::after{right:0;background:linear-gradient(270deg,var(--gray-50),rgba(247,248,255,0));}
-.especiales-car.at-start::before{opacity:0;}
-.especiales-car.at-end::after{opacity:0;}
-/* flechas flotantes sobre los bordes */
-.esp-side{
-  position:absolute;top:calc(50% - 2px);transform:translateY(-50%);z-index:4;
-  width:44px;height:44px;border-radius:50%;cursor:pointer;
-  border:1px solid rgba(11,21,237,.12);background:#fff;color:var(--blue-500);
-  font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 20px rgba(4,8,46,.16);
-  transition:background .22s,color .22s,opacity .3s,transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s;
-}
-/* el translateY se repite en cada estado: si se omite, la flecha salta al centro */
-.esp-side:hover{
-  background:var(--blue-500);color:#fff;
-  transform:translateY(-50%) scale(1.09);
-  box-shadow:0 12px 28px rgba(11,21,237,.32);
-}
-.esp-side:active{transform:translateY(-50%) scale(.95);transition-duration:.09s;}
-.esp-side.l{left:-14px;}
-.esp-side.r{right:-14px;}
-.esp-side:disabled{opacity:0;pointer-events:none;}
-@media(max-width:860px){
-  .esp-side{display:none;}
-  .especiales-car::before,.especiales-car::after{width:36px;}
-}
+
+/* los degradados se desvanecen al llegar a cada extremo */
+.especiales-car.at-start .esp-fade-l{opacity:0;}
+.especiales-car.at-end   .esp-fade-r{opacity:0;}
 
 .service-card{
   background:#fff;border-radius:18px;overflow:hidden;
@@ -860,7 +896,7 @@ input[type=range]::-webkit-slider-thumb{
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--gray-50),transparent);}
 .ticker-track{
   display:flex;gap:16px;align-items:center;
-  width:max-content;animation:ticker 35s linear infinite;
+  width:max-content;animation:ticker 80s linear infinite;
 }
 .ticker-track:hover{animation-play-state:paused;}
 .client-chip{
@@ -988,8 +1024,36 @@ input[type=range]::-webkit-slider-thumb{
 
 /* ═══════════════════════════════════════════════ TESTIMONIOS */
 .testimonios{background:var(--gray-50);}
-.testim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+/* marquee de testimonios: dos filas en sentidos opuestos.
+   El desplazamiento es -50% menos medio hueco: el track lleva dos copias del
+   grupo separadas por un gap, asi que -50% exacto dejaria un salto de gap/2 */
+.tm-marquee{
+  --tm-gap:18px;
+  --tm-dur:70s;
+  position:relative;display:flex;flex-direction:column;
+  gap:var(--tm-gap);overflow:hidden;
+}
+.tm-row{overflow:hidden;}
+.tm-track{
+  display:flex;gap:var(--tm-gap);width:max-content;
+  animation:tmScroll var(--tm-dur) linear infinite;
+}
+.tm-group{display:flex;gap:var(--tm-gap);}
+.tm-row-b .tm-track{animation-direction:reverse;}
+.tm-marquee:hover .tm-track{animation-play-state:paused;}
+@keyframes tmScroll{
+  from{transform:translateX(0);}
+  to  {transform:translateX(calc(-50% - var(--tm-gap) / 2));}
+}
+.tm-marquee::before,.tm-marquee::after{
+  content:'';position:absolute;top:0;bottom:0;width:12%;z-index:2;pointer-events:none;
+}
+.tm-marquee::before{left:0;background:linear-gradient(90deg,var(--gray-50),transparent);}
+.tm-marquee::after{right:0;background:linear-gradient(-90deg,var(--gray-50),transparent);}
+@media (max-width:560px){.tm-marquee{--tm-gap:14px;}}
+@media (prefers-reduced-motion: reduce){.tm-track{animation:none;}}
 .testim-card{
+  width:330px;flex:0 0 auto;
   background:#fff;border-radius:18px;padding:28px 24px;
   border:1px solid rgba(11,21,237,.06);
   box-shadow:0 4px 24px rgba(7,12,71,.06);
@@ -1040,10 +1104,12 @@ input[type=range]::-webkit-slider-thumb{
 .ci{display:flex;gap:16px;align-items:flex-start;}
 .ci-icon{
   width:46px;height:46px;border-radius:12px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:var(--cyan-400);
   transition:all .25s;
 }
+.ci-icon svg{width:21px;height:21px;}
 .ci:hover .ci-icon{background:rgba(0,212,255,.15);border-color:rgba(0,212,255,.3);}
 .ci-text h4{font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:3px;font-family:'Montserrat',sans-serif;font-weight:600;}
 .ci-text a,.ci-text p{font-size:.92rem;color:#fff;font-weight:600;transition:color .2s;}
@@ -1302,17 +1368,11 @@ input[type=range]::-webkit-slider-thumb{
 
 <!-- ═══════════════════════════════════ HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-photo"></div>
-  <div class="hero-mesh"></div>
-  <div id="particles"></div>
+  <div class="hero-drift" id="heroDrift" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
 
   <div class="hero-content container">
     <div class="hero-left">
-      <div class="hero-badge-wrap">
-        <div class="hero-live"><div class="live-dot"></div> Atendiendo ahora</div>
-        <div class="hero-years">30 años de experiencia</div>
-      </div>
-
       <h1>
         <span class="hero-line1">Controlamos tu plaga</span>
         <span class="hero-line2" id="typewriterEl">con técnicos certificados.</span>
@@ -1539,9 +1599,19 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
 
-      <div class="especiales-car" id="especialesCar">
-      <button type="button" class="esp-side l" id="espPrev" aria-label="Ver servicios anteriores" onclick="scrollEspeciales(-1)">‹</button>
-      <div class="especiales-row" id="especialesTrack">
+      <div class="especiales-car relative col-span-full" id="especialesCar">
+
+      <!-- degradados de borde: difuminan la tarjeta cortada en cada extremo.
+           .at-start / .at-end los apagan (regla en el <style>, la pone el JS) -->
+      <div class="esp-fade-l pointer-events-none absolute left-0 top-0 bottom-[22px] z-[3] w-16 bg-gradient-to-r from-gray-50 to-transparent transition-opacity duration-300 min-[1000px]:hidden"></div>
+      <div class="esp-fade-r pointer-events-none absolute right-0 top-0 bottom-[22px] z-[3] w-16 bg-gradient-to-l from-gray-50 to-transparent transition-opacity duration-300 min-[1000px]:hidden"></div>
+
+      <button type="button" id="espPrev" aria-label="Ver servicios anteriores" onclick="scrollEspeciales(-1)"
+        class="absolute top-1/2 z-[4] grid size-11 -translate-y-1/2 place-items-center rounded-full border border-blue-500/10 bg-white text-blue-500 shadow-[0_6px_20px_rgb(4_8_46/.16)] transition duration-200 ease-[cubic-bezier(.34,1.4,.64,1)] hover:bg-blue-500 hover:text-white hover:scale-[1.09] hover:shadow-[0_12px_28px_rgb(11_21_237/.32)] active:scale-95 active:duration-75 disabled:pointer-events-none disabled:opacity-0 min-[1000px]:hidden cursor-pointer left-[-14px]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button type="button" id="espNext" aria-label="Ver más servicios" onclick="scrollEspeciales(1)"
+        class="absolute top-1/2 z-[4] grid size-11 -translate-y-1/2 place-items-center rounded-full border border-blue-500/10 bg-white text-blue-500 shadow-[0_6px_20px_rgb(4_8_46/.16)] transition duration-200 ease-[cubic-bezier(.34,1.4,.64,1)] hover:bg-blue-500 hover:text-white hover:scale-[1.09] hover:shadow-[0_12px_28px_rgb(11_21_237/.32)] active:scale-95 active:duration-75 disabled:pointer-events-none disabled:opacity-0 min-[1000px]:hidden cursor-pointer right-[-14px]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><polyline points="9,18 15,12 9,6"/></svg></button>
+
+      <div class="especiales-row grid auto-cols-[minmax(268px,1fr)] grid-flow-col gap-6 overflow-x-auto overflow-y-hidden px-0.5 pt-[18px] pb-[22px]" id="especialesTrack">
       <!-- Cambio 8a: Termitas -->
       <div class="service-card reveal" style="transition-delay:.16s">
         <div class="service-img">
@@ -1601,7 +1671,6 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
       </div>
-      <button type="button" class="esp-side r" id="espNext" aria-label="Ver más servicios" onclick="scrollEspeciales(1)">›</button>
       </div>
 
       <!-- ── SECCIÓN 3: REUBICACIÓN ── -->
@@ -1642,7 +1711,7 @@ input[type=range]::-webkit-slider-thumb{
       <!-- Cambio 2b: Murciélagos y Mamíferos -->
       <div class="service-card reveal" style="transition-delay:.56s">
         <div class="service-img">
-          <div class="service-img"><img src="img/servicios/fauna.jpg" alt="Tlacuache capturado en trampa para reubicación de fauna silvestre" loading="lazy"></div>
+          <div class="service-img"><img src="img/servicios/fauna.jpg?v=2" alt="Tlacuache capturado en trampa para reubicación de fauna silvestre" loading="lazy"></div>
         </div>
         <div class="service-body">
           <h3>Control y Reubicación de Fauna silvestre</h3>
@@ -2090,7 +2159,10 @@ input[type=range]::-webkit-slider-thumb{
 /* ═══ INDUSTRIAL CHAT ═══ */
 .ind-chat-wrap{background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(7,12,71,.10);overflow:hidden;max-width:760px;margin:0 auto;}
 .ind-chat-head{background:var(--grad-hero);padding:20px 24px;display:flex;align-items:center;gap:14px;}
-.ind-chat-head-avatar{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.ind-chat-head-avatar{width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.chat-avatar img,.ind-chat-head-avatar img,.wa-avatar img{
+  width:76%;height:76%;object-fit:contain;display:block;
+}
 .ind-chat-head-info h3{color:#fff;font-size:1rem;margin-bottom:3px;font-family:'Montserrat',sans-serif;}
 .ind-chat-head-info p{color:rgba(255,255,255,.65);font-size:.8rem;}
 .ind-online-dot{width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;margin-right:5px;animation:glowPulse 2s infinite;}
@@ -2098,7 +2170,7 @@ input[type=range]::-webkit-slider-thumb{
 .chat-msg{display:flex;gap:10px;align-items:flex-end;max-width:88%;}
 .chat-msg.bot{align-self:flex-start;}
 .chat-msg.user{align-self:flex-end;flex-direction:row-reverse;}
-.chat-avatar{width:32px;height:32px;border-radius:50%;background:var(--grad-primary);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.chat-avatar{width:32px;height:32px;border-radius:50%;background:#fff;border:1px solid rgba(11,21,237,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .chat-bubble{padding:11px 15px;border-radius:18px;font-size:.875rem;line-height:1.6;}
 .chat-msg.bot .chat-bubble{background:var(--gray-100);color:var(--gray-900);border-bottom-left-radius:4px;}
 .chat-msg.user .chat-bubble{background:var(--grad-primary);color:#fff;border-bottom-right-radius:4px;}
@@ -2161,7 +2233,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="tab-industrial">
       <div class="ind-chat-wrap reveal">
         <div class="ind-chat-head">
-          <div class="ind-chat-head-avatar">🤖</div>
+          <div class="ind-chat-head-avatar"><img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA"></div>
           <div class="ind-chat-head-info">
             <h3>Asistente SERYSA</h3>
             <p><span class="ind-online-dot"></span>En línea · Propuesta personalizada gratis</p>
@@ -2347,37 +2419,82 @@ document.addEventListener('DOMContentLoaded', function() {
       <h2 class="section-title">Lo que dicen <span class="grad-text">nuestros clientes</span></h2>
       <p class="section-sub">Empresas que llevan años confiando en SERYSA para mantener sus instalaciones sin plagas.</p>
     </div>
-    <div class="testim-grid">
-      <div class="testim-card reveal">
-        <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testim-text">"SERYSA nos ayuda a mantener los estándares de inocuidad que exigen nuestras auditorías AIB. Personal puntual, documentación impecable y sin interrupciones en la producción."</p>
-        <div class="testim-author">
-          <div class="testim-avatar">GR</div>
-          <div>
-            <div class="testim-name">Gerente de Calidad</div>
-            <div class="testim-org">Planta de alimentos — Apodaca, NL</div>
+    <div class="tm-marquee">
+      <div class="tm-row tm-row-a">
+        <div class="tm-track">
+          <div class="tm-group">
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"SERYSA nos ayuda a mantener los estándares de inocuidad que exigen nuestras auditorías AIB. Personal puntual, documentación impecable y sin interrupciones en la producción."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">GR</div>
+              <div>
+                <div class="testim-name">Gerente de Calidad</div>
+                <div class="testim-org">Planta de alimentos — Apodaca, NL</div>
+              </div>
+            </div>
+          </div>
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"Llevamos 5 años con la póliza anual. Nunca hemos tenido una no conformidad en revisiones de Secretaría de Salud. SERYSA conoce perfectamente las normas del sector."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">MA</div>
+              <div>
+                <div class="testim-name">Administrador</div>
+                <div class="testim-org">Restaurante — San Pedro, NL</div>
+              </div>
+            </div>
+          </div>
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"Tuvimos una urgencia de enjambre un sábado y respondieron en menos de 2 horas. El equipo llegó equipado, retiró todo de forma segura y entregó el informe el mismo día. Excelente."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">LC</div>
+              <div>
+                <div class="testim-name">Propietaria</div>
+                <div class="testim-org">Residencia — Guadalupe, NL</div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
-      <div class="testim-card reveal" style="transition-delay:.12s">
-        <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testim-text">"Llevamos 5 años con la póliza anual. Nunca hemos tenido una no conformidad en revisiones de Secretaría de Salud. SERYSA conoce perfectamente las normas del sector."</p>
-        <div class="testim-author">
-          <div class="testim-avatar">MA</div>
-          <div>
-            <div class="testim-name">Administrador</div>
-            <div class="testim-org">Restaurante — San Pedro, NL</div>
+      <div class="tm-row tm-row-b">
+        <div class="tm-track">
+          <div class="tm-group">
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"Tuvimos una urgencia de enjambre un sábado y respondieron en menos de 2 horas. El equipo llegó equipado, retiró todo de forma segura y entregó el informe el mismo día. Excelente."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">LC</div>
+              <div>
+                <div class="testim-name">Propietaria</div>
+                <div class="testim-org">Residencia — Guadalupe, NL</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="testim-card reveal" style="transition-delay:.24s">
-        <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testim-text">"Tuvimos una urgencia de enjambre un sábado y respondieron en menos de 2 horas. El equipo llegó equipado, retiró todo de forma segura y entregó el informe el mismo día. Excelente."</p>
-        <div class="testim-author">
-          <div class="testim-avatar">LC</div>
-          <div>
-            <div class="testim-name">Propietaria</div>
-            <div class="testim-org">Residencia — Guadalupe, NL</div>
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"Llevamos 5 años con la póliza anual. Nunca hemos tenido una no conformidad en revisiones de Secretaría de Salud. SERYSA conoce perfectamente las normas del sector."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">MA</div>
+              <div>
+                <div class="testim-name">Administrador</div>
+                <div class="testim-org">Restaurante — San Pedro, NL</div>
+              </div>
+            </div>
+          </div>
+          <div class="testim-card">
+            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testim-text">"SERYSA nos ayuda a mantener los estándares de inocuidad que exigen nuestras auditorías AIB. Personal puntual, documentación impecable y sin interrupciones en la producción."</p>
+            <div class="testim-author">
+              <div class="testim-avatar">GR</div>
+              <div>
+                <div class="testim-name">Gerente de Calidad</div>
+                <div class="testim-org">Planta de alimentos — Apodaca, NL</div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -2861,35 +2978,35 @@ document.addEventListener('DOMContentLoaded', function() {
         <p>Cuéntanos tu situación. Respondemos en menos de 1 hora en días hábiles y atendemos urgencias el mismo día.</p>
         <div class="contacto-items">
           <div class="ci">
-            <div class="ci-icon">📞</div>
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
             <div class="ci-text">
               <h4>Teléfono directo</h4>
               <a href="tel:+528181410750">(52) 81 8141 0750</a>
             </div>
           </div>
           <div class="ci">
-            <div class="ci-icon" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.2);">💬</div>
+            <div class="ci-icon" style="background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.2);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
             <div class="ci-text">
               <h4>WhatsApp</h4>
               <a href="https://wa.me/528181410750" target="_blank">Escríbenos ahora →</a>
             </div>
           </div>
           <div class="ci">
-            <div class="ci-icon">✉️</div>
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div class="ci-text">
               <h4>Correo electrónico</h4>
               <a href="mailto:info@serysa.com">info@serysa.com</a>
             </div>
           </div>
           <div class="ci">
-            <div class="ci-icon">⏰</div>
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div class="ci-text">
               <h4>Horario</h4>
               <p>Lun–Vie 8am–6pm · Sáb 9am–1pm · Urgencias 24/7</p>
             </div>
           </div>
           <div class="ci">
-            <div class="ci-icon">📍</div>
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div class="ci-text">
               <h4>Cobertura</h4>
               <p>Monterrey y Área Metropolitana de NL</p>
@@ -3000,7 +3117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ═══════════════════════════════════ WA MINI-CHAT MODAL -->
 <div class="wa-modal" id="waModal">
   <div class="wa-modal-header">
-    <div class="wa-avatar">🤖</div>
+    <div class="wa-avatar"><img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA"></div>
     <div class="wa-info">
       <div class="wa-name">SERYSA</div>
       <div class="wa-status">● En línea</div>
@@ -3026,25 +3143,221 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ═══════════════════════════════════ JAVASCRIPT -->
 <script>
-/* ── PARTICLES ── */
+/* ── DRIFT WALL (fondo del hero) ── */
 (function(){
-  const wrap = document.getElementById('particles');
-  const colors = ['rgba(11,21,237,.5)','rgba(0,212,255,.45)','rgba(99,102,241,.4)','rgba(107,116,255,.4)'];
-  for(let i=0;i<22;i++){
-    const d = document.createElement('div');
-    d.className = 'p-dot';
-    const sz = Math.random()*6+2;
-    d.style.cssText = [
-      `width:${sz}px`,`height:${sz}px`,
-      `left:${Math.random()*100}%`,
-      `bottom:-20px`,
-      `background:${colors[Math.floor(Math.random()*colors.length)]}`,
-      `animation-duration:${Math.random()*18+10}s`,
-      `animation-delay:${Math.random()*12}s`,
-      `filter:blur(${sz>5?1:0}px)`
-    ].join(';');
-    wrap.appendChild(d);
+  const root = document.getElementById('heroDrift');
+  if(!root) return;
+
+  /* una sola peticion para las 69 fotos: cada tile solo mueve background-position.
+     69 peticiones encoladas de a 6 costaban ~3.5 s aunque cada una pesara 6 KB */
+  const SHEET_COLS = 9, SHEET_ROWS = 8, PHOTOS = 69;
+  const POS = Array.from({length:PHOTOS},(_,i)=>
+    `${(i % SHEET_COLS)/(SHEET_COLS-1)*100}% ${Math.floor(i/SHEET_COLS)/(SHEET_ROWS-1)*100}%`);
+
+  const CFG = {
+    tileWidth:128, tileHeight:90, gap:10, radius:14,
+    tilt:-13, turn:-17, roll:12,
+    perspective:1200, depth:160,
+    speed:18, direction:'up', variance:.4, parallax:.7,
+    fade:.6, dim:.55, grayscale:false, overlay:'#060010',
+    minColumns:8, scale:1.18
+  };
+
+  const unitW = CFG.tileWidth + CFG.gap;
+  const unitH = CFG.tileHeight + CFG.gap;
+
+  root.style.setProperty('--dw-tile-w', CFG.tileWidth+'px');
+  root.style.setProperty('--dw-tile-h', CFG.tileHeight+'px');
+  root.style.setProperty('--dw-gap',    CFG.gap+'px');
+  root.style.setProperty('--dw-radius', CFG.radius+'px');
+  root.style.setProperty('--dw-perspective', CFG.perspective+'px');
+  root.style.setProperty('--dw-dim',    CFG.dim);
+  root.style.setProperty('--dw-gray',   CFG.grayscale?1:0);
+  root.style.setProperty('--dw-overlay',CFG.overlay);
+  root.style.setProperty('--dw-edge',   Math.max(0,(1-CFG.fade)*100)+'%');
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let reduced = mq.matches;
+  mq.addEventListener('change', e => { reduced = e.matches; });
+
+  const plane = document.createElement('div');
+  plane.className = 'dw-plane';
+  root.appendChild(plane);
+
+  let tracks = [], meta = [], offsets = [], velocities = [], baseVel = [];
+  let colCount = 0, builtH = 0;
+
+  const columnFactor = (i,v) => 1 + v * ((((i*0.6180339887 + 0.35) % 1) * 2) - 1);
+
+  /* Fisher-Yates: baraja una copia, no el original */
+  function shuffled(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
   }
+
+  /* n fotos al azar; si la columna necesita mas que el pool, encadena barajadas
+     distintas en vez de repetir la misma vuelta */
+  function randomList(pool, n){
+    const out = [];
+    while(out.length < n) out.push.apply(out, shuffled(pool));
+    return out.slice(0, n);
+  }
+
+  /* el plano se proyecta más angosto por el giro y la profundidad:
+     hay que pedir columnas suficientes para cubrir el ancho real del hero */
+  function neededColumns(w){
+    const persp = CFG.perspective / (CFG.perspective + CFG.depth);
+    const proj  = CFG.scale * persp * Math.cos(CFG.turn * Math.PI/180);
+    /* en movil el hero es mucho mas alto: forzar 8 columnas dispara el numero
+       de tiles sin ganar nada visible, asi que ahi basta con las que cubren */
+    const min = w < 768 ? 5 : CFG.minColumns;
+    return Math.max(min, Math.ceil((w/proj)/unitW) + 2);
+  }
+
+  function build(){
+    const w = root.clientWidth  || window.innerWidth;
+    const h = root.clientHeight || window.innerHeight;
+    const cols = neededColumns(w);
+    if(cols === colCount && Math.abs(h - builtH) < 80) return;
+    colCount = cols; builtH = h;
+
+    const dirSign = CFG.direction === 'up' ? 1 : -1;
+    const perCol  = Math.max(4, Math.ceil((h*1.6)/unitH));
+    const pool    = POS;
+    const frag = document.createDocumentFragment();
+    tracks = []; meta = []; offsets = []; velocities = []; baseVel = [];
+
+    for(let c=0;c<cols;c++){
+      const col   = document.createElement('div'); col.className = 'dw-col';
+      const track = document.createElement('div'); track.className = 'dw-track';
+
+      /* cada columna toma solo las fotos que alcanza a mostrar: usar las 69 por
+         columna daria un track de ~6900px del que apenas se ve una fraccion.
+         El orden se baraja por columna, asi no se repite la misma secuencia */
+      const list = randomList(pool, perCol);
+      const copyHeight = list.length * unitH;
+      const copies = Math.max(2, Math.ceil((h*1.6)/copyHeight) + 1);
+
+      for(let k=0;k<copies;k++){
+        for(let i=0;i<list.length;i++){
+          const tile  = document.createElement('div');  tile.className  = 'dw-tile';
+          const inner = document.createElement('span'); inner.className = 'dw-inner';
+          inner.style.backgroundPosition = list[i];
+          tile.appendChild(inner);
+          track.appendChild(tile);
+        }
+      }
+
+      col.appendChild(track);
+      frag.appendChild(col);
+
+      tracks.push(track);
+      meta.push({ copyHeight });
+      offsets.push(copyHeight * ((c*0.37) % 1));
+      velocities.push(0);
+      baseVel.push(CFG.speed * columnFactor(c, CFG.variance) * dirSign * (c%2===0?1:-1));
+    }
+
+    plane.innerHTML = '';
+    plane.appendChild(frag);
+  }
+
+  /* parallax: el puntero se escucha en el hero porque el muro no recibe eventos */
+  const hero = document.getElementById('inicio');
+  const pointer = {x:0,y:0}, damped = {x:0,y:0};
+  if(hero){
+    hero.addEventListener('pointermove', e => {
+      if(reduced) return;
+      const r = hero.getBoundingClientRect();
+      pointer.x = (e.clientX - r.left)/r.width  - .5;
+      pointer.y = (e.clientY - r.top )/r.height - .5;
+    }, {passive:true});
+    hero.addEventListener('pointerleave', () => { pointer.x = 0; pointer.y = 0; }, {passive:true});
+  }
+
+  function applyPlane(px,py){
+    plane.style.transform =
+      `translate(-50%, -50%) scale(${CFG.scale}) ` +
+      `rotateX(${CFG.tilt + py}deg) rotateY(${CFG.turn + px}deg) rotateZ(${CFG.roll}deg) ` +
+      `translateZ(${-CFG.depth}px)`;
+  }
+
+  let raf = null, lastTs = null;
+
+  function frame(ts){
+    if(lastTs === null) lastTs = ts;
+    const dt = Math.min(.05, Math.max(0, ts - lastTs)/1000);
+    lastTs = ts;
+
+    const maxTilt = CFG.parallax * 8;
+    const tX =  pointer.x * maxTilt;
+    const tY = -pointer.y * maxTilt;
+    const damp = 1 - Math.exp(-dt/0.12);
+    damped.x += (tX - damped.x) * damp;
+    damped.y += (tY - damped.y) * damp;
+    applyPlane(damped.x, damped.y);
+
+    if(!reduced){
+      for(let c=0;c<tracks.length;c++){
+        const m = meta[c]; if(!m) continue;
+        const ease = 1 - Math.exp(-dt/0.28);
+        velocities[c] += (baseVel[c] - velocities[c]) * ease;
+        let next = offsets[c] + velocities[c]*dt;
+        next = ((next % m.copyHeight) + m.copyHeight) % m.copyHeight;
+        offsets[c] = next;
+        tracks[c].style.transform = `translate3d(0, ${-next}px, 0)`;
+      }
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start(){ if(raf === null){ lastTs = null; raf = requestAnimationFrame(frame); } }
+  function stop(){  if(raf !== null){ cancelAnimationFrame(raf); raf = null; } }
+
+  build();
+  applyPlane(0,0);
+
+  /* no gastar frames con el hero fuera de vista o la pestana oculta.
+     El estado se recalcula en cada aviso: cachearlo en una variable dejaba el
+     muro congelado para siempre si la pagina cargaba en una pestana de fondo
+     (el observer avisaba una sola vez con isIntersecting:false y ya no volvia) */
+  function sync(){
+    if(!hero) return start();
+    const r = hero.getBoundingClientRect();
+    const enPantalla = r.bottom > 0 && r.top < (window.innerHeight || 0);
+    (!document.hidden && enPantalla) ? start() : stop();
+  }
+
+  if(hero && 'IntersectionObserver' in window){
+    new IntersectionObserver(sync, {threshold:0}).observe(hero);
+  }
+  document.addEventListener('visibilitychange', sync);
+  sync();
+
+  let rt = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { build(); sync(); }, 200);
+  }, {passive:true});
+})();
+
+/* ── MARQUEE DE TESTIMONIOS ── */
+(function(){
+  /* el HTML trae un solo grupo por fila para que los testimonios sigan estando
+     en el documento; la copia que cierra el loop se clona aqui */
+  document.querySelectorAll('.tm-track').forEach(track => {
+    const grupo = track.querySelector('.tm-group');
+    if(!grupo) return;
+    const copia = grupo.cloneNode(true);
+    copia.setAttribute('aria-hidden','true');
+    copia.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+    track.appendChild(copia);
+  });
 })();
 
 /* ── TYPEWRITER ── */
@@ -3432,7 +3745,7 @@ function showTyping() {
   const body = document.getElementById('chatBody');
   typingEl = document.createElement('div');
   typingEl.className = 'chat-msg bot chat-typing-wrap';
-  typingEl.innerHTML = '<div class="chat-avatar">🤖</div><div class="chat-typing"><span></span><span></span><span></span></div>';
+  typingEl.innerHTML = '<div class="chat-avatar"><img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA"></div><div class="chat-typing"><span></span><span></span><span></span></div>';
   body.appendChild(typingEl);
   body.scrollTop = body.scrollHeight;
 }
@@ -3450,7 +3763,7 @@ function addBotBubble(text) {
   const body = document.getElementById('chatBody');
   const div = document.createElement('div');
   div.className = 'chat-msg bot';
-  div.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  div.innerHTML = `<div class="chat-avatar"><img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA"></div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div>`;
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
 }
