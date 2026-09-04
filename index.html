@@ -511,7 +511,7 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;}
 /* filas de tarjetas centradas (MIP y Reubicación) */
 .svc-row{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:center;gap:24px;}
-.svc-row>.service-card{flex:0 1 300px;max-width:340px;}
+.svc-row>.service-card{flex:1 1 264px;max-width:340px;}
 @media(max-width:660px){.svc-row>.service-card{flex:1 1 100%;max-width:none;}}
 /* ── Carrusel de Servicios Especiales ────────────────────────────────────────
    El aspecto vive ahora en clases de Tailwind, en el HTML. Aqui solo quedan las
@@ -544,7 +544,7 @@ h1,h2,h3,h4,h5{font-family:'Montserrat',sans-serif;line-height:1.2;}
     display:flex;flex-wrap:wrap;justify-content:center;
     overflow:visible;scroll-snap-type:none;
   }
-  .especiales-row>.service-card{flex:0 1 300px;max-width:340px;}
+  .especiales-row>.service-card{flex:1 1 264px;max-width:340px;}
 }
 
 /* los degradados se desvanecen al llegar a cada extremo */
@@ -1280,7 +1280,7 @@ input[type=range]::-webkit-slider-thumb{
     </a>
     <nav class="nav">
       <a href="#servicios">Servicios</a>
-      <a href="#cotizador">Cotizador</a>
+      <a href="#cotizacion-gratuita">Cotizador</a>
       <a href="#clientes">Clientes</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#zonas">Zonas</a>
@@ -1290,7 +1290,7 @@ input[type=range]::-webkit-slider-thumb{
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
         <span class="phone-txt">(52) 81 8141 0750</span>
       </a>
-      <a href="#contacto" class="btn btn-cyan" style="padding:10px 20px;font-size:.84rem;">Cotización gratis</a>
+      <a href="#cotizacion-gratuita" class="btn btn-cyan" style="padding:10px 20px;font-size:.84rem;">Cotización gratis</a>
     </div>
     <button class="hamburger" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
@@ -1298,7 +1298,7 @@ input[type=range]::-webkit-slider-thumb{
 
 <nav class="mobile-menu" id="mobileMenu">
   <a href="#servicios" onclick="closeMob()">Servicios</a>
-  <a href="#cotizador" onclick="closeMob()">Cotizador online</a>
+  <a href="#cotizacion-gratuita" onclick="closeMob()">Cotizador online</a>
   <a href="#clientes" onclick="closeMob()">Clientes</a>
   <a href="#nosotros" onclick="closeMob()">Nosotros</a>
   <a href="#zonas" onclick="closeMob()">Zonas de cobertura</a>
@@ -1324,7 +1324,7 @@ input[type=range]::-webkit-slider-thumb{
       </p>
 
       <div class="hero-btns">
-        <a href="#cotizador" class="btn btn-cyan btn-lg" onclick="ripple(event)">
+        <a href="#cotizacion-gratuita" class="btn btn-cyan btn-lg" onclick="ripple(event)">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           Cotizar en línea — gratis
         </a>
@@ -1529,6 +1529,19 @@ input[type=range]::-webkit-slider-thumb{
         </div>
       </div>
 
+      <!-- Cambio 8a: Termitas -->
+      <div class="service-card reveal" style="transition-delay:.18s">
+        <div class="service-img">
+          <img src="img/servicios/termita.jpg" alt="Control de Termitas Monterrey" loading="lazy">
+          <div class="service-img-overlay"></div>
+        </div>
+        <div class="service-body">
+          <h3>Control de Termita</h3>
+          <p>Tratamiento preventivo y curativo contra termitas subterráneas y de madera seca. Inspección de estructuras, aplicación de barrera química y seguimiento documentado.</p>
+          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
+        </div>
+      </div>
+
       </div>
 
       <!-- ── SECCIÓN 2: ESPECIALES ── -->
@@ -1553,18 +1566,6 @@ input[type=range]::-webkit-slider-thumb{
         class="absolute top-1/2 z-[4] grid size-11 -translate-y-1/2 place-items-center rounded-full border border-blue-500/10 bg-white text-blue-500 shadow-[0_6px_20px_rgb(4_8_46/.16)] transition duration-200 ease-[cubic-bezier(.34,1.4,.64,1)] hover:bg-blue-500 hover:text-white hover:scale-[1.09] hover:shadow-[0_12px_28px_rgb(11_21_237/.32)] active:scale-95 active:duration-75 disabled:pointer-events-none disabled:opacity-0 min-[1000px]:hidden cursor-pointer right-[-14px]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><polyline points="9,18 15,12 9,6"/></svg></button>
 
       <div class="especiales-row grid auto-cols-[minmax(268px,1fr)] grid-flow-col gap-6 overflow-x-auto overflow-y-hidden px-0.5 pt-[18px] pb-[22px]" id="especialesTrack">
-      <!-- Cambio 8a: Termitas -->
-      <div class="service-card reveal" style="transition-delay:.16s">
-        <div class="service-img">
-          <div class="service-img"><img src="img/servicios/termita.jpg" alt="Control de Termitas Monterrey" loading="lazy"></div>
-        </div>
-        <div class="service-body">
-          <h3>Control de Termita</h3>
-          <p>Tratamiento preventivo y curativo contra termitas subterráneas y de madera seca. Inspección de estructuras, aplicación de barrera química y seguimiento documentado.</p>
-          <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
-        </div>
-      </div>
-
       <!-- Cambio 8b: Insectos Vectores — mosquito con probóscide -->
       <div class="service-card reveal" style="transition-delay:.22s">
         <div class="service-img">
@@ -1756,7 +1757,7 @@ input[type=range]::-webkit-slider-thumb{
         <div class="cob-state reveal"><span class="cob-dot" style="background:#3b47f5"></span><div><h4>Coahuila</h4><p>Saltillo, Torreón, Ramos Arizpe y Piedras Negras.</p></div></div>
         <div class="cob-state reveal" style="transition-delay:.08s"><span class="cob-dot" style="background:#22d3ee"></span><div><h4>Nuevo León</h4><p>Cobertura en todo el estado.</p></div></div>
         <div class="cob-state reveal" style="transition-delay:.16s"><span class="cob-dot" style="background:#67e8f9"></span><div><h4>Tamaulipas</h4><p>Reynosa, Nuevo Laredo, Matamoros y Tampico.</p></div></div>
-        <a href="#cotizador" class="btn btn-cyan" onclick="ripple(event)" style="margin-top:10px;">¿Estás en la zona? Cotiza gratis →</a>
+        <a href="#cotizacion-gratuita" class="btn btn-cyan" onclick="ripple(event)" style="margin-top:10px;">¿Estás en la zona? Cotiza gratis →</a>
       </div>
     </div>
   </div>
@@ -1870,7 +1871,7 @@ input[type=range]::-webkit-slider-thumb{
   <div class="vbg-bar">
     <span class="vbg-bar-text">¿Listo para proteger tu negocio?</span>
     <div class="vbg-bar-actions">
-      <a href="#cotizador" class="btn btn-primary btn-sm">Cotizar gratis →</a>
+      <a href="#cotizacion-gratuita" class="btn btn-primary btn-sm">Cotizar gratis →</a>
       <a href="https://wa.me/528181410750" target="_blank" class="btn btn-whatsapp btn-sm">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -3041,7 +3042,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-links">
           <a href="#nosotros">Quiénes somos</a>
           <a href="#clientes">Nuestros clientes</a>
-          <a href="#cotizador">Cotizador online</a>
+          <a href="#cotizacion-gratuita">Cotizador online</a>
           <a href="#contacto">Contacto</a>
           <a href="#">Aviso de privacidad</a>
         </div>
