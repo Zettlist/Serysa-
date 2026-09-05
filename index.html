@@ -826,6 +826,31 @@ input[type=range]::-webkit-slider-thumb{
   font-family:'Montserrat',sans-serif;
 }
 
+/* Las dos mitades de la banda de Soporte y certificaciones: arriba el
+   sistema, abajo las acreditaciones, separadas por una línea.  El z-index
+   es obligatorio en ambas: el degradado de .certif::before tapa todo lo
+   que no lo lleve. */
+.certif .soporte-grid{position:relative;z-index:1;}
+.certif-sep{
+  position:relative;z-index:1;
+  margin-top:54px;padding-top:44px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.certif-sep-txt{
+  max-width:720px;margin:0 auto 30px;text-align:center;
+  color:rgba(255,255,255,.62);font-size:.95rem;line-height:1.75;
+}
+/* Sobre el azul marino el punteado azul del original quedaba invisible,
+   así que aquí cambia de color; .soporte-img sigue sirviendo igual para
+   cuando lleguen las fotos. */
+.certif .section-sub strong{color:var(--cyan-400);font-weight:600;}
+.certif .soporte-slot{
+  border-color:rgba(0,212,255,.26);background:rgba(255,255,255,.04);
+  color:var(--cyan-400);backdrop-filter:blur(10px);
+}
+.certif .soporte-img{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);}
+@media(max-width:640px){.certif-sep{margin-top:38px;padding-top:32px;}}
+
 /* ═══════════════════════════════════════════════ TICKER / CLIENTS */
 .clients-section{background:var(--gray-50);padding:72px 0;}
 .clients-section .section-header{margin-bottom:48px;}
@@ -1280,7 +1305,6 @@ input[type=range]::-webkit-slider-thumb{
     </a>
     <nav class="nav">
       <a href="#servicios">Servicios</a>
-      <a href="#cotizacion-gratuita">Cotizador</a>
       <a href="#clientes">Clientes</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#zonas">Zonas</a>
@@ -1298,7 +1322,6 @@ input[type=range]::-webkit-slider-thumb{
 
 <nav class="mobile-menu" id="mobileMenu">
   <a href="#servicios" onclick="closeMob()">Servicios</a>
-  <a href="#cotizacion-gratuita" onclick="closeMob()">Cotizador online</a>
   <a href="#clientes" onclick="closeMob()">Clientes</a>
   <a href="#nosotros" onclick="closeMob()">Nosotros</a>
   <a href="#zonas" onclick="closeMob()">Zonas de cobertura</a>
@@ -1668,17 +1691,24 @@ input[type=range]::-webkit-slider-thumb{
 </section>
 
 
-<!-- ═══════════════════════════════════ SOPORTE -->
-<section class="soporte section-pad" id="soporte">
+<!-- ═══════════════════════════════════ SOPORTE Y CERTIFICACIONES -->
+<!-- Antes eran dos secciones separadas: «Soporte» (fondo claro, aquí
+     mismo) y «Certificaciones» (más abajo, tras la franja de video).
+     Hablaban de lo mismo —la documentación que respalda cada visita— y
+     se juntaron en esta banda: primero el sistema, después el papel que
+     lo acredita. -->
+<section class="certif section-pad" id="soporte">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Soporte</h2>
-      <p class="section-sub">Todas las actividades de nuestros servicios son registradas en un sistema, mismo al que nuestros clientes tienen acceso para obtener documentación de soporte, de manera inmediata.</p>
+      <div class="badge badge-glass">Soporte y certificaciones</div>
+      <h2 class="section-title" style="color:#fff;">Información digital para <span class="grad-text">auditorías y normativas</span></h2>
+      <p class="section-sub">Todas las actividades de nuestros servicios son registradas en un sistema, mismo al que nuestros clientes tienen acceso para obtener documentación de soporte, <strong>de manera inmediata</strong>.</p>
     </div>
 
-    <!-- Espacio reservado para imágenes. Para poner una foto, sustituye el div
-         .soporte-slot por otro con clase soporte-img que contenga la etiqueta img
-         apuntando a img/soporte/ con su texto alternativo. -->
+    <!-- Espacio reservado para imágenes. Para poner una foto, sustituye el
+         div .soporte-slot por otro con clase soporte-img que contenga la
+         etiqueta img apuntando a img/soporte/ con su texto alternativo:
+         el estilo para fondo oscuro ya está previsto. -->
     <div class="soporte-grid">
       <div class="soporte-slot reveal" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="30" height="30"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -1693,6 +1723,18 @@ input[type=range]::-webkit-slider-thumb{
         <span>Espacio para imagen</span>
       </div>
     </div>
+
+    <div class="certif-sep">
+      <p class="certif-sep-txt">Reporte de cada visita y carpeta de documentación para el cumplimiento de auditorías: ISO, SQF, FFCC, BRC, TIF, entre otras.</p>
+      <div class="certif-grid">
+        <div class="certif-card reveal"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><rect x="6" y="40" width="36" height="4"/><rect x="10" y="16" width="4" height="24"/><rect x="22" y="16" width="4" height="24"/><rect x="34" y="16" width="4" height="24"/><path d="M4 16 L24 4 L44 16 Z"/><rect x="6" y="14" width="36" height="4"/></svg></span><h4>Licencia Sanitaria COFEPRIS</h4><p>Autorización federal vigente para servicios de control de plagas en NL.</p><div class="certif-num">23 AP 19 026 0329</div></div>
+        <div class="certif-card reveal" style="transition-delay:.08s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><path d="M24 44 L24 10"/><path d="M24 36 Q18 30 14 24 Q20 22 24 28"/><path d="M24 28 Q30 22 34 16 Q28 14 24 20"/><path d="M24 20 Q18 14 14 8 Q20 6 24 12"/><path d="M24 36 Q30 30 34 24 Q28 22 24 28"/></svg></span><h4>AIB International</h4><p>Saneamiento e higiene en procesamiento de alimentos. 12 unidades de educación continua.</p></div>
+        <div class="certif-card reveal" style="transition-delay:.16s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><rect x="6" y="28" width="8" height="16"/><rect x="20" y="18" width="8" height="26"/><rect x="34" y="8" width="8" height="36"/><line x1="4" y1="44" x2="44" y2="44"/></svg></span><h4>HACCP Avanzado</h4><p>Inocuidad alimentaria certificada. Soporte para auditorías corporativas y de clientes internacionales.</p></div>
+        <div class="certif-card reveal" style="transition-delay:.24s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><polygon points="24,6 44,18 24,30 4,18"/><path d="M8 22 L8 34 Q8 42 24 42 Q40 42 40 34 L40 22"/><line x1="44" y1="18" x2="44" y2="32"/></svg></span><h4>CONOCER</h4><p>Competencia Laboral: Control Básico de Plagas, MIP e Inocuidad Alimentaria. Normas técnicas vigentes.</p></div>
+        <div class="certif-card reveal" style="transition-delay:.32s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" opacity=".9"><polygon points="24,4 29,18 44,18 32,28 36,42 24,34 12,42 16,28 4,18 19,18"/></svg></span><h4>Distintivo H</h4><p>Experiencia en auditorías para establecimientos de alimentos. Soporte para obtención del distintivo.</p></div>
+        <div class="certif-card reveal" style="transition-delay:.4s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><line x1="12" y1="44" x2="36" y2="44"/><line x1="24" y1="44" x2="24" y2="30"/><path d="M16 8 L32 8 L32 30 L16 30 Z" rx="4"/><circle cx="24" cy="19" r="6"/><line x1="24" y1="8" x2="24" y2="4"/></svg></span><h4>BPM Industria Alimentaria</h4><p>Buenas Prácticas de Manufactura. Capacitación por BAYER de México y centros especializados.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1703,7 +1745,7 @@ input[type=range]::-webkit-slider-thumb{
     <div class="section-header">
       <div class="badge">Zona de cobertura</div>
       <h2 class="section-title">Atendemos la <span class="grad-text">zona Noreste del País</span></h2>
-      <p class="section-sub">Servicio en Coahuila, Nuevo León y Tamaulipas, con personal certificado y documentación lista para auditorías.</p>
+      <p class="section-sub">Servicio en Nuevo León, Coahuila y Tamaulipas, con personal certificado y documentación lista para auditorías.</p>
     </div>
     <div class="cob-grid">
       <div class="cob-map reveal">
@@ -1754,8 +1796,8 @@ input[type=range]::-webkit-slider-thumb{
 </svg>
       </div>
       <div class="cob-states">
-        <div class="cob-state reveal"><span class="cob-dot" style="background:#3b47f5"></span><div><h4>Coahuila</h4><p>Saltillo, Torreón, Ramos Arizpe y Piedras Negras.</p></div></div>
-        <div class="cob-state reveal" style="transition-delay:.08s"><span class="cob-dot" style="background:#22d3ee"></span><div><h4>Nuevo León</h4><p>Cobertura en todo el estado.</p></div></div>
+        <div class="cob-state reveal"><span class="cob-dot" style="background:#22d3ee"></span><div><h4>Nuevo León</h4><p>Cobertura en todo el estado.</p></div></div>
+        <div class="cob-state reveal" style="transition-delay:.08s"><span class="cob-dot" style="background:#3b47f5"></span><div><h4>Coahuila</h4><p>Saltillo, Torreón, Ramos Arizpe y Piedras Negras.</p></div></div>
         <div class="cob-state reveal" style="transition-delay:.16s"><span class="cob-dot" style="background:#67e8f9"></span><div><h4>Tamaulipas</h4><p>Reynosa, Nuevo Laredo, Matamoros y Tampico.</p></div></div>
         <a href="#cotizacion-gratuita" class="btn btn-cyan" onclick="ripple(event)" style="margin-top:10px;">¿Estás en la zona? Cotiza gratis →</a>
       </div>
@@ -1785,7 +1827,7 @@ input[type=range]::-webkit-slider-thumb{
       <h2 class="section-title">Ventajas que nos hacen <span class="grad-text">Competentes en Monterrey</span></h2>
     </div>
     <div class="ventajas-grid">
-      <div class="ventaja-card reveal"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div><div class="ventaja-text"><h4>Atención oportuna</h4><p>Atendemos según el tipo de plaga, condiciones, espacios y nivel de riesgo. Incluye áreas de oportunidad, medidas preventivas y correctivas al finalizar el servicio.</p></div></div>
+      <div class="ventaja-card reveal"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div><div class="ventaja-text"><h4>Atención a contingencias 24/7</h4><p>Nos distinguimos por la rápida atención al llamado de nuestros clientes por contingencias, atendiéndolas usualmente en un lapso no mayor de 2 horas.</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.07s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 2 L20 6 L20 12 Q20 18 12 22 Q4 18 4 12 L4 6 Z"/><polyline points="9,12 11,14 15,10"/></svg></div><div class="ventaja-text"><h4>Soporte de documentación vigente</h4><p>Licencia sanitaria, seguro RC, RPSE, licencia COFEPRIS para sanitización, certificaciones control de plagas y certificación de competencias laborales (MIP Grado de inocuidad).</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.14s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q20 3 21 2 Q21 8 18 14 Q15 20 8 22 Z"/><line x1="12" y1="12" x2="2" y2="22"/></svg></div><div class="ventaja-text"><h4>Servicio personalizado</h4><p>Diagnóstico, prevención y seguimiento documentado. Mínimo impacto ambiental. Metodología de clase mundial.</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.21s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4 L19 4 Q20 4 20 5 L20 21 Q20 22 19 22 L5 22 Q4 22 4 21 L4 5 Q4 4 5 4 L8 4"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div><div class="ventaja-text"><h4>Garantía</h4><p>Uso exclusivo de productos adecuados de acuerdo a la necesidad, con su soporte y documentación vigente.</p></div></div>
@@ -2163,63 +2205,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<section class="cotizador section-pad" id="cotizador">
-  <div class="container">
-    <div class="section-header">
-      <div class="badge">Cotización Online</div>
-      <h2 class="section-title">Tu cotización en <span class="grad-text">minutos</span></h2>
-      <p class="section-sub">Residencial, industrial o empresarial — cuéntanos tu situación y te damos una propuesta personalizada sin compromiso.</p>
-    </div>
-
-    <!-- Industrial chatbot -->
-    <div id="tab-industrial">
-      <div class="ind-chat-wrap reveal">
-        <div class="ind-chat-head">
-          <div class="ind-chat-head-avatar"><img src="LOGOTIPO-ORIGINAL.png" alt="SERYSA"></div>
-          <div class="ind-chat-head-info">
-            <h3>Asistente SERYSA</h3>
-            <p><span class="ind-online-dot"></span>En línea · Propuesta personalizada gratis</p>
-          </div>
-        </div>
-        <div class="chat-body" id="chatBody"></div>
-        <div class="chat-options" id="chatOptions"></div>
-        <div class="chat-input-area" id="chatInputArea" style="display:none;">
-          <input type="text" id="chatTextInput" placeholder="Escribe tu respuesta..."
-            onkeypress="if(event.key==='Enter')submitChatText()" />
-          <button class="chat-input-send" onclick="submitChatText()">➤</button>
-        </div>
-        <div class="ind-report-card" id="indReport" style="display:none;"></div>
-        <div id="indWaBtn" style="display:none;"></div>
-        <div id="indCompletionMsg" style="display:none; text-align:center; padding:20px 16px; color:#1a7a4a; font-weight:600; font-size:15px;">
-          ✅ ¡Gracias! Nos comunicaremos contigo en breve.
-        </div>
-      </div>
-    </div><!-- /tab-industrial -->
-
-  </div>
-</section>
 
 
 
 
-<!-- ═══════════════════════════════════ CERTIFICACIONES -->
-<section class="certif section-pad">
-  <div class="container">
-    <div class="section-header">
-      <div class="badge badge-glass">Certificaciones</div>
-      <h2 class="section-title" style="color:#fff;">Información digital para <span class="grad-text">auditorías y normativas</span></h2>
-      <p class="section-sub">Reporte de cada visita y carpeta de documentación para el cumplimiento de auditorías: ISO, SQF, FFCC, BRC, TIF, entre otras.</p>
-    </div>
-    <div class="certif-grid">
-      <div class="certif-card reveal"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><rect x="6" y="40" width="36" height="4"/><rect x="10" y="16" width="4" height="24"/><rect x="22" y="16" width="4" height="24"/><rect x="34" y="16" width="4" height="24"/><path d="M4 16 L24 4 L44 16 Z"/><rect x="6" y="14" width="36" height="4"/></svg></span><h4>Licencia Sanitaria COFEPRIS</h4><p>Autorización federal vigente para servicios de control de plagas en NL.</p><div class="certif-num">23 AP 19 026 0329</div></div>
-      <div class="certif-card reveal" style="transition-delay:.08s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><path d="M24 44 L24 10"/><path d="M24 36 Q18 30 14 24 Q20 22 24 28"/><path d="M24 28 Q30 22 34 16 Q28 14 24 20"/><path d="M24 20 Q18 14 14 8 Q20 6 24 12"/><path d="M24 36 Q30 30 34 24 Q28 22 24 28"/></svg></span><h4>AIB International</h4><p>Saneamiento e higiene en procesamiento de alimentos. 12 unidades de educación continua.</p></div>
-      <div class="certif-card reveal" style="transition-delay:.16s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><rect x="6" y="28" width="8" height="16"/><rect x="20" y="18" width="8" height="26"/><rect x="34" y="8" width="8" height="36"/><line x1="4" y1="44" x2="44" y2="44"/></svg></span><h4>HACCP Avanzado</h4><p>Inocuidad alimentaria certificada. Soporte para auditorías corporativas y de clientes internacionales.</p></div>
-      <div class="certif-card reveal" style="transition-delay:.24s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><polygon points="24,6 44,18 24,30 4,18"/><path d="M8 22 L8 34 Q8 42 24 42 Q40 42 40 34 L40 22"/><line x1="44" y1="18" x2="44" y2="32"/></svg></span><h4>CONOCER</h4><p>Competencia Laboral: Control Básico de Plagas, MIP e Inocuidad Alimentaria. Normas técnicas vigentes.</p></div>
-      <div class="certif-card reveal" style="transition-delay:.32s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" opacity=".9"><polygon points="24,4 29,18 44,18 32,28 36,42 24,34 12,42 16,28 4,18 19,18"/></svg></span><h4>Distintivo H</h4><p>Experiencia en auditorías para establecimientos de alimentos. Soporte para obtención del distintivo.</p></div>
-      <div class="certif-card reveal" style="transition-delay:.4s"><span class="certif-emoji"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44"><line x1="12" y1="44" x2="36" y2="44"/><line x1="24" y1="44" x2="24" y2="30"/><path d="M16 8 L32 8 L32 30 L16 30 Z" rx="4"/><circle cx="24" cy="19" r="6"/><line x1="24" y1="8" x2="24" y2="4"/></svg></span><h4>BPM Industria Alimentaria</h4><p>Buenas Prácticas de Manufactura. Capacitación por BAYER de México y centros especializados.</p></div>
-    </div>
-  </div>
-</section>
 
 
 <!-- ═══════════════════════════════════ CLIENTES / TICKER -->
@@ -2353,96 +2342,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 
-<!-- ═══════════════════════════════════ TESTIMONIOS -->
-<section class="testimonios section-pad">
-  <div class="container">
-    <div class="section-header">
-      <div class="badge">Testimonios</div>
-      <h2 class="section-title">Lo que dicen <span class="grad-text">nuestros clientes</span></h2>
-      <p class="section-sub">Empresas que llevan años confiando en SERYSA para mantener sus instalaciones sin plagas.</p>
-    </div>
-    <div class="tm-marquee">
-      <div class="tm-row tm-row-a">
-        <div class="tm-track">
-          <div class="tm-group">
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"SERYSA nos ayuda a mantener los estándares de inocuidad que exigen nuestras auditorías AIB. Personal puntual, documentación impecable y sin interrupciones en la producción."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">GR</div>
-              <div>
-                <div class="testim-name">Gerente de Calidad</div>
-                <div class="testim-org">Planta de alimentos — Apodaca, NL</div>
-              </div>
-            </div>
-          </div>
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"Llevamos 5 años con la póliza anual. Nunca hemos tenido una no conformidad en revisiones de Secretaría de Salud. SERYSA conoce perfectamente las normas del sector."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">MA</div>
-              <div>
-                <div class="testim-name">Administrador</div>
-                <div class="testim-org">Restaurante — San Pedro, NL</div>
-              </div>
-            </div>
-          </div>
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"Tuvimos una urgencia de enjambre un sábado y respondieron en menos de 2 horas. El equipo llegó equipado, retiró todo de forma segura y entregó el informe el mismo día. Excelente."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">LC</div>
-              <div>
-                <div class="testim-name">Propietaria</div>
-                <div class="testim-org">Residencia — Guadalupe, NL</div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="tm-row tm-row-b">
-        <div class="tm-track">
-          <div class="tm-group">
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"Tuvimos una urgencia de enjambre un sábado y respondieron en menos de 2 horas. El equipo llegó equipado, retiró todo de forma segura y entregó el informe el mismo día. Excelente."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">LC</div>
-              <div>
-                <div class="testim-name">Propietaria</div>
-                <div class="testim-org">Residencia — Guadalupe, NL</div>
-              </div>
-            </div>
-          </div>
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"Llevamos 5 años con la póliza anual. Nunca hemos tenido una no conformidad en revisiones de Secretaría de Salud. SERYSA conoce perfectamente las normas del sector."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">MA</div>
-              <div>
-                <div class="testim-name">Administrador</div>
-                <div class="testim-org">Restaurante — San Pedro, NL</div>
-              </div>
-            </div>
-          </div>
-          <div class="testim-card">
-            <div class="testim-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-            <p class="testim-text">"SERYSA nos ayuda a mantener los estándares de inocuidad que exigen nuestras auditorías AIB. Personal puntual, documentación impecable y sin interrupciones en la producción."</p>
-            <div class="testim-author">
-              <div class="testim-avatar">GR</div>
-              <div>
-                <div class="testim-name">Gerente de Calidad</div>
-                <div class="testim-org">Planta de alimentos — Apodaca, NL</div>
-              </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 
@@ -2577,7 +2476,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </ul>
 
       <div class="cine-ctas">
-        <a href="#cotizador" class="btn btn-primary">
+        <a href="#cotizacion-gratuita" class="btn btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>
           Ver cómo trabajamos
         </a>
@@ -3042,7 +2941,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="footer-links">
           <a href="#nosotros">Quiénes somos</a>
           <a href="#clientes">Nuestros clientes</a>
-          <a href="#cotizacion-gratuita">Cotizador online</a>
           <a href="#contacto">Contacto</a>
           <a href="#">Aviso de privacidad</a>
         </div>
@@ -3399,6 +3297,7 @@ document.querySelectorAll('.btn').forEach(btn=>{
    AUTO-INIT CHAT on page load
 ══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
+  if (!document.getElementById('chatBody')) return;
   if (!chatStarted) startChat();
 });
 
