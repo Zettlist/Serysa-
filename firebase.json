@@ -9,7 +9,7 @@
       "**/*.txt",
       "**/*.md",
       "functions/**",
-      "**/*.pdf",
+      "*.pdf",
       "cotizacion_torlan_2026.html",
       "Fotos de tarjetas/**",
       "_originales_backup/**",

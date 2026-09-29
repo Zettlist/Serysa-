@@ -857,6 +857,86 @@ input[type=range]::-webkit-slider-thumb{
   backdrop-filter:blur(10px);transition:border-color .3s;
 }
 .soporte-card:hover{border-color:rgba(0,212,255,.25);}
+
+/* ── sellos de certificacion ── */
+.sellos{position:relative;z-index:1;margin-top:56px;}
+.sellos-titulo{
+  text-align:center;margin-bottom:22px;font-family:'Montserrat',sans-serif;
+  font-size:.78rem;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#fff;
+}
+.sellos-titulo span::before{content:"· ";}
+.sellos-titulo span{font-family:'Open Sans',sans-serif;font-weight:400;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.5);}
+.sellos-botones{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:900px;margin:0 auto;}
+.sello-btn{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:14px 14px 16px;border-radius:16px;cursor:pointer;text-align:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  color:#fff;font:inherit;transition:border-color .25s,background .25s,transform .25s;
+}
+.sello-btn:hover{border-color:rgba(0,212,255,.45);background:rgba(0,212,255,.06);transform:translateY(-3px);}
+.sello-btn:focus-visible{outline:2px solid var(--cyan-400);outline-offset:3px;}
+/* los logos vienen con fondo blanco: se les da su propia placa blanca */
+.sello-logo{
+  width:100%;height:84px;border-radius:10px;background:#fff;
+  display:flex;align-items:center;justify-content:center;padding:10px 12px;
+}
+.sello-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.sello-nombre{font-family:'Montserrat',sans-serif;font-size:.84rem;font-weight:700;}
+.sello-ver{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:600;color:var(--cyan-400);}
+
+/* ── carrusel de logos: el mismo movimiento que el de clientes ── */
+.carrusel-sellos{
+  position:relative;overflow:hidden;margin-top:34px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.carrusel-pista{display:flex;gap:18px;width:max-content;animation:ticker 45s linear infinite;}
+.carrusel-sellos:hover .carrusel-pista{animation-play-state:paused;}
+.carrusel-sello{
+  flex:0 0 auto;width:150px;height:84px;border-radius:12px;background:#fff;
+  display:flex;align-items:center;justify-content:center;padding:10px 14px;
+}
+.carrusel-sello img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+@media(prefers-reduced-motion:reduce){
+  .carrusel-pista{animation:none;flex-wrap:wrap;justify-content:center;width:auto;}
+  .carrusel-sello[aria-hidden="true"]{display:none;}
+}
+@media(max-width:760px){
+  .sellos-titulo span{display:block;margin-top:4px;}
+  .sellos-titulo span::before{content:none;}
+  .sellos-botones{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .carrusel-sello{width:120px;height:70px;}
+}
+
+/* ── ventana del certificado ── */
+/* hidden tiene que ganarle al display de cada clase, o la ventana saldria abierta */
+.doc-modal[hidden],.doc-modal [hidden]{display:none !important;}
+.doc-modal{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;}
+.doc-fondo{position:absolute;inset:0;background:rgba(3,6,20,.72);backdrop-filter:blur(4px);}
+.doc-caja{
+  position:relative;width:min(920px,100%);height:min(88vh,1000px);
+  background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);animation:fadeUp .28s ease;
+}
+.doc-cabeza{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #e8ecf8;}
+.doc-cabeza h3{flex:1;font-size:1rem;color:var(--navy-900);margin:0;}
+.doc-abrir{font-size:.8rem;font-weight:600;color:var(--blue-500);white-space:nowrap;}
+.doc-cerrar{
+  width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;
+  background:#f1f4fb;color:var(--navy-900);font-size:1.5rem;line-height:1;
+}
+.doc-cerrar:hover{background:#e3e9f8;}
+.doc-cuerpo{flex:1;position:relative;background:#eef1f8;}
+.doc-cuerpo iframe{width:100%;height:100%;border:0;display:block;}
+.doc-aviso{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:28px;text-align:center;}
+.doc-aviso p{color:var(--gray-700);max-width:380px;line-height:1.6;}
+body.doc-abierto{overflow:hidden;}
+@media(max-width:600px){
+  .doc-modal{padding:0;}
+  .doc-caja{height:100%;border-radius:0;}
+  .doc-abrir{display:none;}
+}
+@media(prefers-reduced-motion:reduce){.doc-caja{animation:none;}}
 .soporte-card h3{
   display:flex;align-items:center;gap:10px;margin-bottom:18px;
   font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:800;
@@ -1548,6 +1628,43 @@ input[type=range]::-webkit-slider-thumb{
 </section>
 
 
+<!-- ═══════════════════════════════════ NOSOTROS -->
+<!-- Va antes de Servicios por pedido del cliente: primero quién es SERYSA,
+     luego lo que hace. -->
+<section class="nosotros section-pad" id="nosotros">
+  <div class="container">
+    <div class="nosotros-wrap">
+      <div class="nos-image reveal-left">
+        <div class="nos-badge-float">
+          <div class="num">30</div>
+          <div class="lbl">años en MTY</div>
+        </div>
+        <div class="nos-img-main">
+          <img src="WhatsApp%20Image%202026-03-21%20at%2011.38.27%20AM.jpeg" alt="Técnico SERYSA en servicio" loading="lazy">
+        </div>
+        <div class="nos-img-accent">
+          <img src="WhatsApp%20Image%20202qqw6-03-21%20at%2011.38.26%20AM.jpeg" alt="Servicio en grandes instalaciones" loading="lazy">
+        </div>
+      </div>
+      <div class="nos-content reveal-right">
+        <div class="badge" style="margin-bottom:14px;">Quiénes somos</div>
+        <h2 class="section-title" style="margin-bottom:16px;">
+          Expertos en Control de Plagas con <span class="grad-text">más de 30 años en el mercado</span>
+        </h2>
+        <div class="politica">
+          <h3>Política de calidad</h3>
+          <p>En <strong>SERYSA</strong> nos dedicamos y contamos con la certificación para la prestación de servicios de <strong>Manejo Integrado de Plagas (MIP)</strong>, con programas hechos a la medida para cualquier sector y/o giro empresarial, así como servicios de <strong>sanitización</strong> y/o desinfección ambiental.</p>
+          <p>Nos comprometemos a proteger la salud, la infraestructura y los bienes de nuestros clientes, garantizando la bioseguridad e inocuidad en cada uno de nuestros procesos mediante la aplicación de productos, equipos y métodos innovadores.</p>
+          <p>Aseguramos el cumplimiento estricto de las normativas legales, sanitarias y ambientales aplicables a cada sector.</p>
+          <p>Respaldamos nuestras operaciones en la mejora continua de nuestro Sistema de Gestión de Calidad, la alta competencia y certificación de nuestro personal técnico, la prevención de riesgos y el uso de tecnologías e insumos seguros, logrando así servicios confiables, oportunos y de la más alta efectividad.</p>
+        </div>
+        <a href="#contacto" class="btn btn-primary" onclick="ripple(event)">Contáctanos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ═══════════════════════════════════ SERVICIOS -->
 <section class="services section-pad" id="servicios">
   <div class="container">
@@ -1788,8 +1905,79 @@ input[type=range]::-webkit-slider-thumb{
       </div>
     </div>
 
+    <!-- Certificados: cada sello abre su PDF en una ventana.  Los archivos
+         viven en docs/certificados/ con el mismo nombre que su sello. -->
+    <div class="sellos">
+      <p class="sellos-titulo">Certificaciones y registros vigentes <span>toca un sello para ver el documento</span></p>
+      <div class="sellos-botones">
+        <button type="button" class="sello-btn reveal" data-doc="docs/certificados/licencia-sanitaria.pdf" data-titulo="Licencia sanitaria COFEPRIS">
+          <span class="sello-logo"><img src="img/certificaciones/licencia-sanitaria.jpg" alt="COFEPRIS" loading="lazy"></span>
+          <span class="sello-nombre">Licencia sanitaria</span>
+          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </button>
+        <button type="button" class="sello-btn reveal" style="transition-delay:0.06s" data-doc="docs/certificados/conocer.pdf" data-titulo="Certificación CONOCER">
+          <span class="sello-logo"><img src="img/certificaciones/conocer.jpg" alt="Red CONOCER" loading="lazy"></span>
+          <span class="sello-nombre">Certificación CONOCER</span>
+          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </button>
+        <button type="button" class="sello-btn reveal" style="transition-delay:0.12s" data-doc="docs/certificados/sanitizacion.pdf" data-titulo="Certificación de sanitización COFEPRIS">
+          <span class="sello-logo"><img src="img/certificaciones/sanitizacion.jpg" alt="COFEPRIS" loading="lazy"></span>
+          <span class="sello-nombre">Sanitización</span>
+          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </button>
+        <button type="button" class="sello-btn reveal" style="transition-delay:0.18s" data-doc="docs/certificados/repse.pdf" data-titulo="Registro REPSE">
+          <span class="sello-logo"><img src="img/certificaciones/repse.png" alt="REPSE" loading="lazy"></span>
+          <span class="sello-nombre">Registro REPSE</span>
+          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+        </button>
+      </div>
+
+      <div class="carrusel-sellos" aria-label="Normas y certificaciones con las que trabajamos">
+        <div class="carrusel-pista">
+          <span class="carrusel-sello"><img src="img/sellos/haccp.jpg" alt="HACCP" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/aib.png" alt="AIB International" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/distintivo-h.jpg" alt="Distintivo H" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/iso-9001.jpg" alt="ISO 9001:2015" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/sqf.png" alt="SQF" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/brc-food.png" alt="BRC Food Certificated" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/tif.jpg" alt="TIF — Inspeccionado y aprobado SAGARPA" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/primus-gfs.jpg" alt="PrimusGFS" loading="lazy"></span>
+          <span class="carrusel-sello"><img src="img/sellos/fssc-22000.png" alt="FSSC 22000" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/haccp.jpg" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/aib.png" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/distintivo-h.jpg" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/iso-9001.jpg" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/sqf.png" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/brc-food.png" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/tif.jpg" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/primus-gfs.jpg" alt="" loading="lazy"></span>
+          <span class="carrusel-sello" aria-hidden="true"><img src="img/sellos/fssc-22000.png" alt="" loading="lazy"></span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<!-- Ventana del certificado.  Si el navegador no sabe mostrar PDF dentro
+     de la pagina (Chrome en Android, por ejemplo) se ofrece abrirlo aparte. -->
+<div class="doc-modal" id="docModal" hidden>
+  <div class="doc-fondo" data-cerrar></div>
+  <div class="doc-caja" role="dialog" aria-modal="true" aria-labelledby="docTitulo">
+    <div class="doc-cabeza">
+      <h3 id="docTitulo">Certificado</h3>
+      <a class="doc-abrir" id="docAbrir" href="#" target="_blank" rel="noopener">Abrir en pestaña nueva</a>
+      <button type="button" class="doc-cerrar" data-cerrar aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="doc-cuerpo">
+      <iframe id="docVisor" title="Certificado"></iframe>
+      <div class="doc-aviso" id="docAviso" hidden>
+        <p id="docAvisoTxt"></p>
+        <a class="btn btn-cyan" id="docAvisoBtn" href="#" target="_blank" rel="noopener">Abrir el certificado</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════ COBERTURA -->
@@ -2379,14 +2567,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <img src="w.jpeg" alt="Control de plagas cocina industrial" loading="lazy">
       </div>
       <div class="gal-item reveal" style="transition-delay:.24s">
-        <div class="gal-overlay"><div class="gal-label">Retiro de colmena — Equipo especializado</div></div>
-        <img src="WhatsApp%20Image%202026-03-21%20at%20dedede11.38.25%20AM.jpeg" alt="Retiro colmena Monterrey" loading="lazy">
-      </div>
-      <div class="gal-item reveal" style="transition-delay:.3s">
-        <div class="gal-overlay"><div class="gal-label">Zona industrial — Control de vectores</div></div>
-        <img src="WhatsApp%20Image%202026-03-21%20sat%2011.38.27%20AM.jpeg" alt="Control plagas industrial" loading="lazy">
-      </div>
-      <div class="gal-item reveal" style="transition-delay:.36s">
         <div class="gal-overlay"><div class="gal-label">Control profesional de plagas</div></div>
         <img src="WhatsApp%20Image%202026-03-21%20at%2011ddwdw.38.25%20AM.jpeg" alt="Control profesional de plagas" loading="lazy">
       </div>
@@ -2664,44 +2844,6 @@ document.addEventListener('DOMContentLoaded', function() {
   100% { transform: translateY(-110vh) scale(0.3); opacity:0; }
 }
 </style>
-
-
-<!-- ═══════════════════════════════════ NOSOTROS -->
-<section class="nosotros section-pad" id="nosotros">
-  <div class="container">
-    <div class="nosotros-wrap">
-      <div class="nos-image reveal-left">
-        <div class="nos-badge-float">
-          <div class="num">30</div>
-          <div class="lbl">años en MTY</div>
-        </div>
-        <div class="nos-img-main">
-          <img src="WhatsApp%20Image%202026-03-21%20at%2011.38.27%20AM.jpeg" alt="Técnico SERYSA en servicio" loading="lazy">
-        </div>
-        <div class="nos-img-accent">
-          <img src="WhatsApp%20Image%20202qqw6-03-21%20at%2011.38.26%20AM.jpeg" alt="Servicio en grandes instalaciones" loading="lazy">
-        </div>
-      </div>
-      <div class="nos-content reveal-right">
-        <div class="badge" style="margin-bottom:14px;">Quiénes somos</div>
-        <h2 class="section-title" style="margin-bottom:16px;">
-          Expertos en Control de Plagas con <span class="grad-text">más de 30 años en el mercado</span>
-        </h2>
-        <div class="politica">
-          <h3>Política de calidad</h3>
-          <p>En <strong>SERYSA</strong> nos dedicamos y contamos con la certificación para la prestación de servicios de <strong>Manejo Integrado de Plagas (MIP)</strong>, con programas hechos a la medida para cualquier sector y/o giro empresarial, así como servicios de <strong>sanitización</strong> y/o desinfección ambiental.</p>
-          <p>Nos comprometemos a proteger la salud, la infraestructura y los bienes de nuestros clientes, garantizando la bioseguridad e inocuidad en cada uno de nuestros procesos mediante la aplicación de productos, equipos y métodos innovadores.</p>
-          <p>Aseguramos el cumplimiento estricto de las normativas legales, sanitarias y ambientales aplicables a cada sector.</p>
-          <p>Respaldamos nuestras operaciones en la mejora continua de nuestro Sistema de Gestión de Calidad, la alta competencia y certificación de nuestro personal técnico, la prevención de riesgos y el uso de tecnologías e insumos seguros, logrando así servicios confiables, oportunos y de la más alta efectividad.</p>
-        </div>
-        <a href="#contacto" class="btn btn-primary" onclick="ripple(event)">Contáctanos →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
 
 
 <!-- ═══════════════════════════════════ CONTACTO -->
@@ -3158,6 +3300,67 @@ function submitContact(e){
 document.querySelectorAll('.btn').forEach(btn=>{
   btn.addEventListener('click',ripple);
 });
+
+/* ══════════════════════════════════════════════
+   CERTIFICADOS: ventana con el PDF
+══════════════════════════════════════════════ */
+(function(){
+  const modal = document.getElementById('docModal');
+  if (!modal) return;
+  const visor  = document.getElementById('docVisor');
+  const titulo = document.getElementById('docTitulo');
+  const abrir  = document.getElementById('docAbrir');
+  const aviso  = document.getElementById('docAviso');
+  const avisoTxt = document.getElementById('docAvisoTxt');
+  const avisoBtn = document.getElementById('docAvisoBtn');
+  let origen = null;
+
+  function muestraAviso(texto, conBoton){
+    visor.hidden = true; visor.removeAttribute('src');
+    aviso.hidden = false; avisoTxt.textContent = texto;
+    avisoBtn.hidden = !conBoton;
+  }
+
+  async function abre(boton){
+    origen = boton;
+    const doc = boton.dataset.doc;
+    titulo.textContent = boton.dataset.titulo;
+    visor.title = boton.dataset.titulo;
+    abrir.href = avisoBtn.href = doc;
+    abrir.hidden = false;
+    modal.hidden = false;
+    document.body.classList.add('doc-abierto');
+    modal.querySelector('.doc-cerrar').focus();
+
+    // si el archivo todavia no esta, se dice claro en vez de mostrar un error
+    let existe = true;
+    try { existe = (await fetch(doc, { method: 'HEAD', cache: 'no-store' })).ok; } catch (e) {}
+    if (!existe) {
+      abrir.hidden = true;
+      muestraAviso('Este certificado está en actualización. Si lo necesitas ahora, pídelo por WhatsApp o al (52) 81 8141 0750 y te lo enviamos.', false);
+      return;
+    }
+    // Chrome en Android y otros no muestran PDF dentro de la pagina
+    if (navigator.pdfViewerEnabled === false) {
+      muestraAviso('Tu navegador no puede mostrar el PDF aquí. Ábrelo aparte para verlo completo.', true);
+      return;
+    }
+    aviso.hidden = true;
+    visor.hidden = false;
+    visor.src = doc + '#view=FitH';
+  }
+
+  function cierra(){
+    modal.hidden = true;
+    visor.removeAttribute('src');
+    document.body.classList.remove('doc-abierto');
+    if (origen) origen.focus();
+  }
+
+  document.querySelectorAll('.sello-btn').forEach(b => b.addEventListener('click', () => abre(b)));
+  modal.querySelectorAll('[data-cerrar]').forEach(e => e.addEventListener('click', cierra));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) cierra(); });
+})();
 
 /* ══════════════════════════════════════════════
    AUTO-INIT CHAT on page load
