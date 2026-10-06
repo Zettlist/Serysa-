@@ -7,7 +7,23 @@
       "**/node_modules/**",
       "**/*.py",
       "**/*.txt",
-      "**/*.md"
+      "**/*.md",
+      "functions/**",
+      "*.pdf",
+      "cotizacion_torlan_2026.html",
+      "Fotos de tarjetas/**",
+      "_originales_backup/**",
+      "Fotos Fondo/**",
+      "img/fondo/**",
+      "Cambio fotos*/**",
+      "package.json",
+      "package-lock.json",
+      "src/**",
+      "WhatsApp Video*.mp4"
     ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs22"
   }
 }

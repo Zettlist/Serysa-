@@ -1,0 +1,95 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tailwind para el sitio de SERYSA.
+
+   PROPOSITO: poder pegar componentes de shadcn / 21st.dev / reactbits sin
+   traducir sus clases a mano. El sitio sigue siendo HTML estatico.
+
+   REGENERAR TRAS AGREGAR CLASES NUEVAS:
+     npm run css
+
+   DECISION CLAVE: NO se importa "tailwindcss/preflight.css".
+   El preflight es el reset de Tailwind y arrasaria con los ~75 KB de CSS
+   propio que ya tiene index.html (botones, tarjetas, hero, chatbot...).
+   Por eso se importan las capas por separado en vez de usar
+   @import "tailwindcss", que las traeria las tres.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@layer theme;
+
+@import "tailwindcss/theme.css" layer(theme);
+
+/* OJO: las utilidades van SIN capa, a proposito.
+   index.html trae este reset propio, sin capa:
+       *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+   Por regla de cascada, lo sin-capa le gana a cualquier @layer sin importar la
+   especificidad. Con las utilidades en @layer utilities, ese "*" tumbaba TODOS
+   los p-*, px-*, m-*, mt-*... (comprobado: p-6 daba 0px).
+   Sin capa, .p-6 (0,1,0) le gana a * (0,0,0) y el espaciado funciona.
+
+   El sitio sigue protegido por el orden: este <link> va ANTES del <style> de
+   index.html, asi que ante misma especificidad gana el CSS propio. Es decir,
+   las utilidades pisan el reset pero no pisan .service-card, .btn-primary, etc. */
+@import "tailwindcss/utilities.css";
+
+/* Solo se escanea el HTML del sitio. Sin esto, v4 recorre el proyecto entero
+   (PDFs, videos, node_modules de functions/) y la build se vuelve lenta. */
+@source "./../index.html";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Los tokens de :root de index.html, mapeados al tema de Tailwind.
+
+   Efecto: un componente pegado que traiga bg-blue-500 sale con el azul de la
+   marca (#0b15ed), no con el azul de fabrica de Tailwind. Igual con cyan, gray
+   y las fuentes. Los colores que Tailwind trae de serie y no se pisan aqui
+   (slate, zinc, emerald...) siguen disponibles, para no romper componentes
+   ajenos que los usen.
+   ───────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Azules de marca */
+  --color-blue-100: #e8eaff;
+  --color-blue-300: #6b74ff;
+  --color-blue-400: #3b47f5;
+  --color-blue-500: #0b15ed;
+  --color-blue-600: #0910c7;
+  --color-blue-700: #070ba0;
+
+  /* Acento cyan */
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #00d4ff;
+  --color-cyan-600: #0099b8;
+
+  /* Navy: no existe en Tailwind, se agrega */
+  --color-navy-500: #2e40a0;
+  --color-navy-600: #1e2d7a;
+  --color-navy-700: #0d1a5c;
+  --color-navy-800: #070c47;
+  --color-navy-900: #04082e;
+  --color-navy-950: #020510;
+
+  /* Morado */
+  --color-purple-400: #818cf8;
+  --color-purple-500: #6366f1;
+
+  /* Neutros */
+  --color-gray-50:  #f7f8ff;
+  --color-gray-100: #f0f2ff;
+  --color-gray-400: #b3b3b3;
+  --color-gray-700: #4a4a6a;
+  --color-gray-900: #1a1a2e;
+
+  /* Semanticos */
+  --color-marca-green:  #10b981;
+  --color-marca-orange: #f59e0b;
+  --color-marca-red:    #ef4444;
+
+  /* Tipografia del sitio: font-display = titulos, font-sans = texto */
+  --font-display: 'Montserrat', sans-serif;
+  --font-sans: 'Open Sans', sans-serif;
+
+  /* Sombras propias */
+  --shadow-blue: 0 8px 32px rgb(11 21 237 / .35);
+  --shadow-cyan: 0 8px 32px rgb(0 212 255 / .25);
+  --shadow-card: 0 4px 32px rgb(7 12 71 / .08);
+  --shadow-glow: 0 0 40px rgb(11 21 237 / .3);
+}

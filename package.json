@@ -1,0 +1,13 @@
+{
+  "name": "serysa-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sitio de SERYSA. HTML estatico servido por Firebase Hosting; Tailwind solo genera tailwind.css.",
+  "scripts": {
+    "css": "tailwindcss -i src/tw.css -o tailwind.css --minify",
+    "css:watch": "tailwindcss -i src/tw.css -o tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.13"
+  }
+}
