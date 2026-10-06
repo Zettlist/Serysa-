@@ -866,7 +866,7 @@ input[type=range]::-webkit-slider-thumb{
 }
 .sellos-titulo span::before{content:"· ";}
 .sellos-titulo span{font-family:'Open Sans',sans-serif;font-weight:400;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.5);}
-.sellos-botones{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:900px;margin:0 auto;}
+.sellos-botones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:700px;margin:0 auto;}
 .sello-btn{
   display:flex;flex-direction:column;align-items:center;gap:10px;
   padding:14px 14px 16px;border-radius:16px;cursor:pointer;text-align:center;
@@ -882,6 +882,9 @@ input[type=range]::-webkit-slider-thumb{
 }
 .sello-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
 .sello-nombre{font-family:'Montserrat',sans-serif;font-size:.84rem;font-weight:700;}
+.sello-dato{cursor:default;}
+.sello-dato:hover{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.04);transform:none;}
+.sello-num{font-size:.74rem;font-weight:600;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums;}
 .sello-ver{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:600;color:var(--cyan-400);}
 
 /* ── carrusel de logos: el mismo movimiento que el de clientes ── */
@@ -904,7 +907,7 @@ input[type=range]::-webkit-slider-thumb{
 @media(max-width:760px){
   .sellos-titulo span{display:block;margin-top:4px;}
   .sellos-titulo span::before{content:none;}
-  .sellos-botones{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .sellos-botones{grid-template-columns:1fr;gap:12px;max-width:320px;}
   .carrusel-sello{width:120px;height:70px;}
 }
 
@@ -1636,7 +1639,7 @@ body.doc-abierto{overflow:hidden;}
     <div class="nosotros-wrap">
       <div class="nos-image reveal-left">
         <div class="nos-badge-float">
-          <div class="num">30</div>
+          <div class="num">+30</div>
           <div class="lbl">años en MTY</div>
         </div>
         <div class="nos-img-main">
@@ -1693,7 +1696,7 @@ body.doc-abierto{overflow:hidden;}
         </div>
         <div class="service-body">
           <h3>Control de Insectos Rastreros</h3>
-          <p>Cucarachas, hormigas, alacranes y arañas, etc. Utilizando siempre productos de uso urbano en grietas, zócalos y áreas de mayor actividad. Tratamiento seguro en cocinas, almacenes y hogares.</p>
+          <p>Cucarachas, hormigas, alacranes y arañas, etc. Utilizando siempre productos de uso urbano en grietas, zoclos y áreas de mayor actividad. Tratamiento seguro en cocinas, almacenes y hogares.</p>
           <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
@@ -1731,7 +1734,7 @@ body.doc-abierto{overflow:hidden;}
         </div>
         <div class="service-body">
           <h3>Control de Termita</h3>
-          <p>Tratamiento preventivo y curativo contra termitas subterráneas y de madera seca. Inspección de estructuras, aplicación de barrera química y seguimiento documentado.</p>
+          <p>Tratamiento preventivo y correctivo contra termitas subterráneas y de madera seca. Inspección de estructuras, aplicación de barrera química y seguimiento documentado.</p>
           <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
@@ -1839,7 +1842,7 @@ body.doc-abierto{overflow:hidden;}
         </div>
         <div class="service-body">
           <h3>Control y Reubicación Pacífica de Aves</h3>
-          <p>Diversos métodos de control como trampeo, mallas, púas, ahuyentadores, entre otros sistemas de exclusión para palomas y otras aves urbanas. Captura y reubicación humanitaria respetando la normativa ambiental vigente.</p>
+          <p>Diversos métodos de control como trampeo, mallas, púas, ahuyentadores, entre otros sistemas de exclusión para palomas y otras aves urbanas. Captura y reubicación responsable respetando la normativa ambiental vigente.</p>
           <a href="#cotizacion-gratuita" class="service-link">Cotizar este servicio →</a>
         </div>
       </div>
@@ -1894,7 +1897,7 @@ body.doc-abierto{overflow:hidden;}
         <ul>
           <li>Licencia sanitaria actualizada y vigente</li>
           <li>REPSE vigente</li>
-          <li>Certificación de sanitizaciones</li>
+          <li>Autorización de COFEPRIS para sanitizaciones</li>
           <li>Capacitaciones y certificación CONOCER de técnicos</li>
           <li>Plaguicidas de uso urbano</li>
           <li>Seguro de responsabilidad civil, entre otros.</li>
@@ -1908,28 +1911,23 @@ body.doc-abierto{overflow:hidden;}
     <!-- Certificados: cada sello abre su PDF en una ventana.  Los archivos
          viven en docs/certificados/ con el mismo nombre que su sello. -->
     <div class="sellos">
-      <p class="sellos-titulo">Certificaciones y registros vigentes <span>toca un sello para ver el documento</span></p>
+      <p class="sellos-titulo">Certificaciones y registros vigentes</p>
       <div class="sellos-botones">
-        <button type="button" class="sello-btn reveal" data-doc="docs/certificados/licencia-sanitaria.pdf" data-titulo="Licencia sanitaria COFEPRIS">
+        <div class="sello-btn sello-dato reveal">
           <span class="sello-logo"><img src="img/certificaciones/licencia-sanitaria.jpg" alt="COFEPRIS" loading="lazy"></span>
           <span class="sello-nombre">Licencia sanitaria</span>
-          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-        </button>
+          <span class="sello-num">N° 23 AP 19 026 0329</span>
+        </div>
         <button type="button" class="sello-btn reveal" style="transition-delay:0.06s" data-doc="docs/certificados/conocer.pdf" data-titulo="Certificación CONOCER">
           <span class="sello-logo"><img src="img/certificaciones/conocer.jpg" alt="Red CONOCER" loading="lazy"></span>
           <span class="sello-nombre">Certificación CONOCER</span>
           <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
         </button>
-        <button type="button" class="sello-btn reveal" style="transition-delay:0.12s" data-doc="docs/certificados/sanitizacion.pdf" data-titulo="Certificación de sanitización COFEPRIS">
-          <span class="sello-logo"><img src="img/certificaciones/sanitizacion.jpg" alt="COFEPRIS" loading="lazy"></span>
-          <span class="sello-nombre">Sanitización</span>
-          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-        </button>
-        <button type="button" class="sello-btn reveal" style="transition-delay:0.18s" data-doc="docs/certificados/repse.pdf" data-titulo="Registro REPSE">
+        <div class="sello-btn sello-dato reveal" style="transition-delay:0.12s">
           <span class="sello-logo"><img src="img/certificaciones/repse.png" alt="REPSE" loading="lazy"></span>
           <span class="sello-nombre">Registro REPSE</span>
-          <span class="sello-ver">Ver certificado <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-        </button>
+          <span class="sello-num">N° ARR14082/2024</span>
+        </div>
       </div>
 
       <div class="carrusel-sellos" aria-label="Normas y certificaciones con las que trabajamos">
@@ -2068,7 +2066,7 @@ body.doc-abierto{overflow:hidden;}
       <h2 class="section-title">Ventajas que nos hacen <span class="grad-text">Competentes en Monterrey</span></h2>
     </div>
     <div class="ventajas-grid">
-      <div class="ventaja-card reveal"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div><div class="ventaja-text"><h4>Atención a contingencias 24/7</h4><p>Nos distinguimos por la rápida atención al llamado de nuestros clientes por contingencias, atendiéndolas usualmente en un lapso no mayor de 2 horas.</p></div></div>
+      <div class="ventaja-card reveal"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg></div><div class="ventaja-text"><h4>Atención a contingencias 24/7</h4><p>Nos distinguimos por la rápida atención al llamado de nuestros clientes por contingencias, atendiéndolas usualmente en un lapso no mayor de 4 horas.</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.07s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M12 2 L20 6 L20 12 Q20 18 12 22 Q4 18 4 12 L4 6 Z"/><polyline points="9,12 11,14 15,10"/></svg></div><div class="ventaja-text"><h4>Soporte de documentación vigente</h4><p>Licencia sanitaria, seguro RC, RPSE, licencia COFEPRIS para sanitización, certificaciones control de plagas y certificación de competencias laborales (MIP Grado de inocuidad).</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.14s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M2 22 Q8 16 12 12 Q16 8 20 3 Q20 3 21 2 Q21 8 18 14 Q15 20 8 22 Z"/><line x1="12" y1="12" x2="2" y2="22"/></svg></div><div class="ventaja-text"><h4>Servicio personalizado</h4><p>Diagnóstico, prevención y seguimiento documentado. Mínimo impacto ambiental. Metodología de clase mundial.</p></div></div>
       <div class="ventaja-card reveal" style="transition-delay:.21s"><div class="ventaja-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4 L19 4 Q20 4 20 5 L20 21 Q20 22 19 22 L5 22 Q4 22 4 21 L4 5 Q4 4 5 4 L8 4"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="13" y2="16"/></svg></div><div class="ventaja-text"><h4>Garantía</h4><p>Uso exclusivo de productos adecuados de acuerdo a la necesidad, con su soporte y documentación vigente.</p></div></div>
@@ -2097,7 +2095,7 @@ body.doc-abierto{overflow:hidden;}
       <div class="how-step reveal" style="transition-delay:.15s">
         <div class="how-num">2</div>
         <h3>Diagnóstico y cotización</h3>
-        <p>Rango de precio en menos de 1 hora, o visita diagnóstico el mismo día. Sin compromiso.</p>
+        <p>Recibe tu cotización generalmente en menos de 1 hora, o visita diagnóstico el mismo día. Sin compromiso.</p>
       </div>
       <div class="how-step reveal" style="transition-delay:.3s">
         <div class="how-num">3</div>
@@ -2463,79 +2461,75 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="ticker-wrap">
     <div class="ticker-track" id="ticker">
-      <div class="client-chip">Industria Alimentaria</div>
-      <div class="client-chip">Metal Mecánica</div>
-      <div class="client-chip">Hospitales</div>
-      <div class="client-chip">Centros Recreativos</div>
-      <div class="client-chip">ISO · SQF · BRC</div>
-      <div class="client-chip">FFCC · TIF</div>
+      <div class="client-chip">Gilsa</div>
+      <div class="client-chip">Imbera</div>
       <div class="client-chip">Arena Monterrey</div>
-      <div class="client-chip">Banorte</div>
-      <div class="client-chip">CFE</div>
-      <div class="client-chip">Cinépolis</div>
-      <div class="client-chip">Hyundai</div>
-      <div class="client-chip">Kia</div>
-      <div class="client-chip">Mitsubishi</div>
-      <div class="client-chip">Gruma</div>
-      <div class="client-chip">Ternium</div>
-      <div class="client-chip">Mattel</div>
-      <div class="client-chip">iZZi</div>
-      <div class="client-chip">Aramark</div>
-      <div class="client-chip">Essity</div>
-      <div class="client-chip">Fluidmaster</div>
-      <div class="client-chip">Rockwell Automation</div>
-      <div class="client-chip">Jabil</div>
-      <div class="client-chip">Cryo-Infra</div>
-      <div class="client-chip">Comfort Inn</div>
-      <div class="client-chip">Sherwin-Williams</div>
-      <div class="client-chip">Valspar</div>
       <div class="client-chip">Indalum</div>
       <div class="client-chip">Efficient Pack</div>
       <div class="client-chip">Prolamsa</div>
       <div class="client-chip">Super Salads</div>
-      <div class="client-chip">Holy Cow!</div>
-      <div class="client-chip">Carnes El Alba</div>
+      <div class="client-chip">Holy Cow</div>
       <div class="client-chip">San Gabriel</div>
-      <div class="client-chip">Panadería San José</div>
-      <div class="client-chip">Gilsa</div>
-      <div class="client-chip">Imbera</div>
+      <div class="client-chip">Mattel</div>
+      <div class="client-chip">Izzi</div>
+      <div class="client-chip">Aramark</div>
+      <div class="client-chip">Essity</div>
+      <div class="client-chip">Rockwell Automation</div>
+      <div class="client-chip">Jabil</div>
+      <div class="client-chip">Cryoinfra</div>
+      <div class="client-chip">John Deere</div>
+      <div class="client-chip">Disney Store</div>
+      <div class="client-chip">Huerto Basal</div>
+      <div class="client-chip">Comfort Inn</div>
+      <div class="client-chip">Sherwin Williams</div>
+      <div class="client-chip">Banorte</div>
+      <div class="client-chip">CFE</div>
+      <div class="client-chip">Hyundai</div>
+      <div class="client-chip">Kia</div>
+      <div class="client-chip">Mitsubishi</div>
+      <div class="client-chip">Ternium</div>
+      <div class="client-chip">Zobele</div>
+      <div class="client-chip">Nolita Ice Cream</div>
+      <div class="client-chip">Plaza Sendero</div>
+      <div class="client-chip">Machwelding</div>
+      <div class="client-chip">Tortiregias</div>
+      <div class="client-chip">Nijisa</div>
+      <div class="client-chip">Chilokia</div>
       <!-- Duplicate for seamless loop -->
-      <div class="client-chip">Industria Alimentaria</div>
-      <div class="client-chip">Metal Mecánica</div>
-      <div class="client-chip">Hospitales</div>
-      <div class="client-chip">Centros Recreativos</div>
-      <div class="client-chip">ISO · SQF · BRC</div>
-      <div class="client-chip">FFCC · TIF</div>
-      <div class="client-chip">Arena Monterrey</div>
-      <div class="client-chip">Banorte</div>
-      <div class="client-chip">CFE</div>
-      <div class="client-chip">Cinépolis</div>
-      <div class="client-chip">Hyundai</div>
-      <div class="client-chip">Kia</div>
-      <div class="client-chip">Mitsubishi</div>
-      <div class="client-chip">Gruma</div>
-      <div class="client-chip">Ternium</div>
-      <div class="client-chip">Mattel</div>
-      <div class="client-chip">iZZi</div>
-      <div class="client-chip">Aramark</div>
-      <div class="client-chip">Essity</div>
-      <div class="client-chip">Fluidmaster</div>
-      <div class="client-chip">Rockwell Automation</div>
-      <div class="client-chip">Jabil</div>
-      <div class="client-chip">Cryo-Infra</div>
-      <div class="client-chip">Comfort Inn</div>
-      <div class="client-chip">Sherwin-Williams</div>
-      <div class="client-chip">Valspar</div>
-      <div class="client-chip">Indalum</div>
-      <div class="client-chip">Efficient Pack</div>
-      <div class="client-chip">Prolamsa</div>
-      <div class="client-chip">Super Salads</div>
-      <div class="client-chip">Holy Cow!</div>
-      <div class="client-chip">Carnes El Alba</div>
-      <div class="client-chip">San Gabriel</div>
-      <div class="client-chip">Panadería San José</div>
-      <div class="client-chip">Gilsa</div>
-      <div class="client-chip">Imbera</div>
+      <div class="client-chip" aria-hidden="true">Gilsa</div>
+      <div class="client-chip" aria-hidden="true">Imbera</div>
+      <div class="client-chip" aria-hidden="true">Arena Monterrey</div>
+      <div class="client-chip" aria-hidden="true">Indalum</div>
+      <div class="client-chip" aria-hidden="true">Efficient Pack</div>
+      <div class="client-chip" aria-hidden="true">Prolamsa</div>
+      <div class="client-chip" aria-hidden="true">Super Salads</div>
+      <div class="client-chip" aria-hidden="true">Holy Cow</div>
+      <div class="client-chip" aria-hidden="true">San Gabriel</div>
+      <div class="client-chip" aria-hidden="true">Mattel</div>
+      <div class="client-chip" aria-hidden="true">Izzi</div>
+      <div class="client-chip" aria-hidden="true">Aramark</div>
+      <div class="client-chip" aria-hidden="true">Essity</div>
+      <div class="client-chip" aria-hidden="true">Rockwell Automation</div>
+      <div class="client-chip" aria-hidden="true">Jabil</div>
+      <div class="client-chip" aria-hidden="true">Cryoinfra</div>
+      <div class="client-chip" aria-hidden="true">John Deere</div>
+      <div class="client-chip" aria-hidden="true">Disney Store</div>
+      <div class="client-chip" aria-hidden="true">Huerto Basal</div>
+      <div class="client-chip" aria-hidden="true">Comfort Inn</div>
+      <div class="client-chip" aria-hidden="true">Sherwin Williams</div>
+      <div class="client-chip" aria-hidden="true">Banorte</div>
+      <div class="client-chip" aria-hidden="true">CFE</div>
+      <div class="client-chip" aria-hidden="true">Hyundai</div>
+      <div class="client-chip" aria-hidden="true">Kia</div>
+      <div class="client-chip" aria-hidden="true">Mitsubishi</div>
+      <div class="client-chip" aria-hidden="true">Ternium</div>
+      <div class="client-chip" aria-hidden="true">Zobele</div>
+      <div class="client-chip" aria-hidden="true">Nolita Ice Cream</div>
+      <div class="client-chip" aria-hidden="true">Plaza Sendero</div>
+      <div class="client-chip" aria-hidden="true">Machwelding</div>
+      <div class="client-chip" aria-hidden="true">Tortiregias</div>
+      <div class="client-chip" aria-hidden="true">Nijisa</div>
+      <div class="client-chip" aria-hidden="true">Chilokia</div>
     </div>
   </div>
 </section>
@@ -3357,7 +3351,7 @@ document.querySelectorAll('.btn').forEach(btn=>{
     if (origen) origen.focus();
   }
 
-  document.querySelectorAll('.sello-btn').forEach(b => b.addEventListener('click', () => abre(b)));
+  document.querySelectorAll('button.sello-btn').forEach(b => b.addEventListener('click', () => abre(b)));
   modal.querySelectorAll('[data-cerrar]').forEach(e => e.addEventListener('click', cierra));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) cierra(); });
 })();
